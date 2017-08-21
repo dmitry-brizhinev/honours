@@ -1,0 +1,40 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+%\usepackage{natbib}
+\bibliographystyle{apalike}
+%\setcitestyle{authoryear,open={((},close={))}}
+
+\newcommand{\delims}[3]{\!\left #1 #2 \right #3}
+\newcommand{\parens}[1]{\delims{(}{#1}{)}}
+\newcommand{\braces}[1]{\delims{\lbrace}{#1}{\rbrace}}
+\newcommand{\brackets}[1]{\delims{[}{#1}{]}}
+\newcommand{\norm}[1]{\delims{\|}{#1}{\|}}
+\newcommand{\abs}[1]{\delims{|}{#1}{|}}
+\newcommand{\inner}[2]{\delims{\langle}{#1,#2}{\rangle}}
+\newcommand{\vectinner}[2]{\inner{\vect{#1}}{\vect{#2}}}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\begin{document}
+\title{\vspace{-10ex}Top-down and Bottom-up Information Flow}
+\author{Dmitry Brizhinev}
+\maketitle
+
+\section{Introduction}
+
+\cite[p.~150--153]{coward} \cite[p.~150]{coward}.
+
+
+
+
+
+\clearpage
+
+\bibliography{../references}
+\end{document}
