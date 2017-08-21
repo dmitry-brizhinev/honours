@@ -30,7 +30,7 @@
 \section{Introduction}
 I have found that the concept of top-down vs bottom-up processing is widely used in psychology and neuroscience \cite{citationneeded}. Most visual information from human eyes passes via the lateral geniculate nucleus. This is where the first post-retinal processing happens to visual information \cite{citationneeded}. However, most of the \emph{inputs} to the LGN are from higher brain regions \cite{citationneeded}. This suggests that even early processing depends a great deal on top-down cues.
 
-\section{Definition}
+\section{Definitions}
 I will explain what I mean by top-down and bottom-up processing using an example. Consider this image \cite{citationneeded}:
 
 \begin{figure}[h!]
@@ -47,7 +47,7 @@ Side note: I am not sure what the relationship is between \emph{top-down/bottom-
 
 \section{Approaches to top-down vs bottom-up}
 \subsection{Neuroscience and psychology}
-The concept of top-down and bottom-up processing originates from psychology. In psychology, top-down is defined something like my definition above \cite{citationneeded}. In neuroscience, top-down and bottom-up refer to the direction of information flow (neural connections) \cite{citationneeded}. It is clear that human cognition involves both kinds of processing, and that top-down processing is very important (rather than a minor part) \cite{citationneeded}.
+The concept of top-down and bottom-up processing originates from psychology. In psychology, top-down is defined something like my definition above. In neuroscience, top-down and bottom-up refer to the direction of information flow (neural connections). It is clear that human cognition involves both kinds of processing, and that top-down processing is very important (rather than a minor part).
 
 \subsection{Coward}
 
@@ -75,7 +75,7 @@ I should look more into some specific RNNs, particularly applications of RNNs to
 Side note: I find it interesting that neuroscience tends to use the idea of \emph{neural connections going backwards and forwards}, while the AI field has settled on the metaphor of \emph{network outputs feeding into its inputs}, and of \emph{unrolling the RNN into a sequential network with periodic constraints on the weights}.
 
 \subsection{AIXI}
-AIXI does not have the concept of \emph{brain regions} or \emph{processing steps}, and so the distinction between top-down and bottom-up processing does not apply to it \cite{citationneeded}. I think of this as an example of the general reason why AIXI is insufficient as a model of \emph{cognition} (not that it's intended to be) -- it defines only the output of the process, not how a realistic system could arrive at the output.
+AIXI does not have the concept of \emph{brain regions} or \emph{processing steps}, and so the distinction between top-down and bottom-up processing does not apply to it \cite{citationneeded}. I think of this as an example of the general reason why AIXI is insufficient as a model of \emph{cognition} (not that it's intended to be) -- it defines only the output of the process, not how a realistic system could arrived at the output.
 
 I also want to look at approximate AIXI implementations, to see whether the situation is different there. \cite{researchneeded}
 
