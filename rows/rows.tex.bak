@@ -1,0 +1,161 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\bibliographystyle{apalike}
+%\setcitestyle{authoryear,open={((},close={))}}
+
+\newcommand{\delims}[3]{\!\left #1 #2 \right #3}
+\newcommand{\parens}[1]{\delims{(}{#1}{)}}
+\newcommand{\braces}[1]{\delims{\lbrace}{#1}{\rbrace}}
+\newcommand{\brackets}[1]{\delims{[}{#1}{]}}
+\newcommand{\norm}[1]{\delims{\|}{#1}{\|}}
+\newcommand{\abs}[1]{\delims{|}{#1}{|}}
+\newcommand{\inner}[2]{\delims{\langle}{#1,#2}{\rangle}}
+\newcommand{\vectinner}[2]{\inner{\vect{#1}}{\vect{#2}}}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\newcommand{\nquote}[1]{``{#1}''}
+
+\begin{document}
+\title{\vspace{-10ex}List of rows}
+\author{Dmitry Brizhinev}
+\maketitle
+
+\section{Introduction}
+I have many \emph{rows} in mind for my project. Each row represents some aspect of intelligence. I want to compare how different theories of neuroscience and different AI systems (\emph{columns}) approach these rows. When theories diverge, that opens the possibility of improving one theory by adopting ideas from another. When theories are all the same, that indicates either an aspect that we understand well, or a blind spot where we are making unwarranted assumptions.
+
+The rows are currently in no particular order. I am writing this document to explain what each row means, and to provide a scaffold that I can then use when investigating columns in depth.
+
+\section{My topics}
+These are the topics I listed in my email, with one addition (seeking out more information) that occurred to me in the meantime.
+
+\subsection{Meaning of intelligent behaviour}
+The core question we want to answer is \nquote{how do we make an intelligent system?}, where \emph{intelligent} means \nquote{having this hard-to-define ability that humans have}. Various precise definitions of intelligence have been proposed, and I want to compare a few of them. An important one I will mention here goes something like \nquote{A (generally) intelligent system is one that, given any \emph{utility function} as input, can reasonably well choose actions in the world to maximise its utility}.
+
+\subsection{Relationship between intelligence and logic/mathematics}
+Humans traditionally associate \nquote{intelligence} with mental feats and skills like playing chess and proving mathematical theorems. Hofstadter \cite{hofstadter} thought that a computer would have to be intelligent to play chess. But, it turned out playing chess is not as difficult as it seemed. Computers can beat any human now, but I would consider chess-playing programs only very marginally intelligent. One reason is that the intelligence is not \emph{general} (see the previous section). However, another reason is that most of the power of the human brain is not devoted to chess playing.
+
+Feats of logic and mathematics are hallmarks of human intelligence because the human brain has not evolved to perform them, so for a human they really do require an extraordinary application of human general intelligence. Over time, we have realised that intelligence is a far broader concept, and that the ability to perform such feats is actually a poor measure of the intelligence of an artificial system.
+
+\subsection{How the utility function interacts with \nquote{morality}, and how it is learnt}
+Theories of machine intelligence often make no reference to morality, but theories of neuroscience do, because morality is an important part of human behaviour. Typically, AI theories assume morality is absorbed into the utility function (i.e. moral actions provide more utility than immoral ones). However, humans often distinguish between \nquote{selfish} and \nquote{altruistic} actions, in a way that suggests separate types of utility. It is worth comparing different approaches to this.
+
+A closely related question is how morality (and the utility function in general) is learnt. There is some debate over whether human morality is hardwired by evolution, or learnt through social interaction (probably a mix of both). This has implications for how best to design an AI system that avoids taking \nquote{immoral} actions.
+
+\subsection{The role of human emotions}
+Emotions are still restricted to biological life. The stereotypical AI skeptic says \nquote{I don't believe a machine could ever feel love}. It is worth looking at neuroscience theories of how emotions work and what purpose they serve, so that we can decide whether an intelligent system should have emotions, and how to implement them.
+
+For reference, one possible role for emotions is as a form of fast heuristics. Another is as a social precommitment mechanism -- you can expect me to get angry even if it would not be \nquote{rational} for me to take revenge in a one-shot game.
+
+\subsection{The concept of forming beliefs by combining prior beliefs with new evidence}
+Commonly expressed in the form of Bayes' law, this seems like a really fundamental concept. Mathematically defined systems like AIXI have Bayes' law as a fundamental component, and any other system must, in some sense, approximate this ideal. I think it is worth comparing how different architectures and neuroscience theories approach this. For example, a neural network architecture expresses some prior over the information it expects to encounter. The human brain is full of priors programmed in by evolution.
+
+\subsection{Seeking out more information}
+We can distinguish between uncertainty about something that is (for all intents and purposes) \emph{unknowable} or \emph{random}, such as the outcome of a future coin toss, and uncertainty that stems from a lack of relevant information, such as when I know a coin is biased, but haven't asked which way it is biased. An intelligent agent would benefit from being able to notice when additional information would improve its decision making and seek it out.
+
+A simpler version of this question is the exploration/exploitation tradeoff.
+
+\subsection{Bottom-up and top-down information flow}
+A naive model of cognition involves only bottom-up processing. Such models typically define a series of processing steps, each converting a simpler, less meaningful representation into a more complex one, e.g. \emph{pixels $\rightarrow$ strokes $\rightarrow$ letters $\rightarrow$ words $\rightarrow$ sentences}. Top-down processing is any part of the model where information from a \nquote{later} stage in this chain is used to help with an earlier stage. This is possible after the system has made a first guess at the later stage using only bottom-up information, but it might also involve \emph{what the system expected to see}, before any bottom-up information is available.
+
+\subsection{The concept of \nquote{learning}}
+Learning is usually defined as some change in internal state in response to new information. I think there is a lot of room for improvement in how current neural network architectures \nquote{learn}. There will be a lot of very different approaches to learning, both across AI systems (e.g. model-based reinforcement learning agents vs. feedforward neural networks vs. LSTM recurrent neural networks) and neuroscience theories.
+
+Backpropagation is wildly popular in the neural network field. It is a very powerful technique, but the practice of trying to make everything differentiable just so you can use backprop has a \nquote{man with a hammer} feel about it.
+
+\subsection{Different types of learning}
+Perhaps better seen as a part of the previous section, I am thinking here of phrases like \nquote{reinforcement learning}, \nquote{supervised and unsupervised learning}, \nquote{learning by observation}. Humans have different ways of learning, and an AI system should probably be able to learn in these different ways as well.
+
+\subsection{The process by which decisions are made}
+This is another area in which AI systems differ greatly, and which I think has a lot of room for improvement. Thanks to studies of the visual cortex, we understand a lot about how humans perceive stimuli; consequently, AI has made great strides in vision tasks. I feel like a similar breakthrough has yet to happen for planning/acting (as opposed to perceiving). Decision making in AI systems is still either in the computationally infeasible logic paradigm (make a list of all reachable states and calculate the expected utility) or crude neural network approaches that make me feel like they are missing crucial insights. I will look into theories of human decision making and studies of relevant brain regions to see whether there are any insights or obvious missing links.
+
+\subsection{Looking at behaviour in a hierarchical fashion}
+This seems to be a common thread across many theories. For example, we might distinguish between \nquote{tactical} actions to accomplish a goal, and \nquote{strategic} actions to choose goals. We will also split each action into sub-actions, perhaps handled by different parts of the system. It seems likely that a fully intelligent system will need to structure its behaviour hierarchically, to avoid an explosion of possibilities.
+
+\subsection{Internal actions}
+An agent's set of actions can involve those that change its internal state (e.g. record a memory in an LSTM unit). This sort of recursion often appears in theories of brain function, and I think it is an important insight, underutilised in the AI field. I want to compare how current AI systems use this idea (if at all), and how neuroscience theories provide ideas for improving these systems.
+
+\subsection{Model-based vs model-free learning}
+A model of the world is a (simplified) representation of what the world is like and what the consequences of actions are likely to be. A model-based learner tries to understand the world, and then use its model to choose actions. A model-free learner learns about the value of its actions directly. There is debate in neuroscience over whether the human brain is better characterised as a model-based or model-free system. Likewise, AI systems fall into both camps. Currently, actual models of the world are computationally infeasible -- perhaps the neuroscience literature will provide some ideas for improvement.
+
+\subsection{Theory of mind}
+An important part of a model of the world is the modeling of other agents (particularly humans, if the AI system needs to interact with them). Theory of mind is an important topic in psychology because it appears to be a skill that children develop over time (and some autistic children do not). The skill requires one to model other agents as somewhat predictable entities with desires, beliefs, etc., to understand that their beliefs/knowledge might be different from one's own, and that this affects their behaviour.
+
+An AI system with no explicit theory of mind might still be able to manage humans as a generic part of the environment, but it seems like an obvious optimisation to add.
+
+\subsection{Self awareness}
+I intend to define self-awareness precisely, and to consistently use the term to avoid confusion with \nquote{consciousness} (next section). Self awareness asks whether an agent's model of the world includes a model of itself. In particular, whether the agent is aware of how damage to itself might affect its future cognition (rather than merely predicting that damage leads to negative utility or \nquote{pain}). An agent with theory of mind might model \emph{itself} the same way it models other agents, as an entity with beliefs and desires. This will allow the agent to hold fruitful conversations with humans about its internal state. It might also aid in understanding when the agent should seek out more information before making a decision. Theories in psychology sometimes posit that such a self-application of theory of mind is the origin of human self-awareness.
+
+Reinforcement learning traditionally maintains a separation between the agent and the environment, which means such agents do not have (or need) such a theory of self. However, a real AI agent operating in the real world may potentially need to understand how the world can affect its own cognition. Or perhaps we might want to explicitly avoid such understanding, if we want to create an AI that will never attempt to resist being shut down.
+
+\subsection{Consciousness}
+I intend to define \emph{consciousness} as a reference to Chalmers' hard problem \cite{chalmers}. I probably won't have much to say about it, but it will be important to distinguish from the easy problem posed by self awareness. These terms are often confused, and I want to avoid the confusion.
+
+\subsection{Sleep}
+Similar to emotions, sleep is something that biological systems do and artificial systems do not (at least, not in the same way). Human sleep has important neurological functions beyond conserving energy, but they are not fully understood. It is worthwhile looking at theories of sleep to see whether an AI system should implement something similar, or if it can get the same benefits in a different way.
+
+\subsection{Brain wave frequencies}
+I might drop this section because it seems to have little application to AI, but it is an interesting topic nonetheless. Brain waves have been studied a lot not so much because they are obviously important but because they are easy to study. Accordingly, various theories have sprung up about what different frequencies are used for.
+
+\subsection{Parts of the brain}
+The human brain has a modular architecture, with identifiable parts like the cortex, cerebellum, hippocampus, and basal ganglia. I want to investigate what functions are they theorised to serve and how are these functions achieved in AI systems.
+
+\subsection{Cortical organisation}
+The size and sophistication of the human cortex seems to be the main difference between ourselves and all other animals, suggesting that it is important for intelligence. Accordingly, understanding how the cortex works and what role it serves is important for AI progress. Our understanding of the visual cortex has led to breakthroughs in computer vision, and I expect many more will come as other parts are studies.
+
+For this work, I want to look into the three organisational categories of cortical layers, cortical columns, and cortical areas. I want to compare the theorised reasons for these divisions, and how similar functions are performed (or could be performed) in AI systems.
+
+\subsection{Short term (working) memory}
+Our short-term or working memory seems important for human cognition. I want to compare different theories of how working memory is implemented in the brain, what role it serves and how equivalents appear in AI systems (LSTM is the obvious example to look at).
+
+\subsection{Long term memory}
+Our long term memory (of which there are several kinds, e.g. episodic, semantic and procedural) is also important for human cognition. Likewise, I want to compare theories of how these different types of memory are implemented, what role they serve, and what artificial equivalents exist. The \nquote{forgetting problem} in AI will be particularly important here, because some form of carefully-organised long term memory store seems like it would help.
+
+\subsection{Transfer learning}
+In psychology, transfer learning refers to learning on one task that helps with performance on a different task. There is a disappointing \emph{lack} of demonstrable transfer learning (e.g. doing crosswords doesn't make one better at chess through some kind of \nquote{brain training}). However, defined somewhat more broadly, transfer learning is obvious. Learning a language makes it easier to learn to understand all humans that speak that language -- the tasks are not independent. Concretely, I would define transfer learning in an AI system as \nquote{given tasks A and B, a system demonstrates transfer learning if it can train on A, then perform well on A but not B, and then train on B, and perform well on both A and B, and the time needed to train on B is less than if it had only trained on B to perform only B}.
+
+I want to investigate how theories of neuroscience explain these kinds of phenomena (perhaps not explicitly calling it transfer learning) -- where information learnt for one task can be employed when performing another task. I also want to look at how AI systems implement this, and how they could be improved.
+
+\subsection{Human language and natural language processing}
+Language is an important human capability. Furthermore, some theorists have suggested that language is crucial not only to human communication, but to human thought itself. Accordingly, I wish to compare neuroscientific theories of language, both how language is processed in the brain, and what role (if any) it serves beyond communication. I then want to look at how AI systems process language, how they could be improved, and whether there are any non-communication benefits to be had by adding some language capacity to a system.
+
+\subsection{Human pain/pleasure and reward signals in reinforcement learning}
+Reinforcement learners typically have behaviour that is isomorphic under scaling or translation of their utility function. They simply pick the action that leads to the most utility, and don't distinguish between \nquote{seeking out pleasure} and \nquote{avoiding pain}. On the other hand, humans do distinguish between these two, and they even ask questions like \nquote{is a particular type of existence better or worse than being dead?}. Of course, we can give a reinforcement learner some particular utility for the \nquote{dead} state, but it doesn't quite feel like the same thing to me. I want to clarify my understanding of this by comparing different neuroscientific theories of how pain, pleasure, and addiction work, and different AI approaches to the concept of \nquote{reward}.
+
+\section{Marcus's topics}
+Marcus replied to my email with some good suggestions for topics. I haven't thought deeply about how to integrate them into the work yet, but I will include some of them here so I can keep an eye out for relevant bits when I'm reading literature.
+
+\subsection{Reasoning}
+The human ability to reason abstractly (rather than merely react quickly to environmental events) is currently not fully understood. Although we can create systems that perform logical reasoning, the more general human type of reasoning eludes us. Part of my review here will be just finding a good definition for what \nquote{reasoning} actually means.
+
+\subsection{Creativity}
+Creativity is an extremely broad term. It might be useful to look at what philosophers have to say, but it is likely to be too imprecise to evaluate specific theories or AI systems.
+
+\subsection{Generalization}
+The most advanced kind of generalisation is the transfer learning I talked about above. A simpler kind is the task of inferring missing data from given (e.g. learning to distinguish cats and dogs given only some examples of the same). Explaining how different AI systems approach such a task provides a good overview of the system itself.
+
+\subsection{Problem solving}
+The process of defining an obstacle as a \nquote{problem} to solve, and then coming up with a solution, is an interesting task. I think it will be instructive to explore how different neuros
+
+\subsection{Planning}
+
+\subsection{Self-preservation}
+
+\subsection{Classification}
+
+\subsection{Induction}
+
+\subsection{Deduction}
+
+\subsection{Abduction}
+
+\bibliography{../references}
+\end{document}
