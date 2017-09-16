@@ -1,0 +1,799 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\bibliographystyle{apalike}
+%\setcitestyle{authoryear,open={((},close={))}}
+
+\newcommand{\delims}[3]{\!\left #1 #2 \right #3}
+\newcommand{\parens}[1]{\delims{(}{#1}{)}}
+\newcommand{\braces}[1]{\delims{\lbrace}{#1}{\rbrace}}
+\newcommand{\brackets}[1]{\delims{[}{#1}{]}}
+\newcommand{\norm}[1]{\delims{\|}{#1}{\|}}
+\newcommand{\abs}[1]{\delims{|}{#1}{|}}
+\newcommand{\inner}[2]{\delims{\langle}{#1,#2}{\rangle}}
+\newcommand{\vectinner}[2]{\inner{\vect{#1}}{\vect{#2}}}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\newcommand{\nquote}[1]{``{#1}''}
+
+\begin{document}
+\title{\vspace{-10ex}List of rows}
+\author{Dmitry Brizhinev}
+\maketitle
+
+\section{Introduction}
+This writeup is based on The Emotion Machine \cite{minsky}
+
+%\cite[p.~150--153]{ref} \cite[p.~150]{ref}.
+
+\section{Summary of Minsky's theory}
+\nquote{this book will begin by portraying a typical brain as containing a great many parts that we'll call \nquote{resources.}} \cite[p.~2--3]{minsky}
+
+Our later chapters will argue that our brains must also be equipped with resources that we shall call "Critics"-—each of which is specialized to recognize some certain condition—and then to activate a specific collection of other resources. Some of our Critics are built in from birth, to provide us with certain "instinctive"
+reactions—such as Anger, Hunger, Fear, and Thirst—which evolved
+to help our ancestors survive. Thus, Anger and Fear evolved for defense and protection, while Hunger and Thirst evolved for nutrition. However, as we learn and grow, we also develop ways to activate other, new sets of resources to use—and this leads to types of mental states that we regard as more "intellectual" than "emotional." For example, whenever a problem seems hard to you, then your mind will start to switch among different Ways to Think—by selecting different sets of resources that can help you to divide the problem into smaller parts, or find suggestive analogies, or retrieve solutions from memories—or even ask some other person
+for help. \cite[p.~4]{minsky}
+
+The rest of this book will argue that this could be what provides our species with our uniquely human resourcefulness. \cite[p.~5]{minsky}
+
+Each of our major Ways to Think results from turning certain resources on while turning certain others offhand thus changing some ways that our brains behave. \cite[p.~5]{minsky}
+
+There is a traditional view in which emotions add extra features to plain, simple thoughts, much as artists use colors to augment the effects of black-and-white drawings. However, this book will argue, instead, that many of our emotional states result when certain particular Ways to Think start to suppress our use of certain resources! \cite[p.~5]{minsky}
+
+If a program works in only one way, then it gets stuck when that
+method fails. But a program that has several ways to proceed
+could then switch to some other approach, or search for a suitable
+substitute. \cite[p.~6]{minsky}
+
+one thing seems common to all those conditions: each leads us to think in different ways \cite[p.~12]{minsky}
+
+It's almost as though a switch had been thrown and a different program has started to run \cite[p.~12]{minsky}
+\\
+Whenever you think about your "Self," you are switching among a huge network of models, each of which tries to represent some particular aspects of your mind—to answer some questions about yourself \cite[p.~16]{minsky}
+
+we'll start with the simple idea that every brain contains many parts, each of which does certain specialized jobs. Some can recognize various patterns, others can supervise various actions, yet others can formulate goals or plans, and some can contain large bodies of knowledge. This suggests that we could envision a mind (or a brain) as composed of a great many different "resources." \cite[p.~22-23]{minsky}
+
+[Note that Minsky considers emotions to be examples of resources -- ones that turn other resources on and off]
+
+First, perhaps, we ought to ask how those resources originate. Clearly, some of them must have evolved to promote functions that keep our bodies alive; Anger and Fear evolved for protection, and Hunger evolved to serve nutrition—and many such "basic instincts" are already built into our brains at birth. Other resources appear in later years, such as the ones involved with reproduction (which often engages some risky behaviors); some of these also must be inborn, but others must be mainly learned. \cite[p.~24]{minsky}
+
+I'm using resource in a hazy way, to refer to all sorts of structures and processes that range from perception and action to Ways to Think about bodies of knowledge. Some such functions are performed in certain particular parts of the brain, while others use parts that are more widely spread over much larger portions of the brain. Other parts of this book discuss more ideas about the kinds of resources our brains seem to support, as well as how their functions might be organized. However, I won't try to identify where these might fie in the brain because research on this is advancing so quickly that any conclusion one might make today could be outdated in just a few weeks \cite[p.~25]{minsky}
+
+if all our resources were active at once, they would too often get into conflicts. You can't make your body both walk and run, or move in two different directions at once. So when one has several goals that are incompatible, because they compete for the same resources (or for time, space, or energy), then one needs to engage processes that have ways to manage such conflicts \cite[p.~26]{minsky}
+
+both in societies and in brains, few "higher-level executives" know enough of the system's details to specify what must be done—hence, much of their "power" in fact consists in selecting among options proposed by their subordinates. Then, in effect, those low-level individuals will, at least transiently, be controlling or constraining what their superiors do \cite[p.~26]{minsky}
+
+it isn't enough just to know that you're stuck: you'll do better if you can recognize that you're lacing some particular kind of obstacle. For if you can diagnose what Type of Problem you face, this can help you to select a more appropriate Way to Think. So this book will suggest that to deal with hard problems, our brains augmented their ancient Reaction-Machines with what we'll call "Critic-Selector Machines." The simplest versions of these would be the "If-*Do" machines described in Section 1-4. There, when an "If" detects a certain realworld situation, its "Do" reacts with a certain real-world action. Of course, this means that simple If-*Do machines are highly constrained and inflexible. However, the "Critics" of Critic-Selector Machines will also detect situations or problems inside the mind such as serious conflicts between active resources. Similarly, the "Selectors" of Critic-Selector Machines don't just perform actions in the external world, they can react to mental obstacles by turning other resources on or off—thus switching to different Ways to Think. For example, one such Way to Think would be to consider several alternative ways to proceed before selecting which action to take. Thus, an adult who encounters what might be a threat need not just react instinctively, but first could proceed to deliberate on whether to retreat or attack—by using high-level strategies to choose among possible ways to react. This way, one could make a thoughtful choice between becoming angry or becoming afraid. Thus when it seems appropriate to intimidate an adversary, one can make oneself angry deliberately—although one may not be aware that one is doing this.\cite[p.~28-29]{minsky}
+
+Diagram:
+top arrows: values, censors, and ideals
+6 layers:
+self-conscious emotions
+self-reflective thinking
+reflective thinking
+deliberative thinking
+learned reactions
+instinctive reactions
+bottom arrows: instinctive behavioural systems \cite[p.~29]{minsky}
+
+We all can observe the progression of our children's values and abilities. Yet none of us can recollect the early steps of our own mental growth! One reason for this could be that, during those times, we kept developing ways to build memories—and each time we switched to new versions of these, that made it difficult to retrieve (or to understand) the records we made in previous times \cite[p.~30]{minsky}
+
+any large change in which resources are active will substantially alter one's mental state. Such a process might begin when one Selector resource directly arouses several others. Then, some of those newly aroused resources may proceed to activating yet other ones—and if each such change leads to several more, this all could result in a large-scale "cascade." The further these activities spread, the more they will change your mental state, but, of course, this won't change everything. When Charles engages a new Way to Think, not all his resources will be replaced—so, in many respects he'll still be the same. He will still be able to see, hear, and speak—but now he'll perceive things in different ways, and may select different subjects to discuss. He may now have some different attitudes, but still will have access to most of his commonsense knowledge. He will still have some of the same plans and goals—but different ones will be pursued because they now have different priorities. Yet despite all these changes, Charles will insist that he still has the same "identity." To what extent will he be aware of how his mental condition has altered? He sometimes won't notice those changes at all, but at other times, he may find himself asking questions like, "Why am I getting so angry now?" However, even to think of asking such questions, Charles's brain must be equipped with ways to "self-reflect" on some of his recent activities—for example, by recognizing the spreading of certain cascades. \cite[p.~31-32]{minsky}
+
+all-too-common tendency to try to divide any complex thing into two separate, complementary parts—-such as emotion vs. intellect. However, Chapter 9-2 will argue that few such two-part distinctions really describe two genuinely different ideas \cite[p.~33]{minsky}
+
+In our early stages of development, our low-level processes solve many small problems without any sense of how this happens. However, as we develop more levels of thought, those higher levels start to find ways to represent some aspects of our recent thoughts. Eventually these develop into collections of "models" of ourselves. \cite[p.~34-35]{minsky}
+
+Playing alone. Carol wants to fill her cup with mud, and first tries to do this with her fork, but this fails because the mud slips through. She feels frustrated and disappointed. But when she succeeds by using her spoon, Carol feels satisfied and pleased. What could Carol learn from this? She learns from her "trial and error" experience chat forks are not good for carrying mud. But then she learns from success with a spoon that spoons are good tools for moving a fluid, so she is likely to use this method the next time she wants to fill a cup. Note that here Carol was working alone—and acquired new knowledge, all by herself. In the course of learning by trial and error -- a person requires no teacher to help her. \cite[p.~36-37]{minsky}
+
+In the face of a parent's blame or reproach, she learns that her goal was not a good one to pursue \cite[p.~37]{minsky}
+
+When we're praised or rejected by people we love, we don't just feel Pleasure or Dissatisfaction; instead, we tend to feel Pride or Shame \cite[p.~38]{minsky}
+
+Carol's shame caused her to change her goals instead of just learning ways to achieve them! Similarly, it her mother had praised her for her play, that praise could have led Carol to deepen her interest in material science and engineering. \cite[p.~39]{minsky}
+
+It is one thing to learn how to get what you want—and another to learn what you ought to want. In our usual learning by trial and error, we improve our ways to achieve the goals that we already hold. However, when we "self-consciously" reflect on our goals (see Chapter 5-6), we're likely to change their priorities-—and what I am suggesting is that selfconscious emotions like Pride and Shame play special roles; they help us learn ends instead of means. Thus, where trial and error teach us new ways to achieve the goals we already maintain—attachment-related blame and praise teach us which goals we should discard or retain \cite[p.~39]{minsky}
+
+Here is one useful theory about when we use words like want and goal: You say that you want a certain thing when you have an active mental process that works to reduce the difference between your present situation and one in which you possess that thing. \cite[p.~40]{minsky}
+
+When such processes work at low cognitive levels, at first we may not recognize them—for example, when you get too hot and start to sweat. However, when perspiration drips, you may notice this and deliberate: "I must find some way to escape from this heat" Then your higher-level knowledge suggests other actions that you could take \cite[p.~41]{minsky}
+
+When you need to remove several differences, then this may require several steps. For example, suppose that you're hungry and want to eat, but you have only a can of soup. Then you'll need a tool to open that can, you'll need to find a bowl and a spoon, and you'll need a place where you can sit down to eat. So, each such need is a "subgoal" that comes from some difference between what you have now and what you desire. \cite[p.~42]{minsky}
+
+the most common conception of how people learn—that our reactions are "reinforced by success." \cite[p.~43]{minsky}
+
+However, although this kind of "learning by trial and error" can connect new subgoals to existing goals, it does not explain how a person could learn completely new goals—or what we call "values" or "ideals"—that don't yet connect to existing ones. More generally, it does not cover the subject of how one could learn what one "ought" to want. I don't recall much discussion of this in academic psychology books, so here I'll conjecture that children do this in a special way that depends on how they interpret the reactions of the persons to whom they are 'attached'. \cite[p.~43-44]{minsky}
+
+In most other species of animals, the function of infant attachment seems clear: remaining close to parents helps to keep their offspring safe. However, in humans it seems to have other effects; when Carol's Imprimer praises her, she feels a special thrill of pride that elevates her present goal to a status that is more "respectable," Thus, Carol's goal to work with mud may have begun as nothing more than a casual urge to play with materials in her environment. But—according to my conjecture here-—her Imprimers praise (or blame) appears to change the status of that goal into something more like an ethical value (or into one she regards as dishonorable). \cite[p.~44-45]{minsky}
+
+So now we've seen several different ways in which our children might change themselves:
+Positive Experience: When a method succeeds, learn to use that subgoal.
+Negative Experience: When a method fails, learn to not use that
+subgoal.
+Aversion Learning: When a stranger scolds, learn to avoid such
+situations.
+Attachment Praise: When an imprimer praises, elevate your goal.
+Attachment Censure: When an imprimer scolds, devalue your goal.
+Internal Imprinting: When an imprimer scolds, devalue your goal.
+\cite[p.~44-46]{minsky}
+
+This six-level image is intended to be vague, because our brains are not so neatly arranged. However, this gives us a way to begin: imagine that the kinds of goals called "values" or "ideals" are attached to resources near the top, while our more infantile aims come from resources near the base of that cake. Then the arrow in this diagram suggests a possible meaning for "elevate." To "elevate" a goal could mean to copy, move, or link it to some higher location in that tower. \cite[p.~47]{minsky}
+
+The If must describe some relevant features and relationships of
+the situation you faced.
+The Then must describe some relevant aspects of the successful
+actions you took. \cite[p.~49]{minsky}
+
+In other words, when a person learns, it is not just a matter of "making connections" but is also a matter of making the structures that then get connected—which means that we need to find some ways to represent not only those external events, hut also the relevant mental events. Thus, Carol will need some reflective resources to choose which of the Ways to Think that she used should be among the things that she remembers. No theory of learning can be complete unless it includes ideas about how we make these "credit assignments." \cite[p.~49]{minsky}
+
+What happens when a young child's Imprimers go absent? Shortly, we'll see some evidence that this usuallv leads to severe distress. However, older children better tolerate this, presumably because each child makes "internal models1' that help them to predict their Imprimers' reactions. Then each such model would serve its child as an "internalized" system of values—and this could be how people develop what we call ethics, conscience, or moral sense. Perhaps Sigmund Freud had such a process in mind when he suggested that children can "introject" some of their parents' attitudes. \cite[p.~50]{minsky}
+
+We should also ask what might happen if a child somehow gained more control over how that internal model behaves—-so that now that child could praise himself—and thus select which goals to elevate—or else that child could censure himself, and thus impose new constraints on himself. This would make him "ethically autonomous" because he now can replace some of his imprinted value-sets. Then, if some of those older values persist in spite of attempts to altet them, this could lead to conflicts in which the child opposes his former Imprimers. However, if that child's brain were able to change all of its previous values and goals, then there would remain no constraints at all on what kind of person emerges from this—it could even be a sociopath. \cite[p.~51]{minsky}
+
+Clearly, some of our traits are partly based on genes that we have inhetited, but others spread in the form of contagious ideas that propagate from each brain to the next as parts of a cultural heritage \cite[p.~51]{minsky}
+
+To be sure, some thinkers might argue that we can use logical reasoning to deduce which high-level goals to choose. However, it seems to me that logic can only help us deduce what's implied by the assumptions we make—but it cannot help us to choose among which assumptions we ought to assume. \cite[p.~52]{minsky}
+
+We all know people who make clever plans but rarely manage to carry them out because their models of what they will actually do don't conform enough to reality. But how could a trillion-synapse machine ever become predictable? How did our brains come to manage themselves in the face of their own great complexity? The answer must be that we learn to represent things in extremely compact, yet useful ways. \cite[p.~60]{minsky}
+
+In the course of each person's development, we tend to evolve certain policies that seem so consistent that we (and our friends) can recognize them as features or traits—and we use these to build our self-images. Then when we try to formulate plans, we can use those traits to predict what we'll do (and to thus discard plans that we won't pursue). Whenever this works, we're gratified, and this leads us to further train ourselves to behave in accord with these simplified descriptions. Thus, over rime our imagined trairs proceed to make themselves more real. \cite[p.~61]{minsky}
+
+Finally, we also should note that a child could even become attached to an entity that doesn't exist—such as a person in some legend or myth, a fictional charactet in a book, or an imaginary animal. A person can even become attached to an abstract doctrine, dogma, or creed—or to an icon or image that represents it. Then those imagined entities could serve as "virtual mentots" inside their wotshippets' minds. After all, when you come right down to it, all our attachments ate made to fictions; you nevet connect to an actual person, but only to the models you've made to represent your conceptions of them. \cite[p.~65]{minsky}
+
+What could make the sensation called "Pain" lead one into the state we call "Suffering"? This chapter proposes a theory for this: any pain will activate the goal "Get rid of that pain"—and achieving this will also make that goal go away. However, if that pain is intense and persistent enough, this will arouse yet other resources that tend to suppress your other goals—and if this grows into a large-scale "cascade," there won't be much left of the rest of your mind. \cite[p.~66]{minsky}
+
+pleasure and pain engage some of the same kinds of machinery; both constrict one's range of attention, both have connections with how we learn, and both reduce the priorities of almost all one's other goals \cite[p.~68]{minsky}
+
+The primary function of Pain is to compel one to remove what is causing it—but in doing so, it tends to disrupt most of a person's other goals. Then, if this results in a large-scale cascade, we use words like Anguish or Suffering to describe what remains of its victim's mind. \cite[p.~70]{minsky}
+
+the victims of Pain Asymbolia still recognize what the rest of us describe as pain—but do not find those feelings unpleasant, and may even laugh in response to them—which suggests that these patients have lost some resources that normally cause those cascades of torments. \cite[p.~72-73]{minsky}
+
+it seems to me that what we call "feelings" arc what result from our attempts to describe our whole mental states—no matter that every such state is so complex that any brief description of it can capture just a few aspects of it. Consequently, the best we can do is to recognize some ways in which our present state is similar to or differs from some other states that we recollect. In other words, because our mental states are so complex, we can describe them only in terms of analogies. Nevertheless, it can be easy to recognize (as opposed to describe) a particular feeling or mental condition because you may only need to detect a few of its characteristic features. \cite[p.~74]{minsky}
+
+It seems to me tliat when people talk about "feeling bad" they are referring to the disruption of their other goals, and to the various conditions that result from this. Pain would not serve the functions fot which it evolved if it allowed us to keep pursuing our usual goals while our bodies were being destroyed. \cite[p.~75]{minsky}
+
+We all have heard anecdotes in which a wounded soldier continues to fight without being disrupted by pain—and only later succumbs to shock, after the battle is lost or won. Thus, a powerful goal to save yourself, or to save your friends, may be able to override everything else. \cite[p.~76-77]{minsky}
+
+our ancient reactions to chronic pains have nor yet been adapted to be compatible with the reflective thoughts and farsighted plans that only later evolved in our brains. Evolution never had any sense of how a species might evolve next—so it did not anticipate how pain might disrupt our future high-level abilities. And thus, we came to evolve a design that protects our bodies but ruins our minds. \cite[p.~79]{minsky}
+
+When you suffer the loss of a long-time friend, you feel that you've lost a part of yourself, because so many parts of your mind depend on that sharing of dreams and ideas—and now, alas, the signals that those brain parts transmit will never again receive replies. \cite[p.~80]{minsky}
+
+We usually think of a person's abilities in positive terms, as in, "An expert is someone who knows what to do." But one could rake the opposite view, that "An expert is someone who rarely slips up—because of knowing what not to do." However, this subject was rarely discussed in twentiethcentury psychology—except, perhaps most notably, in Sigmund Freud's analyses. \cite[p.~81]{minsky}
+
+I'll conjecture that our minds accumulate resources that we shall call "Critics"—each of which learns to recognize some particular kind of potential mistake. I'll assume that everyone possesses at least these three different types of Critics:
+A Corrector declares that you are doing something dangerous. "You must stop right now, because you're moving your hand toward a flame."
+A Suppressor interrupts before you begin the action you're planning to take. "Don't start to move your hand toward that flame, lest it get burned."
+A Censor acts yet earlier, to prevent that idea from occurring to you—so you never even consider the option of moving your hand in that direction.
+...
+a Censor can actually speed you up, by keeping you from considering the activities that it prohibits. This could be one reason why experts are sometimes so quick; they don't even conceive of those wrong things to do.
+...
+Design each Censor to be a machine that is equipped with enough memory that it can remember the way you were thinking several steps before you made a certain particular kind of mistake. Then later, when that Censor recognizes a similar state, it steers you to think in some different way so that you then won't repeat that mistake.\cite[p.~81-82]{minsky}
+
+For example, if certain Critics were to stay active all the time, then one would appear to be obsessed with certain aspects of the world or oneself-—or else one might constantly seem to be compelled to repeat certain kinds of activities. Another example of poor Critic control would be when one repeatedly turns too many Critics on, and later switches too many off. Here is what appears to be a firsthand description of such a condition:
+Kay Redfield Jamison 1994: "The clinical reality of manic-depressive illness is far more lethal and infinitely more complex than the current psychiatric nomenclature, bipolar disorder, would suggest. Cycles of fluctuating moods and energy levels serve as a background to constantly changing thoughts, behaviors, and feelings. The illness encompasses the extremes of human experience. Thinking can range from florid psychosis, or "madness," to patterns of unusually clear, fast and creative associations, to retardation so profound that no meaningful mental activity can occur. Behavior can be frenzied, expansive, bizarre, and seductive, or it can be seclusive, sluggish, and dangerously suicidal. Moods may swing erratically between euphoria and despair or irritability and desperation. . , . [But] the highs associated with mania are generally only pleasant and productive during the earlier, milder stages."
+...
+but I suspect that everyone constantly uses such processes tn
+the course of their everyday commonsense thinking
+...
+First, briefly shut most of your Critics off. This helps you to think of some things you could do—with little concern about whether they'll work—as though you were in a brief "manic" state.
+Next, turn many Critics on, to examine these options more skeptically— as though you were having a mild depression.
+Finally, choose an option that seems promising, and then proceed to pursue it, until one of your Critics starts to complain that you have stopped making progress.
+Sometimes you may go though such phases deliberately, perhaps spending several minutes on each. However, my conjecture is that we often do this on timescaJes of one or two seconds, or less, in the course of our everyday commonsense thinking. But then, all these events may be so brief that we have almost no sense that they're happening.\cite[p.~83-85]{minsky}
+
+the "Critic-Selector Model of Mind," which portrays our thinking as based on mental reactions to mental situations. In this model, our Critics play a central role in making large-scale changes in how we think, by selecting resources we'll use for thinking about different kinds of situations. Here is a simplified version of this:
+Critics recognise a situation type -> Selectors activate a Way to Think. [Second diagram has resources sending inputs to critics and receiving outputs from selectors]\cite[p.~85-86]{minsky}
+
+Our Critic-Selector Model of Mind will include structures like these at every level, so that each person's mind will include reactive, deliberative, and reflective Critics. At the lowest levels, those Critics and Selectors are almost the same as the Ifs and Thens of simple reactions. But at our higher reflective levels, these Critics and Selectors can cause so many changes that, in effect, they switch us to different Ways to Think.
+...
+extend the term Critic to include resources that not only detect mistakes but also recognize successes and promising opportunities; we'll call those "positive" critics "Encouragers." \cite[p.~86]{minsky}
+
+[Diagram illustrating mapping to Freud - "Values, goals, ideals and taboos are the superego, innate instinctive wishes and drives are the id, and the ego settles conflicts"]\cite[p.~88]{minsky}
+
+Clearly, some of our Critics are always on the job, like voyeurs that constantly monitor us, waiting for moments to set off alarms—whereas other Critics are only active on special occasions, or in particular states of mind. Let's look again at two extremes:
+If you could switch all your Critics off, then nothing would seem to have any faults, and the whole world might suddenly seem to change so that everything now seems glorious. You'd be left with few worries, concerns, or goals—and others might describe you as elated, euphoric, demented, or manic.
+However, if you turned too many Crirics on, you'd see imperfections everywhere. Your entire world would seem filled with flaws, engulfed in a flood of ugliness. If you also found fault with your goals themselves, you'd feci no urge to straighten things out, or to respond to any encouragement.
+This means that those Critics must be controlled: if you were to turn too many on, then you would never get anything done. But if you turned ali your Critics off, it might seem as though ali your goals were achieved— and again you wouldn't accomplish much.
+[Also argues that mystical/meditative, psychidelic experiences are like an extreme version of turning all critics off] \cite[p.~89-90]{minsky}
+
+To us, it might seem "irrational" to exploit an emotion to solve a problem. However, when Joan's Losing Weight encounters an obstacle, it makes just as much sense for that goal to exploit emotions Wke Jealousy or Disgust as it would for Joan herself to use a stick to extend her reach-—no matter that even Joan herself may see such behaviots as "emotional," \cite[p.~92]{minsky}
+
+directness would be too dangerous. If some other goal could simply turn Hunger off, we'd all be in peril of starving to death. If it could directly switch Anger on, we might find ourselves fighting most of the time. If it could simply extinguish Sleep, we'd be likely to wear our bodies out. \cite[p.~93]{minsky}
+
+consciousness is a suitcase-like word that we use ro refer to many different mental activities, which don't have a single cause or origin—and, surely, this is why people have found it so hard to "understand what consciousness is." \cite[p.~97]{minsky}
+
+[Reactive A-brain and deliberative B-brain diagram: external world sends signals to A-brain (and A-brain sends commands back), A-brain sends signals to B-brain]
+...
+Similarly, your B-Brain is connected so that it can react to signals that it receives from A, and then can react by sending signals to A. However, B has no direct connection to the outer world, so, like the prisoners in Plato's cave, who sec only shadows on a wall, the fi-Brain mistakes As descriptions for real things. The i?-Brain does not realize that what it perceives are not objects in the external world but are merely events in the y4-Brain itself.
+...
+Nevertheless, although the B-Brain cannot directly perform any physical actions, it still can affect the external world, by controlling the ways in which A might react. For example, if B sees that A. has got stuck at repeating itself, it might suffice lor B to instruct A to change its strategy.  \cite[p.~100-101]{minsky}
+
+a B-Brain would need appropriate ways to represent things. In this case, you would be better off if your B-Brain represented "walking to a certain place"'as a single extended act, like, "Keep moving your legs till you get to the other side of the street." [so that it doesn't say: stop, you're repeating the same thing over and over again] \cite[p.~101]{minsky}
+
+[Diagram adds a "reflective" C-brain]
+...
+C-Brain could act like a "manager" who has no special expertise about how to do any particular job—but still could give "general" guidance like this:
+If B's descriptions seem too vague, C tells it to use more specific details.
+If B's are buried in too much detail, C suggesrs more abstract descriptions.
+If what B is doing is taking too long, C tells it to try some other technique.
+...
+[Minsky thinks there are at least 6 layers of this]\cite[p.~102]{minsky}
+
+What caused Joan to turn toward that sound? [Instinctive]
+How did she know that it was the sound of a car? [Learned]
+What resources were used to make her decision? [Deliberative]
+How did she choose which resources to use? [Reflective]
+Did she feel that she made a good decision? [Self-Reflc-ctive]
+Did her actions live up to her principles? [Self-Conscious]
+...
+We know that by the time of birth, every infant is already equipped with a variety of instinctive reactions, and has started to add learned reactions to these. Then, over time, we progressively add more deliberative ways to reason, imagine, and plan for the future. Later, we build a new layer in which we start to do reflective thinking about our own thoughts—and two-year-old children already arc making additional ways to self-reflect about why and how they thought those things. And, eventually, we begin to think more self-consciously about which things to regard as right or wrong to do. \cite[p.~103]{minsky}
+
+There is an evolutionary reason for why we should not expect the brain to be a single, highly interconnected network: it would be almost impossible for such a system to evolve—because it would have so many flaws or "bugs" that it could not survive for long. \cite[p.~104]{minsky}
+
+it appears that our brains result from processes in which each new part in based on some older designs, but also includes exceptions to it. Indeed, I suspect that large parts of our brains work mainly to correct mistakes that other parts make—and this is surely one reason why the subject of human psychology has become so hard. We can expect to discover neat rules and laws that partly explain many aspects of how we think. However, every such "law of thought" will also need a sizable list of exceptions to it. So psychology will never be much like physics, in which we frequently find ''unified theories" that work flawlessly. \cite[p.~105]{minsky}
+
+whenever you play a computer game, you control what happens inside the computer mainly by using symbols and names. The processes we call "consciousness" do very much the same. It's as though the higher levels of our minds sit at mental terminals, steering great engines in our brains, not by knowing how that machinery works but by "clicking" on symbols from menu lists that appear on our mental screen displays. And, after ail, we ought not to be surprised by this; our minds did not evolve to serve as instruments lor observing themselves, but for solving such practical problems as nutrition, defense, and reproduction. \cite[p.~109]{minsky}
+
+this led many thinkers to assume that all those seemingly common traits are somehow derived from some single, central, "vital force"—rather than from massive collections of different processes that go on inside membranes rilled with intricate machinery; today it makes less sense to use "alive" as though there were a definite boundary line that separates animals from machines. This chapter will argue that we all still make just that type of mistake when we use words like consciousness. \cite[p.~111]{minsky}
+
+most of our mental processes work in ways that don't cause us to think or reflect about why and how we are doing them. However, when those processes don't function well or when they encounter obstacles, this starts up high-level activities that often include these kinds of properties:
+(1) They use the models we make of ourselves.
+(2) They tend to be more serial and less parallel.
+(3) They tend to use symbolic descriptions.
+(4) They make use of our most recent memories.
+\cite[p.~112]{minsky}
+
+you might complain about feeling frustrated or distressed, and then attempt to remedy this by mental acts, which, if expressed in words, might say, "Now I should make myself concentrate, "or "I should try to think in some more organized way, "or "I should switch to a higher-level overview."
+What kind of machinery could cause you to think in such ways? Let's assume that your brain contains one or more special "trouble-detectors" that start to react when your usual systems don't achieve some goal. Then such a resource could go on to activate other, higher-level processes 
+[Diagram of trouble detector activating selectors "self-models", "serial processes", "symbolic descriptions", "recent memories"]\cite[p.~113]{minsky}
+
+Now let's ask the opposite question, namely, "What might cause someone to talk about having been thinking consciously?" We can see one way to answer that, by simply reversing our "troubledetecting" diagram so that information flows in the other direction! So here we have a brain that includes one or more "consciousnessdetecting Critics," each of which recognizes the activity of a certain set of high-level processes. Such Critics would then send signals to other parts of the brain—and this could enable one's language systems to describe one's condition with words like conscious, attentive, aware, and alert, as well as with words like me and myself. \cite[p.~116]{minsky}
+
+if such a detector turned out to be useful enough, one might come to imagine the existence of some process or entity that seems to be causing those activities, and this concept might get connected to such terms as deliberate or intentional—or even free will—so that one finds oneself to be saying things like, "Yes, I performed that action deliberately, so you have a right to praise or censure me for doing it." Furthermore, if several different such detectors (which recognize different such sets of conditions) get connected to the same language-words, then the meanings of those words might frequently shift \cite[p.~117]{minsky}
+
+before you enter a familiar room, it is likely that you have already retrieved an old description of it, and it may be quite some time before you notice that some things have changed. In othet words, much of the scene that you think you perceive is based on recollections of what you expected to see. \cite[p.~118]{minsky}
+
+if we take consciousness to mean "awareness of our internal processes"—it doesn't live up to its reputation \cite[p.~120]{minsky}
+
+in this book we're using model to mean a mental representation that can help us to answer some questions about some other, more complex thing or idea. For example, when we say that "Joan has a mental model of Charles," we mean that Joan possesses some structure or knowledge that helps her answer some questions about Charles." I emphasize the word some because each of our models will give useful answers to only certain types of questions, but might give wrong answers to other questions \cite[p.~121]{minsky}
+
+Joan's model for the object called "Joan" will be a structure that she calls "My Self"—and which surely includes at least two parts: one called "My Body" and one called "My Mind." Furthermore, each model will have some smaller parts \cite[p.~122]{minsky}
+
+If you were to ask Joan if she has a mind, she could answer "Yes,"by using the model that she calls "My Self." And if you asked her where her consciousness is, she might reply that it's part of "My Mind" (because she thinks of it as more like goals and ideas than like physical things such as hands and feet). However, if you asked Joan where her consciousness is, this particular model would not help her to say, as many people would, "My mind is inside my head (or my brain) "—unless her model called "My Self" iko included an "is a part-of" link from My Mind to My Head, or an "is caused-by" [ink from My Mind to My Brain. \cite[p.~122]{minsky}
+
+she might just say that she used "free will"—which might simply mean, 'I have no model that explains how I made the choice I made." \cite[p.~123]{minsky}
+
+perhaps our human ability to self-reflect evolved from our developing ways to "envision" how objects behave in space. For as suggested in Lakoff 1980 and 1992, space-related analogies seem so useful in our everyday thinking that they permeate our language and thought. Imagine how hard it would be to think without using concepts like, "I'm getter closer to my goal." But why do we find it so easy to use those spatial metaphors? Perhaps we are born with machinery for this; we know that the brains of several kinds of animals construct some maplike representations of environments with which they're familiar \cite[p.~125]{minsky}
+
+Inborn, Instinctive Reactions: Joan hears a sound and turns her head. We are born with instincts that help us to survive.
+Learned Reactions: She sees a quickly oncoming car. Joan had to learn that certain conditions demand specific ways to react.
+Deliberative Thinking: What to say at the meeting. Joan considers several alternatives and tries to decide which would be best.
+Reflective Thinking: Joan reflects on her decision. Here she reacts not to external events but happenings inside her brain.
+Self-Reflective Thinking: Uneasy about arriving late. Here we find her thinking about plans that she has made for herself.
+Self-Conscious Emotions: What would my friends have thought of me? Here Joan asks how well her actions agreed with her ideals. \cite[p.~130-131]{minsky}
+[Summary of the rest of the chapter:
+inborn reactions are like if->do rules, which are insufficient in general. Minsky suggests if->do might be too simplistic to cover the things that instincts actually do 
+learned reactions are like positive and negative reinforcement, though minsky suggests the real challenge is credit assignment and properly representing both the situation and the response to learn
+Deliberative: making plans, choosing between alternatives, predicting consequences; search tree is the simplest version of this
+Reflective: models of own thought process to investigate where it might have gone wrong (or which bits went right)
+Self-reflecting: models of self as an agent having the thought process
+Self-conscious: something something values (model of what an agent with my values *should* do?)
+]
+
+The simplest way would be for her to possess a collection of three-part If + Do -> Then rules, where each
+If describes a situation, each Do describes a possible action, and each Then depicts what might be a possible result of doing that action  \cite[p.~135]{minsky}
+
+To envision that four-step sequence of actions, Carol will need a good many skills. To begin with, her visual systems will need to describe the shapes and locations of those blocks, some parts of which may be out of sighr—and she'll need ways to plan which blocks to move and to where she ought to move them. Then, whenever she moves a block, she must program her fingers to grasp it, and rhen move it to the intended place, and finally release it there—while taking care rhat her arm and hand won't collide with her body or face, or disturb the blocks already in place. And she'll have to control the velocity, to deposit the block on the top of the arch without tumbling down its supporting blocks. \cite[p.~136-137]{minsky}
+
+People frequently try to distinguish between thinking "logically" and "intuitively," but this is almost always a matter of degree. For example, we often use chains of prediction in ways that resemble logical statements like this:
+If A implies B, and B implies C, then A implies C,
+But when does such "logical thinking" work? Clearly, if all our assumptions are correct—as well as our logical reasoning—then all of our conclusions will be correct, and we'll never make the slightest mistake. However, it turns out that in real life, most assumptions are sometimes wrong, because the "rules" they express usually have some exceptions to them. This means that there is a difference between the rigid methods of logic and the seemingly similar chainlike forms of everyday commonsense reasoning. We all know that a physical chain is only as strong as its weakest li nk. But long mental chains are flimsier yet, because they keep growing weaker with every new link! So using logic is somewhat like walking a plank; it assumes that each separate step is correct—whereas commonsense thinking demands more support; one must add evidence after every few steps. And those frailties grow exponentially with increasingly longer chains, because every additional inference-step may give the chain more ways to break. This is why, when people present their arguments, they frequently interrupt themselves to add more evidence or analogies; they sense the need to further support the present step before they proceed to the next one.\cite[p.~140]{minsky}
+
+when we face problems in everyday life, we tend to switch among several techniques, understanding that each may have some flaws. But because they all have different faults, we may be able to combine them in ways that still can exploit their remaining strengths. Our model needs a place in which these kinds of thinking can proceed; we'll call this the "deliberative" level \cite[p.~141]{minsky}
+
+Student: I see how each level could reason about what happens on
+levels below itself. But if a level tried to think about itself, then wouldn't it become confused because this would keep changing the subject it's thinking about?
+Indeed, that would cause so much trouble that, rather than try to examine itself, it would be better for a system to make simplified models of its condition—and record these in some memory banks. Then later it can self-reflect (if only to a certain extent), by applying the same sorts of processes (to those memories) that it already knows how to apply to inputs that come from external events. After all, most parts of our brains already have ways to detect events that occur inside the brain; indeed, only a few of our mental resources have any direct external connections—such as those that get signals from eyes or skin, or those that send messages to limbs.
+...
+What sorts of brain events should a reflective mind reflect upon? That would include predictions that turned out to be wrong, plans that encountered obstacles, and failures to access the knowledge one needs. Chaptet 7 wiil argue that it is also important to think about why the methods we used might have helped us to succeed.\cite[p.~142-143]{minsky}
+
+Our self-reflective level does more than does the reflective layer discussed above: it not only considers some recent thoughts, but it also thinks about the entity that had those thoughts—as when Carol said in Section 5-3, "I simply imagined an arch in my mind—and saw where each of the blocks should go." This shows that she is using a model of herself (like the one in Chapter 4-7) that describes some of her goals and abilities. \cite[p.~144]{minsky}
+
+consider how smarr it is ro know you're confused (as opposed to being confused without knowing this)—because then you can tell yourself to elevate to a larger-scale view of your motives and goals. This could help you to recognize that you have lost track of what you were trying to do, or have been wasting time on minor details, or that you chose a poor goal to pursue. This could lead to your making a better plan—or might even lead to a large-scale cascade like, "Just thinking about this makes me feel ill. Perhaps it's time to switch to some completely different activity." \cite[p.~145]{minsky}
+
+Joan must have built some models of the kinds of ideas that she "ought" to have. Then when she finds conflicts between how she behaves and the values of those to whom she's attached, this could lead to the kinds of cascades we called "self-conscious emotions" in Chapter 2-2. \cite[p.~146]{minsky}
+
+[Diagram mapping top 3 layers to superego, bottom 3 to id, and self-reflective to deliberative to ego] \cite[p.~148]{minsky}
+
+If a machine were equipped with all these kinds of processes, it might become able to represent itself as a single, self-aware entity. Then it might indeed claim to be at least as conscious as you or me—no matter that some other people might not agree. \cite[p.~148]{minsky}
+
+In earlier times, the most common view was that our visual systems work from "bottom to top," first by discerning the low-level features of scenes, then assembling them into regions and shapes, and finally recognizing the objects. However, in recent years, it has become clear that our highest-level expectations affect what happens in the "earliest" stages. \cite[p.~152]{minsky}
+
+our low-level systems may begin by locating separate patches and fragments, but then we use "context" to guess what they mean-—and then try to confirm those conjectures by using other kinds of ptocessing. In other wotds, we "re-cognize" things by being "re-minded" of familiar objects thar could match incomplete fragments of evidence. But we still do not know enough about how our high-level expectations affect which features our low-level systems detect. \cite[p.~154]{minsky}
+
+It might seem plausible to think that the scenes we imagine are of the same nature as visual images-—that is, composed of large numbers of separate spors. However, I suspect that this is an illusion, because those mental images do not behave in the ways that pictures do. Instead, it seems more likely that we can envision such scenes by intervening at higher levels of the representations that we described in the previous section. \cite[p.~155]{minsky}
+
+In everyday language, the word abstract is sometimes used to mean "very hard to understand"—but here it has almost the opposite sense: abstract descriptions are simpler because they suppress details that are not relevant. \cite[p.~157]{minsky}
+
+But how could any brain or machine envision a sequence of possible actions? Section 5-1 showed how to make predictions by using If+ Action -> Then rules, so a brain could use each Then to convert that prediction into a simulus—a representation of the resulting scene—by making a change at some level of our machines perceptual system. \cite[p.~159]{minsky}
+
+There are two reasons to include that pair of "Suppressor Bands." First, while you are imagining a future condition, you do not want this to be replaced by a description of the present condition; aJso, you don't yet want your muscles to perform the imagined action until you have considered some other options. So you need some way to disconnect your mind, to enable you to "stop and think" before selecting which action to take." (This could use the same machinery that disconnects our minds from our bodies when we are dreaming while we sleep.) \cite[p.~159-160]{minsky}
+
+It is often supposed that such actions are done under continuous "feedback control"—-by processes that keep working to reduce your distance from your goal. However, that cannot be generally true because human reactions are so slow that it takes about one-fifth of a second to react to events that one did not expect. This means that you cannot change what you are doing right now; all you can do is revise the plan that you've made for what you will do after that. Thus, when Joan reaches out to answer diat call, she must plan to reduce the speed of her hand before it collides with that telephone. Without good plans for what will happen next, she'd be constantly having accidents. \cite[p.~173]{minsky}
+
+[About "baby-machines":] In fact, several actual projects have had this goal, and each such system made progress at first but eventually stopped extending itself. I suspect that this usually happened because those programs failed to develop good new ways to represent knowledge. \cite[p.~178]{minsky}
+
+Another problem with baby-machines is that if a system learns new rules too recklessly, it is likely to accumulate too much irtelevant information—and its performance will deteriorate. Chapter 8-5 will argue that unless learning is done selectively—by making appropriate "credit assignments"—a machine will fail to learn the right things from most of its experiences. \cite[p.~179]{minsky}
+
+it will be difficult for a machine to keep developing-—unless it first evolves ways to protect itself against changes that cause bad side effects. An excellent way to accomplish this, both in engineering and in biology, has been to split the whole system into parts that then can evolve more independently. This surely is why all living things evolved to become assemblies of separate parts (which we call "organs")-—each of which have comparatively few connections to other parts. \cite[p.~181]{minsky}
+
+you cannot remember much of your earjiesr years; in particular, you cannot recall how you developed your early abilities. Presumably, you had not yet developed the skills one needs for making those kinds of memories. \cite[p.~182]{minsky}
+
+To retrieve information rapidly, a computer expert might suggest
+that we store everything in some single "database" and use some generalpurpose "matching" technique. However, most such systems still classify things in terms of how those things have been described instead of in terms of the goals that they can help us to achieve. This is extremely important because we usually know less about the type of thing we are looking for than about the goal that we want to accomplish with it—because we're always facing some obstacles, and want to know how to deal with them. \cite[p.~183]{minsky}
+
+So instead of using some "general" method, 1 suspect that every child develops ways to link each new fragment of knowledge to some particular goals it might help to achieve, and thus help to answer questions like these:
+What kinds of goals might this item serve? Which kinds of problems could it help to solve? What obstacles could it help to overcome? In which situations might it be relevant? In which contexts is this likely to help? What subgoals must first be achieved? How has it been applied in the past? What were some similar previous cases? What other records might be relevant? See Credit Assignment in Chapter 8-5-
+Each fragment of knowledge may also need links to some knowledge about its deficiencies—and the dangers and costs of using it:
+What are its most likely side effects? Is it likely to do us more harm or more good? How much will it cost to use it? Will it repay the efforr of using it? What are its common exceptions and bugs? In which contexts is it likely to fail us—and what might be good alternatives?
+We also link each item to information about its sources and to what certain other persons might know.
+Was it learned from a reliable source? Some informants may simply
+be wrong, wht'e others may mean to mislead us. Is it likely to be outdated soon? That's why this book does not discuss most current beliefs about how our brains work. Which other people are likely to know it? Our social activities strongly depend on knowing what others may understand.\cite[p.~183-184]{minsky}
+
+we may offer such justifications as, "That impulse became too strong to resist"or "Ifound that I did it in spite of myself. " Such excuses relate to the conflicts between our immediate goals and our higher ideals, and every society tries to teach its members to resist their urges to breach its conventions \cite[p.~185]{minsky}
+
+when some resources make choices in ways that the rest of your mind cannot control, as when you do something "in spite of yourseil." Again, that pattern may seem as though some external force was imposed on you. So it often makes practical sense to represent intentions as though they were like forces or even like antagonists. \cite[p.~186]{minsky}
+
+A system will seem to have a goal when it persists at applying different techniques until the present situation changes into a certain other condition. \cite[p.~187]{minsky}
+
+Aim: It begins with a description of a certain possible future situation. It also can recognize some differences between the situation it now is in and that "certain other condition."
+Resourcefulness: It is also equipped with some methods that may be able to reduce those particular kinds of differences.
+Persistence: If this process keeps applying those methods, then, in psychological terms, we will perceive it as trying to change what it now has into what it "wants." \cite[p.~188]{minsky}
+
+we have goals because that's how our brains evolved: the people without goals became extinct because they simply could not compete \cite[p.~191]{minsky}
+
+Chapter 2-2 considered some questions about how we connect our subgoals to goals—but did not stop to investigate how those subgoals might originate. However, a Difference-Engine does this by itself, because every difference it needs to reduce becomes another subgoal for it! \cite[p.~192]{minsky}
+
+How does a person discover which subgoals are required to accomplish a job? You could find these by trial and error, or by doing experimenrs in your head, or by recalling some prior experience-—and one of the most useful methods of all is to use a Difference-Engine, because each difference becomes a new subgoal for you. \cite[p.~194]{minsky}
+
+To summarize, our idea is that to have an active goal amounts to running a Difference-Engine-like process. I suspect tiiat, inside each human brain, many such processes all run at once, at various levels in various realms. These range from reactive systems that work all the time (like those that maintain our temperatures) up to the self-conscious levels at which we less frequendy think about what kind of person we'd like to be \cite[p.~194]{minsky}
+
+we do most things in much simpler ways, because we already know what to do: when you do something a number of times (as when you "practice" a new type of skill), it gradually gets converted into a script or sequence of actions that less often require higher levels of thinking. \cite[p.~194]{minsky}
+
+some processes might replace an extensive search by a straightforward script that contains only the steps that led to success; in other words, one learns to use a particular path instead of searching through a map. Other processes use repeated attempts to replace the Ifs of complex rules by ones that react only to relevant features. And yet other processes may construct new Critics and Censors to prevent various sorts of common mistakes. \cite[p.~195]{minsky}
+
+suppose that each higher level in the brain mainly reacts to the changes below it, but over some larger scale of time. If so, then when signals repeat at level A, the B-Brain will have nothing to say. And if the signals that go up to B form a sequence that repeats—so that the B-Brain keeps seeing a similar pattern—then the C-Brain will sense a "constant condition," and thus have nothing to say to the level above it. More generally, we can expect any repetitive signal to tend to partly "anesthetize" the next level above it. So although your foot may continue to tap to the beat of a rhythmic tune, most details of those smaller events eventually will get ignored. \cite[p.~197-198]{minsky}
+
+If some condition has been present for long—and nothing bad has happened to you—then it probably poses no danger to you, so you might as well not pay attention to it and apply your resources more gainfully. However, this could also lead to other effects. Once a level gets freed from control by repetitive signals that come from below it, then it could start to "send signals down" to instruct those lower levels to try to detect other, different kinds of evidence
+...
+when repetitive signals anesthetize some parts of your brain, this could release some other resources to think in new, unusual ways. This could be why some types of meditation can thrive on repetitive mantras and chants \cite[p.~198]{minsky}
+
+What makes us selectively notice things that are likely to be relevant? Patrick Winston (1970) suggested doing this by organizing some bodies of knowledge inro what he called "Difference-Networks"
+[Network connecting objects to others with semantic links that encode differences]
+Now, when you look for a thing that matches your description of "chair," your furniture network could recognize a bench as similar. Then you can choose to accept that bench, or reject it because it is too wide or has no back. \cite[p.~200-201]{minsky}
+
+Most traditional programs were designed to use more hierarchical schemes—such as regarding a chair as an instance of "furniture," and a table as just another instance. Such hierarchical clas si hear ions often help to find suitably similar things, but cannot make enough kinds of distinctions. I suspect that people use both techniques but that the "sideways" connections in our Di fife re nee- Networks are more vital to how we construct the analogies tliat are among our most useful ways to think about things. \cite[p.~201-202]{minsky}
+
+
+using the word emotional does not help us to see what is happening— because how "positive" or "negative" a feeling seems will still depend on how one's mental processes deal with "all the reasons pro and con"
+...
+It seems to me that when people say, "/ used my free will to make that decision," this is roughly the same as saying, "someprocess stopped my deliberations and made me adopt what seemed best at that moment. " In other words, "free will" is not a process we use to make a decision, but one that we use to stop other processes!
+...
+To say that "My decision was free" is almost the same thing as to say, "I don't want to know what decided me," \cite[p.~204]{minsky}
+
+[thinking by analogy] is important because it helps us to deal with new situations—and in fact, that is almost always the case, because no two situations are ever the same \cite[p.~205]{minsky}
+
+the importance of each difference depends upon ones current intentions and goals. For example, one's concern with the shape, size, weight, or cost of a thing depends on what one plans to use it for—-so, the kinds ol analogies that people will use must depend upon their current purposes \cite[p.~207]{minsky}
+
+Notice that to make and use an analogy, one must work on three different levels at once: (1) descriptions of the original objects, (2) descriptions of their relationships, and (3) descriptions of the differences between those relationships. Of course, as we saw in Chapter 5-2 and 5-3, none of these descriptions should be too concrete (or they won't apply to other examples), and none of them should too abstract (or they won't be able to represent the differences that are relevant). \cite[p.~209]{minsky}
+
+It took us many years of hard work to develop our more mature Ways to Think, but whatever records remain of this have somehow become inaccessible. What could have made us all victims of that "amnesia ol infancy"? I don't think this is simply because we "forgot." Instead, I suspect that it results from our developing new and better ways to represent both physical and menral events—and some of these methods became so effective that they replaced our previous ones. Now, if those old records still exist, we can no longer make sense of them. \cite[p.~216]{minsky}
+
+why we evolved so many different Ways to Think: if your thoughts were controlled in only a single way, you would be in danger of becoming a monomaniac. Of course, such accidents have constantly happened in the course of human history, but the genes of those individuals do not usually propagate because their bearers lack versatility \cite[p.~217]{minsky}
+
+What led Joan to notice that pile of books? Why did that that idea "occur" to her now instead of at some other time? Lets look more closely at these events.
+Joan has not made much progress. Some mental Critic must have
+noticed this and suggested that she "take a break."
+Discouraged she sets those thoughts aside. How will Joan later get back to her previous states? Section 7-6 will talk about how she could make—-and later retrieve—the contexts of some of her
+previous thoughts.
+Joan is roaming without any goal. Or so it may seem—but most animals have instincts to maintain their "territories" or nests. Usually, Joan walks right past this spot, but right now she is "making rounds" because of being mainly controlled by Critics that aim to maintain the tidiness of her home.
+She passes an untidy stack of books and stops for a moment to straighten it out. Why doesn'r Joan stop to read those books instead of just trying to tidy them up? This is because, right now, she represents those books as untidy objects rather than as containers of knowledge.
+But then she "gets"a new idea. When people say, "It occurred to me," this shows how limited is the extent to which we can reflect on how we produce our ideas,
+Joan goes to her desk to type a note. Here, Joan is using a model ol herself that represents her knowledge about the qualities of her short-term memories. She knows that when she "gets" an idea, she cannot depend on remembering it—and so she puts her housekeeping on hold to make a more permanent record. \cite[p.~219]{minsky}
+
+if you have an important goal, then it is useful to notice thar you are stuck—and it will be even more useful if you also can recognize that you're being blocked by a certain particular type of barrier, obstacle, impasse, or snag. For if you can diagnose the particular Type of Problem you face, then you can use that knowledge to switch to a more appropriate Way to Think. This suggests a model of mind based on reacting to "cognitive obstacles." We'll call this the "Critic-Selector. "
+[Critics recognize a problem type -> selectors activate a "way to think"] \cite[p.~220]{minsky}
+
+each Critic could recommend the use of not just one but several different Selectors \cite[p.~222]{minsky}
+
+However, while competitive strategies might suffice for fairly simple brains, I doubt that such schemes would work on larger scales, unless supervised by processes that use additional knowledge about how to settle particular kinds of conflicts. For example, one might use these more reflective policies:
+If'too many Critics are aroused, then describe the problem in more detail.
+If too few Critics are aroused, then make the description more
+abstract,
+If important resources conflict, then try to discover a cause for this,
+//there has been a series of failures, then switch to a different set of Critics
+...
+A brain with good memories of the recent past could recognize later, after the fact, that certain selections had serious flaws—and then could proceed to try to find ways to refine the Critics that made those mistakes.
+...
+However, to recognize those kinds of events, we would need more "reflective" Critics that work at higher levels—and this suggests that our model of mind should include Selectors and Crirics at every level\cite[p.~223]{minsky}
+
+How long do those states of mind persist? Some last fot no more than the blink of an eye, but infatuations persist for days or weeks. However, when "dispositions" endure for weeks or years, we regard them to be aspects of a person's personality, and call them "characteristics" or "traits." \cite[p.~224]{minsky}
+
+[List of example Ways to Think]
+Knowing How. The besr way to solve a problem is to already know a way to solve tt. However, we may not be able to retrieve that knowledge—and often we don't even know that we have it.
+Searching Extensively. When one has no better alternative, one could try to search through all possible chains of actions. But that method is not often practical because such searches grow exponentially.
+Reasoning by Analogy. When a problem reminds you of one that you solved in the past, you may be able to adapt that case to the present situation—if you have good ways to tell which similarities are most relevant.
+Dividing and Conquering. If you can't solve a problem all at once, then break it down into smaller parts. For example, every difference we recognize may suggest a separate subproblem to solve.
+Reformulating. Find a different representation that highlights more relevant information. We often do this by making a verbal description—-and then "understanding" it in some different way!
+Planning. Consider the set of subgoals you want to achieve and examine how they affect each other. Then, with those constraints in mind, propose an efficient sequence lor achieving them.
+Simplifying. Often a good way to solve a difficult problem is first to solve a simpler version that ignores some features of that problem. Then any such solution may serve as a sequence of
+stepping-stones for solving the original problem.
+Elevating, If you are bogged down in too many details, describe the situation in more general terms. But if your description seems too vague, switch to one that is more concrete.
+Changing the subject. Whatever you are working on now, if you get discouraged enough, you can always abandon it and simply switch to a different task.
+Wishful thinking. Imagine having unlimited time and all the resources that you might want. If you still cant envision solving the problem, then you should reformulate it.
+Self reflection. Instead of further pursuing a problem, ask what makes that problem seem hard, ot what you might be doing wrong. This can suggest some better techniques—or, instead, better ways to spend your time.
+Impersonation. When your own ideas seem inadequate, imagine someone better at this, and try to do what that person would do. Myself, I do this frequently, by imitating Imprimers and teachers.
+Logical Contradiction. Try to prove that your problem cannot be solved, and then look for a flaw in that argument.
+Logical Reasoning. We often try to make chains of deductions. However, this can lead to wrong conclusions when our assumptions turn out to be unsound.2
+External Representations. If you find thatyoure losing track of details, you can resort to keeping records and notes, or drawing suitable diagrams.
+Imagination, One can avoid taking physical risks if one can predict "What would happen if" by simulating possible actions inside the mental models that one has built.
+Cry for help. You can behave in ways that may arouse your companions' sympathies.
+Ask for help, If your status is high enough, you can persuade or command someone else to help*—or even offer ro pay them.
+Resignation. Whenever you find yourself totally stuck, you can shut down the resources you're using now and relax, lie back, drop out, and stop. Then the "rest of your mind" may find an alternative— or conclude that you don't have to do this at all. \cite[p.~226-228]{minsky}
+
+[List of example types of Critics]
+Innate Reactions and Built-in Alarms. Many types of external events arouse detectors that make us quickly react—-such as when an object rapidly moves toward you, or a light is too bright, or you touch something hot.
+...
+Learned Reactive Critics. A typical infant will simply cry when exposed to high levels of noise-—but later a child may learn ro react by moving to a quieter place. And eventually we learn to deal with obstacles by using "delibetative" thinking about them.
+...
+Deliberative Critics. When our first attempt fails to solve a problem, we can often discover alternatives, by thinking about what might have gone wrong.
+"Achieving one goal made another one harder. (Try them in the opposite order.)"
+...
+Reflective Critics. When you try to solve problems by trial and error, you use your critics as "diagnosticians"—either to verify that you're making progress or to suggest alternative ways to proceed
+"I've repeated the same thing several times. (Some other process must be stuck.)"
+...
+Self-Reflective Critics. When you can't control the resources you need, or try to achieve too many goals at once, then you may start to criticize yourself
+"I missed a good opportunity. (Switch to a different set of Critics.)"
+...
+Self-Conscious Critics. Some assessments may even affect one's current image of oneself, and this can affect one's overall state
+"None of my goals seem meaningful. (Depression.)"
+\cite[p.~229-231]{minsky}
+
+I added an "Encourager" to the end of each list above, to make room for "Positive Critics" that can assign more priority, time, or resources to the strategy that you are currently using \cite[p.~231]{minsky}
+
+if it took a long time to find that solution, then one should try to criticize the methods one used for finding that answer \cite[p.~231]{minsky}
+
+we can sometimes improve our Ways to Think by creating higher-level Selectors and Critics that help to reduce the sizes of the searches we make. However, to make such kinds of credir assignments, we'll need to use higher reflective levels of thinking than those that have hitherto been proposed in most traditional "theories of learning." \cite[p.~232]{minsky}
+
+How do we organize our collections of Critics? How do we make them and how do we change them? Do some of our Critics scold other ones when they produce poor performances? Are certain minds more productive because their Critics are better organized?
+How do we organize our collections of Ways to Think? How do we make them and how do we change them? Do some of them recognize when other ones tend to produce poor performances? Are certain minds "more intelligent" because their Ways to Think are better organized?
+The following sections will atgne that, today, we have no plausible answers to questions like these-—and that these issues should be recognized as central to the development of psychology. \cite[p.~232]{minsky}
+
+This suggests an idea about what we mean when we use our most common emotion-words; they refer to classes of mental conditions that produce external signs that make our behaviors more predictable to the persons with whom we are dealing. \cite[p.~233]{minsky}
+
+Poincare concluded that when making his discoveries, he must have used activities that typically worked in four stages like these:
+Preparation: activare resources to deal with this particular type of problem
+Incubation: generate many potential solutions
+Revelation: recognize a promising one
+Evaluation: verify that it actually works
+The first and last of these stages seemed to involve the kinds of high-level processes that we characterized as highly reflective ones—whereas incubation and revelation usually proceed without our being aware of them \cite[p.~237]{minsky}
+
+it seems to me that what we call "creativity" is not simply an ability to generate completely novel conceptions; for a new idea to be useful to us, we must be able to combine it with the knowledge and skills we already possess—so it must not be too different from ideas with which we're already familiar. \cite[p.~240]{minsky}
+
+suppose thai a typical moment ol commonsensc thinking begins with a brief "micro-manic" phase that produces a few ideas; one could then quickly look for flaws in these, during a short-lived "micro-depressive" phase. If all this takes place so quickly that your reflective systems don't notice it, then each "micro-cycle" would seem to be no more than a typical moment of everyday thinking—and the entire process of thinking might seem to go in a steady, smooth, uneventful flow \cite[p.~241-242]{minsky}
+
+our model of mind needs places to store these various kinds of contextual knowledge. Otherwise, each "train of thought" would be disrupted by every interruption. In simpler brains, it might suffice to maintain only a single such memory. However, minds that look several steps ahead, or work with elaborate subgoal trees, must be able to rapidly switch among several different context-sets \cite[p.~242]{minsky}
+
+When such a diversion is small and brief, this causes little trouble because it leaves most of our active resources unchanged. However, a larger-scale change could cause more disruption and result in wasted time and confusion. So as we evolved more ways to think, we also evolved machinery for more quickly returning ro previous contexts \cite[p.~244]{minsky}
+
+There is evidence that it rakes hours or days for short-term memories to be converted to longer-term ones. Most previous theories about this assumed that frequent repetitions made the original record more permanent. However, it seems more likely to me that new memories are briefly maintained in resources that act like a computer's cache—and then, over time, more permanenr versions are creared in other regions of our brains. \cite[p.~245]{minsky}
+
+our high-level thinking we can maintain only a few different "trains of thought" before we start to become confused. However, at our lower reactive levels, we carry on many different activities \cite[p.~247]{minsky}
+
+One very simple theory would be that each context box has a limited size, SO there is only a certain amount of room in which to store such information. A better conjecture would be that each of our well-developed realms acquires a context box of its own. Then, some processes in each of those realms could do work on their own, without getting into conflicts until they have to compete for the same resources.
+For example, it's easy to both walk and talk because these use such different sets of resources. However, it is much harder to both speak and wtite (or to listen and read) simultaneously, because both tasks will compete for the same language resources. \cite[p.~248]{minsky}
+
+It seems to me that it's only a myth that there exists any single "rational" way to think. One is always comparing various goals, and deciding which ones to put aside or postpone—and one will never make much progress toward achieving any particular goal unless one can persist at it for long enough. This means that every Way to Think will need at least some ability to keep other processes from stopping it—and this could be done to some extent by controlling which Critics are active \cite[p.~249]{minsky}
+
+Then what should determine which Critics are active? Sometimes we need to concentrate, but we must also respond to emergencies-—and all this suggests that it would be dangerous for us to have a single, centralized system that too firmly controls which of our Critics are active \cite[p.~250]{minsky}
+
+if we want to better understand the higher levels of human thought, we should ask our researchers-—both in Al and in psychology—to put higher priorities on discovering ways ro describe and classify the Problem Types that people face, the Ways to Think we use to deal with them, and the higher-level organizations we use to manage our mental resources \cite[p.~252-253]{minsky}
+
+Chapter I. We are born with many kinds of resources.
+Chapter 2. We learn from our Imprinters and friends.
+Chapter 3. We also learn what we ought not to do.
+Chapter 4. We can reflect upon what we are thinking about.
+Chapter 5. We can predict the effects of imagined actions.
+Chapter 6. We use huge stores of commonsense knowledge.
+Chapter 7. We can switch among different Ways to Think.
+\cite[p.~256]{minsky}
+
+If you "understand" something in only one way, then you scarcely understand it at all—because when something goes wrong, you'll have no place to go. But if you represent something in several ways, then when one method fails, you can switch to another. That way, you can turn things around in your mind to see them from different points of view—-until you find one that works for you! \cite[p.~257]{minsky}
+
+each of our separate ways to estimate distance has many different ways to fail. Focusing works only on nearby things—and many persons can't focus at all. Binocular vision works over a longer range, but quite a few people are unable to compare the images in their two eyes. Some methods fail when the ground isn't level, and texture and haze are not often available. Knowledge applies only to objects you know, and an object might have an unusual size—yet we scarcely ever make fatal mistakes because we can use so many different techniques. \cite[p.~259-260]{minsky}
+
+[Panalogy structure: fixed "roles" or "slots": e.g. actor - verb - object - initial place - final place; linked to different realms e.g. physical realm of who holds the item and dominion realm of who owns the item] \cite[p.~261]{minsky}
+
+Minsky 1986: "The secret is that sight is intertwined with memory. When face to face with someone you newly meet, you seem to react almost instantly—but not as much to what you see as to what that sight "reminds" you of. The moment you sense the presence of a person, a world of assumptions are aroused that are usually true about people in general. At the same time, certain superficial cues remind you of particular people you've already met. Unconsciously, then, you will assume that this stranger must also resemble them, not only in appearance bur in other traits as well. No amount of self- discipline can keep those superficial similarities from provoking assumptions that may then affect your judgments and decisions." \cite[p.~263]{minsky}
+
+We don't need to constantly "see" all those things because we build virtual worlds in our heads
+...
+We make those mental models so fluently that we feet no need to ask ourselves how our brains construct them and put them to use \cite[p.~263-264]{minsky}
+
+even before you entered that room, you expected it to have Jour walls—and already knew how to represent a typical boxlike four-walled room. Consequently, you "assumed by default" that its edges, corners, ceiling, and floor would he parts of a larger, nonmoving framework that doesn't depend on your present point-of view. In other words, the "reality" that we perceive is based on mental models in which things don't usually change their shapes or disappear, despite their changing appearances. We mainly react to what we expect—and tend to tepresent the things that we see as though they remain the same as we move aroimc \cite[p.~264]{minsky}
+
+if you represent that chair as near the north wall, and the door as part ok the south wall, then these objects will have a fixed "mental place"—regardless of where you were when you noticed them—and those locations will stay the same even when those objects are out of sight. \cite[p.~265]{minsky}
+
+if you were to construct an entirely new mental structure, you also would have to construct some way to retrieve it in future rimes, as well as to connect it to some skills for using it. However, if that older object or incident already belongs to a panalogy, and you add your new concept as an additional leaf, then it will inherit all die techniques by which your older ideas are retrieved and applied. \cite[p.~265]{minsky}
+
+you can think of a chair as a physical structure whose parts consist of a back, seat, and legs. In that physical view, the chairs legs support its seat, and both of these support the chair's back. You also can think of a chair as a way to make people feel comfortable. Thus, the chair's seat is designed to support one's weight, the chairs back serves to support ones back, and the chair's legs support one up to a height designed to help a person to relax.
+Similarly, you could also regard that very same chair as an item of personal property, or as a work of art or of carpentry—and each of those various contexts could lead you to represent chairs in different ways. Then, when your present idea of that chair makes no sense, your Critics could tell you to switch to a different mental realm—and if you have linked similar features into panalogies, that switching could work very rapidly. \cite[p.~265-266]{minsky}
+
+Student: But wouldn't such links cause you to mistake what you see for something else that it reminds you of? You would always be confusing things.
+Yes, and we're constantly making those kinds of "mistakes"—but paradoxically, that often helps to keep us from being confused! For if you saw each chair as entirely new, then it would have no meaning to you. However, if each new chair reminds you of similar ones—then you will see many uses for it. \cite[p.~266]{minsky}
+
+our brains might embody much of our cornmonsense knowledge in the form of panalogies \cite[p.~267]{minsky}
+
+To do this ["learn" a dog trick from seeing it happen once], jack could use a process like the Difference-Engine in Chapter 6-3. It would begin with his description of that trick, which is now in his short-term memory. Then Jack's "mental animal trainer" would work to produce a copy of that description in some other, more permanent place—by repeatedly altering the new copy until the trainer can see no significant difference between those short-term and long-term memories \cite[p.~268]{minsky}
+
+Indeed, that "transfer to long-term memory" process sometimes takes a whole day or more, and may require substantial intervals of sleep \cite[p.~269]{minsky}
+
+Retrieval: After one makes a memory record, it would make no sense to store this away without providing some ways to retrieve it. This means that each record must also be made with links that will help to activate it when relevant (for example, by linking each new memory to some other, already exisring panalogy).
+Credit Assignment: A memory record of how one solved a problem would be unlikely to have much future use if it applied to only one situation. Section 8-5 will discuss some techniques we might use to extend the relevance of our memory records.
+The "Real-Estate"" Problem for Long-Term Memories. How could an "animal trainer" find room in the brain for the copy that it is trying to make? How could it find appropriate networks of brain cells to use without disrupting connections and records that one would not want to erase? Finding places for new memories must involve complex constraints and requirements, and this could be a reason as to why making permanent records takes so much time.
+Copying Complex Descriptions. It is easy to imagine ways to record a simple list of symbols or properties, but I have never seen any plausible schemes for how a brain could quickly make copies of structures with more complex connections. That is why this section proposed using a sequential, Difference Engine-like scheme. (Chapter 22 of Minsky 1986 suggests that a similar scheme must be involved in verbal communication.) \cite[p.~270]{minsky}
+
+Simply adding new If—>Do rules might suffice for learning how to do simple things—but even this may require one to make some critical kinds of decisions. Consider that any new If-> Do rule is likely to fail if the If specifies too few details (because then that rule will be applied too recklessly)—or if the If includes too many details (since then it may never apply again, because no two situations are ever exactly the same). The same applies to the Do of that rule; therefore, each new If and Do must be just abstract enough to make it apply to a "similar" case-—but not to too many dissimilar ones. Otherwise, Jack's dog might need a different new rule for every posture or place that it's in. All this means that those old "reinforcement" schemes might explain some of how certain animals learn, but those ideas won't help much to explain how humans leatn more complicated things. \cite[p.~272]{minsky}
+
+the quality of our credit assignment could be important aspects of the suitcase of traits that people call "intelligence." For merely recording solutions to problems will help us only to solve somewhat similar problems, whereas if we can record how we found those solutions, that could further enable us to deal with much broader classes of situations. \cite[p.~272-273]{minsky}
+
+when you finally achieve a goal, you should assign some credit for this to the higher-level method you used to divide that goal into subgoals. Instead of just storing solutions to problems, you can use each such expetience to refine the strategies that you used. \cite[p.~273]{minsky}
+
+We usually make our credit assignments without much reflection, but sometimes one may say to oneself after completing some difficult job, "It was stupid of me to have wasted all that time, when I knew how to do it all along." To remedy this, one might be able to construct a new Critic, or make some change in an existing Critic that failed to remind one to retrieve that particular fragment of knowledge. \cite[p.~274]{minsky}
+
+What makes certain children excel at "transferring" knowledge to other, different realms—whereas orhcr children seem to need to relearn the same ideas in each domain?
+It would be easy simply to say that some children are "more intelligent"—-but that would not help us to explain how they use their experiences to make more helpful generalizations. This could be partly because some children are better at making and using panalogies. But also, those "smarter" children may have come to learn more efficiently because they have learned to reflect (perhaps unconsciously) about how their own learning processes work—and then found ways to improve those processes. For example, such reflections may lead to better ideas about which aspects of things they ought to learn.
+It seems clear that the qualities of how we learn must depend, to a large extent, on how well we make our credit assignments. This means that persons who do not learn to make good credit assignments would be likely to show deficiencies in their ability to apply what they learn to new situations. This is what psychologists call "Transfer of Learning." \cite[p.~274-275]{minsky}
+
+most children discover various ways to arrange their toy blocks into columns and rows—and if observers praise what they've done, those children may go on to refine those new skills. Then a certain few of them may also go on to play at discovering new Ways to Think. However, no outside observer can see those mental events, so those particular children must have learned good ways ro, internally, praise themselves! This means that when such a child does remarkable things, outsiders may see no clear cause for this-—and will tend to describe that child's new skills with uninformative terms like talents, endowments, traits, or gifts. \cite[p.~276-277]{minsky}
+
+what distinguishes the thinkers whom we call "creative" is not how many new ideas they produce—nor even how novel those concepts may be—but how effectively they can select which new ideas to further develop. This means that those artists have ways to suppress (ot, better, not even to generate) ptoducts that have too much novelty. \cite[p.~278]{minsky}
+
+But what do we mean by a representation*. 1 will use that term to talk about any structure inside one's brain that one can use to answer some questions. Of course, those answers will be useful only when your representation behaves enough like the subject that you are asking about. \cite[p.~279]{minsky}
+
+we typically make several different representations for any particular incident. For example, those records might include:
+A verbal description of that incident
+A visual simulus of the scene
+Some models of the persons involved
+Simulations of how those persons felt
+Analogies with similar incidents
+Predictions about what might happen next
+Why would your brain represent the same event in so many differenr ways? If each realm of thought that you engaged left an additional record or trace, this would enable you, later, to use multiple ways to think about that same incident—for example, by using verbal reasoning, or by manipulating mental diagrams, or by envisioning the actors' gestures and facial expressions. \cite[p.~279-280]{minsky}
+
+[Ideas about ways to record memories]
+Describing Events as Stones or Scripts ...
+Describing Structures with Semantic Networks ...
+Using Trans-Frames to Represent Actions - We'll use the term "Trans-Frame" to name a pair of representations of the conditions before and after some action was done. Then we can represent the effect of a sequence of actions by linking together a chain of Trans-Frames to form a story or narrative. ...
+Learning by Building "Knowledge-Lines" ...
+Micronemes for Contextual Knowledge ...
+\cite[p.~281-291]{minsky}
+
+This Trans-Frame includes two Semantic Networks that describe the situations Before and After that trip was taken—but it also contains many other slots that contain information about when, how, and why Joan took that trip. But also, those slots may already come equipped to contain the common answers to the most common questions. In other words, the slots of our Frames may contain "by default" a great deal of what we call commonsense knowledge
+...
+you might assume "by default" that an apple is red—but if you know that a certain apple is green, then you will replace "red" with "green" in its color slot. In other words, a typical frame describes a stereotype whose "default assumptions" are usually right—but which you can easily change whenever you meet some exceptions to them
+...
+if you heard that Charles was grasping a book, you would not stop to ask why he was doing that, because you would assume by default that he has the most usual goal for anyone who would grasp anything—that is, to keep it from falling to the floor. This idea of "default assumptions" could help to explain how you can so quickly access your commonsense knowledge: as soon as you activate a frame, many questions that you might otherwise ask will already be answered before you can ask them,\cite[p.~285-286]{minsky}
+
+Suppose that you have just had a good idea, which helped you to solve a certain hard problem called P What should you learn from this experience? One thing you could do is to construct a new rule: //"the problem you face is like problem P. Then try the solution that once worked on P, Such a rule will help you to solve problems that closely resemble P—but will be less helpful with less similar problems. However, if you could make a recording of the Way to Think that you used to find that solution, this would be more likely to help in a wider range of situations.
+Of course, it would be impractical to make a copy of the entire state of a human mind; however, you might get most of the effect you want if you could, later, reactivate enough of the resources that were active at the time you discover that way to solve problem P. You could do this by constructing a new Selector that is connected so that it activates just those resources that were recently active. We call this kind of structure a "K-line." Such a K-line can act as a sort of "snapshot" of a mental state because, when you later activate it, this will put you into a similar state \cite[p.~286]{minsky}
+
+If we want to use that new K-line fot problems similar to P, then such a Critic should recognize some combination of features of P. However, if such a Critic would act only when all the features of P were present, then it could fail to recognize situations that were slightly different from P So each new Critic should only detect features that actually helped.
+This suggests that when we make new Selectors and Critics—or more generally, whenever we learn—we should try to make sure that what we learn will mainly consist of knowledge that's likely to actually help. The following section on credit assignment will discuss some processes that might help to ensure that what we learn will be relevant in future times. \cite[p.~287-288]{minsky}
+
+when you activate a K-linc, that won't completely replace your present Way to Think—because that K-line will rurn some of your resources off and turn some set of others on, but many of your current resources will srill remain engaged. So now, two different sets of resources will be active in your mind at once: the ones used for your recent thoughts and the ones aroused by that memory. If those resources were all comparibJe, then both sets might be able to work together to solve the problem that you are facing. Then you could combine what remains of both of those sets, store them away as a new K-line set—and the result would be that you would have created a Selector for a new Way to Think \cite[p.~288]{minsky}
+
+if you tried to make a single K-line that could re-create that mental state, that K-line might need to be connected to hundreds of thousands of other resources. However, you could accomplish much of the same effect by making a K-line that simply connects to just those three older representations of Charles, Joan, and book. Then, when you activate this new K-line at some later date, this may be sufficient to give you the sense of reexperiencing the mental event that you constructed it to represent. \cite[p.~289]{minsky}
+
+number-based networks also have limitations that keep them from doing reflective thinking. One can sometimes interpret those numerical values as correlations or likelihoods, but, because they carry no other clues about what those links might signify, it can be extremely hard tor other resources to use that information.
+...
+In contrast, Semantic Networks can explicitly represent different kinds of relationships (because of the labels anached to each link). \cite[p.~290]{minsky}
+
+Many contextual features like these have common names, but many others have no such wotds, just as we have no expressions for most flavors and aromas, gestures and intonations, attitudes and dispositions. I have proposed to use the term "micronemes" for rhe myriad of nameless clues that color and shade our thoughts about things, and the figure below suggests some machinery through which such contextual features could affect our mental processes.'11 Imagine that the brain contains a bundle of thousands of wirelike fibers that pass through a great many other structures inside thar brain—so that the state of each of those micronemes can influence many other processes.
+On the input side, we shall assume that many of your mental resources—such as K-lines, Frame-slots, or lf-+Do—*Then rules—can alter the states of some micronemes. Then the present state of your micronemes could represent much of your current mental context—and as the states of those fibers are changed, your far-reaching bundles of micronemes will broadcast that information to many other mental resources, so that this will change some of your attitudes, outlooks, and stares of mind. \cite[p.~291-292]{minsky}
+
+[Diagram representing a guess at how to heirarchically structure representiations in the brain: narrative stories are made up of trans-frames, which are made up of frames, which are made up of semantic networks, which are made up of K-lines and K-tress, which are made up of neural networks (arranged in cortical columns) which contain micronemes] \cite[p.~293]{minsky}
+
+So, although sensations give us "occasions" to learn, this cannot be what makes us "able" to learn, because we first must have the additional knowledge that our brains would need, as Kant has said, to "produce representations" and then "to connect11 them \cite[p.~294]{minsky}
+
+All this leads me to suspect that we must be born with primitive forms of structures like K-lines, Frames, and Semantic Networks—so that no infant needs to wholly invent the kinds of representations that we depicted above. However, I doubt that we're born with those structures complete, so it still requires some effort and time for us to refine those primitive representations into their more adult forms. \cite[p.~294-295]{minsky}
+
+each particular form of expression also brings its own particular limitations. For example, logic-based systems are very precise, but they make it hard to do reasoning with analogies. Similarly, statistical systems are useful for making predictions, but do nor serve well to represent the reasons why those predictions are sometimes correct. It was recognized even in ancient times that we must represent things in multiple ways \cite[p.~296]{minsky}
+
+Whenever you think about your "Self" you are switching among
+a network of models, each of which may help to answer questions
+about different aspects of what you are. \cite[p.~300]{minsky}
+
+some of our models are based on simplistic ideas, like "All our actions are based on the will to survive,"'or "We always like pleasure more than pain," while some other Selfmodels are far more complex. We develop these multiple theories because each of them helps to represent certain aspects of ourselves, but is likely to give some wrong answers about other questions about ourselves. \cite[p.~300]{minsky}
+
+What could lead Charles to make such different models? Perhaps his first representation of Joan served well to predict het social behaviors, but that model did not well describe her business self. Then, when he changed that description to apply to that business realm, ir made new mistakes in the contexts where it had formerly worked. Eventually, he found that he had to make separate models of Joan to describe her behaviors in various roles. \cite[p.~302]{minsky}
+
+when one needs to make a decision, the result will partly depend upon which of one's subpersonalities is active then. Joan's Business Selfmight be inclined to choose the option that seems more profitable; her Ethical Self 'might select an option that better conforms with her ideals; her Social Self might want to select the one that would most please her friends \cite[p.~306]{minsky}
+
+here is a simplistic theory of this: whatever happens, we're prone to ask ourselves who or what was responsible—because our representations force us to fill the "caused-by" slots that we mentioned in Chapter 8-7. This leads us to find explanations thar frequently help us to predict and control not only what happens in the world, but also what happens in our minds. Thus we often find ourselves wondering what caused us to act in a certain way or led us to make a particular choice. However, when you fail to find a plausible cause, that slor-filling hunger may lead you to imagine a cause that doesn't exist—such as the "I" in '1 just got a good idea." For if your frame-default machinery compels you to find some single cause for everything that you ever do—then that entity needs a name. You call it "me." I call it "you." \cite[p.~309]{minsky}
+
+Here are some possible causes for the appearance of such uniformities:
+Inborn Characteristics. One reason why people exhihit ttaits is that each person is born with different sets of genes that lead to particular ways to behave.
+Learned Characteristics. Each person also comes to learn individual goals and priorities that influence when various resources get engaged—as when to become angry or afraid—-so that some individuals may tend more than others to become belligerent or diffident.
+Investment Principle. Once we learn an effective way to do some job, we'll resist learning other ways to do it—-because new methods are usually harder to use until we become proficient at them. So as our oldet procedures gain strength, it gets harder for new ones to compete with them.
+Archetypes and Self-Ideals. Every culture comes with myths that describe beings endowed with well-defined traits. Few of us can prevenr ourselves from becoming arrached to those heroes and villains—and this makes us try to change ourselves, to make those imagined traits become real.
+Self-Control. It is hard to achieve any difficult goal—or to carry out any long-range plan——unless you can make yourself persist at it. The following section will suggest that, to keep ourselves from constantly changing our goals and other priorities, our cultures teach us to train ourselves to become more "self-predictable," by constraining the ways in which we behave. \cite[p.~310]{minsky}
+
+you need some knowledge about which of those methods will work on yourself, bur generally, it seems to me, the tricks that we use for self-control are very much like the ones that we use to influence our acquaintances. \cite[p.~312]{minsky}
+
+Self-control is no simple skill, and many of us spend much of our lives seeking ways to make our minds "behave." This suggests yet another meaning for Self; we sometimes use it as a suitcase-word for all the methods we use to control ourselves. \cite[p.~313]{minsky}
+
+Another reason why we tend to think in terms of pairs could be that our brains are innately equipped with special ways to detect differences between pairs of mental representations. Thus in Chapter 6-4 we mentioned that when you touch somediing very hot or cold, the sensation is intense at first, but then will rapidly fade away-—because our external senses mainly react to how things change in time. (This also applies to our visual sensors, but we're normally unaware of this because our eyes are almost always in motion.) If this same sensitivity to change also applies to sensors inside a brain, this would make it easy to compare a pair of descriptions, simply by alternately presenting them. However, this "temporal blinking" scheme would work less well for describing the relationships of more than two things—and that could be one reason why people are so much less proficient at making three-way comparisons. \cite[p.~317]{minsky}
+
+most of the novel ideas in this book came from finding that two parts are rarely enough—and eventually my rule became: when thinking about psychology, one shoulA never start with less than three different parts or hypotheses! \cite[p.~318]{minsky}
+
+1 suspect that we use words like "A/,?" and "I" to keep us from thinking about what we are! For they all give the very same answer, "Myself,"to every such question that we might ask \cite[p.~320]{minsky}
+
+the Singie-Self view is convenienr to use in our everyday lives. But if you want to understand how your thinking works, no simple mode! could portray enough details of how our minds work. Nor would it help for you to have some way to observe your entire mind simultaneously, because then you would be overwhelmed by seeing too many unwanted details. So eventually, you will need to switch among simplified models of yourself. \cite[p.~321]{minsky}
+
+it seems to me that we often use words like pleasure and satisfaction to refer to an extensive network of processes that we do not yet understand, and when anything seems so complex that we can't grasp it all at once, then we tend to treat it as though it were single and indivisible \cite[p.~323]{minsky}
+
+when you see the mind as a cloud of conflicting resources, then you no longer need to think of pleasure as a "basic" or all-or-none thing. For now you can imagine that, while some parts of your mind are uncomfortable, other parts of your mind may enjoy forcing those first parts to work for them. \cite[p.~325]{minsky}
+
+I suspect that pleasure also helps us to learn by engaging another, more "negative" function that works to keep our minds from "changing the subject" while credit assignment is being accomplished! \cite[p.~326]{minsky}
+
+it seems to me that the mysteries that Chalmers sees result from squeezing multiple mental activities into suitcase-words like subjective, sensations, and consciousness. For example, Chapter 4-2 showed how people use the word consciousness for at least a dozen mental processes—and Chapter 5-7 showed that our perceptual systems also involve many types and levels of processing. However, our higher-level processes cannot detect all those intermediate steps—-and this lack of insight leads us to the belief that our sensations come to us in some way that is simple, direct, and immediate." \cite[p.~327-328]{minsky}
+
+if you can say, "This apple looks red to me," then some "physical instrument" in your brain must have recognized the activity involved with that experience—and then caused your vocal tract to behave accordingly. That "experience-detecting" instrument could be another internal activity recognizer like those we've seen in Chapter 4-3. \cite[p.~332]{minsky}
+
+There is a popular belief that the brain gets much of its power and speed because it can do many things in parallel. Indeed, it is clear that some of our sensory, motor, and other systems can do many things simultaneously. However, it also seems clear that when we tackle more difficult problems, we increasingly need to divide those problems into parts, and focus on these sequentially This means that our higher, reflective levels of thought will tend to operate more serially. This may also partly account for our sense of having (or being) a "stream of consciousness." \cite[p.~337]{minsky}
+
+It seems sale to predict that most of our future attempts to build large, growing Artificial Intelligences will be subject to all sorts of mental disorders. For if a mind could make changes in how ir works, it would face the risk of destroying itself. This could be one reason why our brains evolved so many partly separate systems, instead of a more unified and centralized one: there may have been substantial advantages to imposing limits on the extent to which out minds could examine themselves! \cite[p.~341]{minsky}
+
+\section{My topics}
+What does Minsky have to say on each of these?
+
+\subsection{Meaning of intelligent behaviour}
+``We recognize the things we see, we understand the
+words we hear, and we remember things that we've experienced so that, later, we can apply what we've learned to other kinds of problems and opportunities. We also do a remarkable thing that no other creatures seem able to do: whenever our usual ways to think fail, \emph{we can start to think about our thoughts themselves} -- and if this \nquote{reflective thinking} shows where we went wrong, that can help us to invent new and more powerful ways to
+think." \cite[p.~1]{minsky}
+
+\subsection{Relationship between intelligence and logic/mathematics}
+Humans traditionally associate \nquote{intelligence} with mental feats and skills like playing chess and proving mathematical theorems. Hofstadter \cite{hofstadter} thought that a computer would have to be intelligent to play chess. But, it turned out playing chess is not as difficult as it seemed. Computers can beat any human now, but I would consider chess-playing programs only very marginally intelligent. One reason is that the intelligence is not \emph{general} (see the previous section). However, another reason is that most of the power of the human brain is not devoted to chess playing.
+
+Feats of logic and mathematics are hallmarks of human intelligence because the human brain has not evolved to perform them, so for a human they really do require an extraordinary application of human general intelligence. Over time, we have realised that intelligence is a far broader concept, and that the ability to perform such feats is actually a poor measure of the intelligence of an artificial system.
+
+\subsection{How the utility function interacts with \nquote{morality}, and how it is learnt}
+Theories of machine intelligence often make no reference to morality, but theories of neuroscience do, because morality is an important part of human behaviour. Typically, AI theories assume morality is absorbed into the utility function (i.e. moral actions provide more utility than immoral ones). However, humans often distinguish between \nquote{selfish} and \nquote{altruistic} actions, in a way that suggests separate types of utility. It is worth comparing different approaches to this.
+
+A closely related question is how morality (and the utility function in general) is learnt. There is some debate over whether human morality is hardwired by evolution, or learnt through social interaction (probably a mix of both). This has implications for how best to design an AI system that avoids taking \nquote{immoral} actions.
+
+\subsection{The role of human emotions}
+For example, the stare called "Anger" appears to arouse
+resources that make us react with unusual speed and strength—while suppressing resources that we otherwise use to plan and act more prudently; thus, Anger replaces your cautiousness with aggressiveness and trades your sympathy for hostility. Similarly, the condition called "Fear" would engage resources in ways that cause you to retreat. \cite[p.~3]{minsky}
+
+Some popular answers to this are, "Those changes are caused by chemicals in the brain,"'or "They result from an excess ofstress," or "They come from thinking depressing thoughts." However, such statements say almost nothing about how those processes actually work—whereas the idea of selecting a set of resources can suggest more specific ways in which our thinking can change. \cite[p.~3]{minsky}
+
+Each of our major "emotional states" results from turning certain
+resources on while turning certain others off—and thus changing
+some ways that our brains behave. \cite[p.~4]{minsky}
+
+
+\subsection{The concept of forming beliefs by combining prior beliefs with new evidence}
+Commonly expressed in the form of Bayes' law, this seems like a really fundamental concept. Mathematically defined systems like AIXI have Bayes' law as a fundamental component, and any other system must, in some sense, approximate this ideal. I think it is worth comparing how different architectures and neuroscience theories approach this. For example, a neural network architecture expresses some prior over the information it expects to encounter. The human brain is full of priors programmed in by evolution.
+
+\subsection{Seeking out more information}
+We can distinguish between uncertainty about something that is (for all intents and purposes) \emph{unknowable} or \emph{random}, such as the outcome of a future coin toss, and uncertainty that stems from a lack of relevant information, such as when I know a coin is biased, but haven't asked which way it is biased. An intelligent agent would benefit from being able to notice when additional information would improve its decision making and seek it out.
+
+A simpler version of this question is the exploration/exploitation tradeoff.
+
+\subsection{Bottom-up and top-down information flow}
+A naive model of cognition involves only bottom-up processing. Such models typically define a series of processing steps, each converting a simpler, less meaningful representation into a more complex one, e.g. \emph{pixels $\rightarrow$ strokes $\rightarrow$ letters $\rightarrow$ words $\rightarrow$ sentences}. Top-down processing is any part of the model where information from a \nquote{later} stage in this chain is used to help with an earlier stage. This is possible after the system has made a first guess at the later stage using only bottom-up information, but it might also involve \emph{what the system expected to see}, before any bottom-up information is available.
+
+\subsection{The concept of \nquote{learning}}
+Learning is usually defined as some change in internal state in response to new information. I think there is a lot of room for improvement in how current neural network architectures \nquote{learn}. There will be a lot of very different approaches to learning, both across AI systems (e.g. model-based reinforcement learning agents vs. feedforward neural networks vs. LSTM recurrent neural networks) and neuroscience theories.
+
+Backpropagation is wildly popular in the neural network field. It is a very powerful technique, but the practice of trying to make everything differentiable just so you can use backprop has a \nquote{man with a hammer} feel about it.
+
+\subsection{Different types of learning}
+Perhaps better seen as a part of the previous section, I am thinking here of phrases like \nquote{reinforcement learning}, \nquote{supervised and unsupervised learning}, \nquote{learning by observation}. Humans have different ways of learning, and an AI system should probably be able to learn in these different ways as well.
+
+\subsection{The process by which decisions are made}
+This is another area in which AI systems differ greatly, and which I think has a lot of room for improvement. Thanks to studies of the visual cortex, we understand a lot about how humans perceive stimuli; consequently, AI has made great strides in vision tasks. I feel like a similar breakthrough has yet to happen for planning/acting (as opposed to perceiving). Decision making in AI systems is still either in the computationally infeasible logic paradigm (make a list of all reachable states and calculate the expected utility) or crude neural network approaches that make me feel like they are missing crucial insights. I will look into theories of human decision making and studies of relevant brain regions to see whether there are any insights or obvious missing links.
+
+\subsection{Looking at behaviour in a hierarchical fashion}
+This seems to be a common thread across many theories. For example, we might distinguish between \nquote{tactical} actions to accomplish a goal, and \nquote{strategic} actions to choose goals. We will also split each action into sub-actions, perhaps handled by different parts of the system. It seems likely that a fully intelligent system will need to structure its behaviour hierarchically, to avoid an explosion of possibilities.
+
+\subsection{Internal actions}
+An agent's set of actions can involve those that change its internal state (e.g. record a memory in an LSTM unit). This sort of recursion often appears in theories of brain function, and I think it is an important insight, underutilised in the AI field. I want to compare how current AI systems use this idea (if at all), and how neuroscience theories provide ideas for improving these systems.
+
+\subsection{Model-based vs model-free learning}
+A model of the world is a (simplified) representation of what the world is like and what the consequences of actions are likely to be. A model-based learner tries to understand the world, and then use its model to choose actions. A model-free learner learns about the value of its actions directly. There is debate in neuroscience over whether the human brain is better characterised as a model-based or model-free system. Likewise, AI systems fall into both camps. Currently, actual models of the world are computationally infeasible -- perhaps the neuroscience literature will provide some ideas for improvement.
+
+\subsection{Theory of mind}
+An important part of a model of the world is the modeling of other agents (particularly humans, if the AI system needs to interact with them). Theory of mind is an important topic in psychology because it appears to be a skill that children develop over time (and some autistic children do not). The skill requires one to model other agents as somewhat predictable entities with desires, beliefs, etc., to understand that their beliefs/knowledge might be different from one's own, and that this affects their behaviour.
+
+An AI system with no explicit theory of mind might still be able to manage humans as a generic part of the environment, but it seems like an obvious optimisation to add.
+
+\subsection{Self awareness}
+I intend to define self-awareness precisely, and to consistently use the term to avoid confusion with \nquote{consciousness} (next section). Self awareness asks whether an agent's model of the world includes a model of itself. In particular, whether the agent is aware of how damage to itself might affect its future cognition (rather than merely predicting that damage leads to negative utility or \nquote{pain}). An agent with theory of mind might model \emph{itself} the same way it models other agents, as an entity with beliefs and desires. This will allow the agent to hold fruitful conversations with humans about its internal state. It might also aid in understanding when the agent should seek out more information before making a decision. Theories in psychology sometimes posit that such a self-application of theory of mind is the origin of human self-awareness.
+
+Reinforcement learning traditionally maintains a separation between the agent and the environment, which means such agents do not have (or need) such a theory of self. However, a real AI agent operating in the real world may potentially need to understand how the world can affect its own cognition. Or perhaps we might want to explicitly avoid such understanding, if we want to create an AI that will never attempt to resist being shut down.
+
+\subsection{Consciousness}
+I intend to define \emph{consciousness} as a reference to Chalmers' hard problem \cite{chalmers}. I probably won't have much to say about it, but it will be important to distinguish from the easy problem posed by self awareness. These terms are often confused, and I want to avoid the confusion.
+
+\subsection{Sleep}
+Similar to emotions, sleep is something that biological systems do and artificial systems do not (at least, not in the same way). Human sleep has important neurological functions beyond conserving energy, but they are not fully understood. It is worthwhile looking at theories of sleep to see whether an AI system should implement something similar, or if it can get the same benefits in a different way.
+
+\subsection{Brain wave frequencies}
+I might drop this section because it seems to have little application to AI, but it is an interesting topic nonetheless. Brain waves have been studied a lot not so much because they are obviously important but because they are easy to study. Accordingly, various theories have sprung up about what different frequencies are used for.
+
+\subsection{Parts of the brain}
+The human brain has a modular architecture, with identifiable parts like the cortex, cerebellum, hippocampus, and basal ganglia. I want to investigate what functions are they theorised to serve and how are these functions achieved in AI systems.
+
+\subsection{Cortical organisation}
+The size and sophistication of the human cortex seems to be the main difference between ourselves and all other animals, suggesting that it is important for intelligence. Accordingly, understanding how the cortex works and what role it serves is important for AI progress. Our understanding of the visual cortex has led to breakthroughs in computer vision, and I expect many more will come as other parts are studies.
+
+For this work, I want to look into the three organisational categories of cortical layers, cortical columns, and cortical areas. I want to compare the theorised reasons for these divisions, and how similar functions are performed (or could be performed) in AI systems.
+
+\subsection{Short term (working) memory}
+Our short-term or working memory seems important for human cognition. I want to compare different theories of how working memory is implemented in the brain, what role it serves and how equivalents appear in AI systems (LSTM is the obvious example to look at).
+
+\subsection{Long term memory}
+Our long term memory (of which there are several kinds, e.g. episodic, semantic and procedural) is also important for human cognition. Likewise, I want to compare theories of how these different types of memory are implemented, what role they serve, and what artificial equivalents exist. The \nquote{forgetting problem} in AI will be particularly important here, because some form of carefully-organised long term memory store seems like it would help.
+
+\subsection{Transfer learning}
+In psychology, transfer learning refers to learning on one task that helps with performance on a different task. There is a disappointing \emph{lack} of demonstrable transfer learning (e.g. doing crosswords doesn't make one better at chess through some kind of \nquote{brain training}). However, defined somewhat more broadly, transfer learning is obvious. Learning a language makes it easier to learn to understand all humans that speak that language -- the tasks are not independent. Concretely, I would define transfer learning in an AI system as \nquote{given tasks A and B, a system demonstrates transfer learning if it can train on A, then perform well on A but not B, and then train on B, and perform well on both A and B, and the time needed to train on B is less than if it had only trained on B to perform only B}.
+
+I want to investigate how theories of neuroscience explain these kinds of phenomena (perhaps not explicitly calling it transfer learning) -- where information learnt for one task can be employed when performing another task. I also want to look at how AI systems implement this, and how they could be improved.
+
+\subsection{Human language and natural language processing}
+Language is an important human capability. Furthermore, some theorists have suggested that language is crucial not only to human communication, but to human thought itself. Accordingly, I wish to compare neuroscientific theories of language, both how language is processed in the brain, and what role (if any) it serves beyond communication. I then want to look at how AI systems process language, how they could be improved, and whether there are any non-communication benefits to be had by adding some language capacity to a system.
+
+\subsection{Human pain/pleasure and reward signals in reinforcement learning}
+Reinforcement learners typically have behaviour that is isomorphic under scaling or translation of their utility function. They simply pick the action that leads to the most utility, and don't distinguish between \nquote{seeking out pleasure} and \nquote{avoiding pain}. On the other hand, humans do distinguish between these two, and they even ask questions like \nquote{is a particular type of existence better or worse than being dead?}. Of course, we can give a reinforcement learner some particular utility for the \nquote{dead} state, but it doesn't quite feel like the same thing to me. I want to clarify my understanding of this by comparing different neuroscientific theories of how pain, pleasure, and addiction work, and different AI approaches to the concept of \nquote{reward}.
+
+\section{Marcus's topics}
+Marcus replied to my email with some good suggestions for topics. I haven't thought deeply about how to integrate them into the work yet, but I will include some of them here so I can keep an eye out for relevant bits when I'm reading literature.
+
+\subsection{Reasoning}
+The human ability to reason abstractly (rather than merely react quickly to environmental events) is currently not fully understood. Although we can create systems that perform logical reasoning, the more general human type of reasoning eludes us. Part of my review here will be just finding a good definition for what \nquote{reasoning} actually means.
+
+\subsection{Creativity}
+Creativity is an extremely broad term. It might be useful to look at what philosophers have to say, but it is likely to be too imprecise to evaluate specific theories or AI systems.
+
+\subsection{Generalization / Classification}
+The most advanced kind of generalisation is the transfer learning I talked about above. A simpler kind is the task of inferring missing data from given (e.g. learning to distinguish cats and dogs given only some examples of the same). Explaining how different AI systems approach such a task provides a good overview of the system itself.
+
+\subsection{Problem solving}
+The process of defining an obstacle as a \nquote{problem} to solve, and then coming up with a solution, is an interesting task. I think it will be instructive to explore how different neuroscience theories propose such a thing can happen.
+
+\subsection{Planning}
+I imagined the topic of \nquote{planning} is subsumed under my \nquote{the p[rocess by which decisions are made} section, but it probably deserves its own section. Humans don't merely take actions and split them into sub-actions, etc. We can take a very deliberate action of creating a plan, and then following it.
+
+\subsection{Self-preservation}
+None of my headings directly covered self-preservation, so it is a good one to add. The discussion here will be closely related to the one about self-awareness. It will be good to discuss forms of self-preservation that do and do not require self-awareness.
+
+\subsection{Deduction}
+Deductive reasoning means inferring $B$ from $A$ and $A \to B$. Humans and other intelligent systems have to be able to make such inferences even under uncertainty over the truth of the axioms (i.e. using something other than binary logic).
+
+\subsection{Induction}
+Inductive reasoning means inferring $\forall x. A(x)$ from many examples of $x$. This type of reasoning is not logically sound, but important nonetheless.
+
+\subsection{Abduction}
+Abductive reasoning means inferring a cause $A$ for an event $B$. This is also not logically sound, but important for intelligent systems.
+
+\bibliography{../references}
+\end{document}
