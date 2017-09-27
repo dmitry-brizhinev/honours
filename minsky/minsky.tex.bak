@@ -149,7 +149,7 @@ See the previous section.
 \subsection{Transfer learning}
 Minsky mentions credit assignment as being crucial to successful transfer learning -- but never proposes \emph{how} such good credit assignment would be accomplished. He does mention that it would be more useful to assign credit to the process used to choose actions than to the actions themselves.
 
-Misnky often mentions that humans' ability to make analogies is crucial to their versatility. He proposes the \nquote{panalogy} knowledge representation structure, where similar processes are linked together to allow us to quickly switch between them. We can then add to the panalogy when we encounter a new thing that is like those other things. He also thinks we might represent similar things via a semantic network of differences -- i.e. \emph{X} is like \emph{Y} except for feature \emph{A}. We could then decide whether feature A is relevant in a particular situation, or if we could ignore it and make a successful analogy.
+Misnky often mentions that humans' ability to make analogies is crucial to their versitility. He proposes the \nquote{panalogy} knowledge representation structure, where similar processes are linked together to allow us to quickly switch between them. We can then add to the panalogy when we encounter a new thing that is like those other things. 
 
 \subsection{Human language and natural language processing}
 Minsky doesn't talk about language.
@@ -160,33 +160,34 @@ Minsky has a strange (in my opinion) theory of pain. He thinks that pain is a ne
 He thinks that pleasure is a similar state, except that it tries to maintain the state. He also suggests that one role of pleasure might be to maintain a mental state while credit assignment processes analyse it.
 
 \section{Marcus's topics}
+Marcus replied to my email with some good suggestions for topics. I haven't thought deeply about how to integrate them into the work yet, but I will include some of them here so I can keep an eye out for relevant bits when I'm reading literature.
 
 \subsection{Reasoning}
-Minsky thinks that \nquote{reasoning} takes many different forms, and each is an example of a Way to Think. He thinks that, rather than lumping them all into one term, it might be fruitful to try to catalogue all of these different forms of reasoning.
+The human ability to reason abstractly (rather than merely react quickly to environmental events) is currently not fully understood. Although we can create systems that perform logical reasoning, the more general human type of reasoning eludes us. Part of my review here will be just finding a good definition for what \nquote{reasoning} actually means.
 
 \subsection{Creativity}
-Minsky thinks that a creative process consists of two parts (which might be on a very rapid). A \nquote{manic} phase where Critics are suppressed and ideas and associations are allowed to flourish, followed by a \nquote{depressive} phase where Critics are reactivated to evaluate the generated ideas. He often makes the comparison between this model and bipolar disorder. He believes that this process can occur unconsciously after the goal is selected consciously.
+Creativity is an extremely broad term. It might be useful to look at what philosophers have to say, but it is likely to be too imprecise to evaluate specific theories or AI systems.
 
 \subsection{Generalization / Classification}
-Minsky doesn't talk about this much, but his panalogy is probably relevant.
+The most advanced kind of generalisation is the transfer learning I talked about above. A simpler kind is the task of inferring missing data from given (e.g. learning to distinguish cats and dogs given only some examples of the same). Explaining how different AI systems approach such a task provides a good overview of the system itself.
 
 \subsection{Problem solving}
-Minsky believes that we have many different Ways to Think that we can switch among to help solve problems.
+The process of defining an obstacle as a \nquote{problem} to solve, and then coming up with a solution, is an interesting task. I think it will be instructive to explore how different neuroscience theories propose such a thing can happen.
 
 \subsection{Planning}
-Minsky imagines a plan as a hierarchical process of choosing a difference between the current state and the desired state, and then making removing that difference into a subgoal.
+I imagined the topic of \nquote{planning} is subsumed under my \nquote{the p[rocess by which decisions are made} section, but it probably deserves its own section. Humans don't merely take actions and split them into sub-actions, etc. We can take a very deliberate action of creating a plan, and then following it.
 
 \subsection{Self-preservation}
-I don't think Minsky talked about self-preservation specifically.
+None of my headings directly covered self-preservation, so it is a good one to add. The discussion here will be closely related to the one about self-awareness. It will be good to discuss forms of self-preservation that do and do not require self-awareness.
 
 \subsection{Deduction}
-Minsky thinks of logical deduction as just an example (and not a particularly noteworthy one) of a Way to Think.
+Deductive reasoning means inferring $B$ from $A$ and $A \to B$. Humans and other intelligent systems have to be able to make such inferences even under uncertainty over the truth of the axioms (i.e. using something other than binary logic).
 
 \subsection{Induction}
-Likewise.
+Inductive reasoning means inferring $\forall x. A(x)$ from many examples of $x$. This type of reasoning is not logically sound, but important nonetheless.
 
 \subsection{Abduction}
-Likewise.
+Abductive reasoning means inferring a cause $A$ for an event $B$. This is also not logically sound, but important for intelligent systems.
 
 \section{Quotes from the book (many errors due to OCR)}
 We recognize the things we see, we understand the
