@@ -1,0 +1,1017 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\bibliographystyle{apalike}
+%\setcitestyle{authoryear,open={((},close={))}}
+
+\newcommand{\delims}[3]{\!\left #1 #2 \right #3}
+\newcommand{\parens}[1]{\delims{(}{#1}{)}}
+\newcommand{\braces}[1]{\delims{\lbrace}{#1}{\rbrace}}
+\newcommand{\brackets}[1]{\delims{[}{#1}{]}}
+\newcommand{\norm}[1]{\delims{\|}{#1}{\|}}
+\newcommand{\abs}[1]{\delims{|}{#1}{|}}
+\newcommand{\inner}[2]{\delims{\langle}{#1,#2}{\rangle}}
+\newcommand{\vectinner}[2]{\inner{\vect{#1}}{\vect{#2}}}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\newcommand{\nquote}[1]{``{#1}''}
+
+\begin{document}
+\title{\vspace{-10ex}Practopoiesis}
+\author{Dmitry Brizhinev}
+\maketitle
+
+\section{Introduction}
+The theory of \nquote{practopoiesis} is described by \cite{practopoiesis}. This writeup is based on that paper.
+
+\section{Glossary}
+The author uses a lot of jargon, much of it invented by himself. I present some of the terms here. I will try to avoid using them in my writeup.
+
+\paragraph{practopoiesis} The name for the ideas contained in \cite{practopoiesis}.
+
+\paragraph{variety} How many possible states a system can be in. I think of this as memory capacity.
+
+\paragraph{cybernetic knowledge} Knowledge. More specifically, information contained in a system that helps it interact with its environment. For example, my brain contains my friends' names, which helps me interact with my friends. My genes contain information about how to build brains that are good at learning things like names and interacting with environments.
+
+\paragraph{poiesis} Using a feedback loop to do things.
+
+\paragraph{poietic hierarchy} Where one system uses a feedback loop to build a second system, and the second system uses a feedback loop to do something, etc.
+
+\paragraph{traverse} A feedback loop in a poietic hierarchy. A system with three traverses is one with three feedback loops. The bottom-most loop builds the middle loop, the middle loop builds the top loop, and the top loop acts on the environment. The result of the action provides feedback on the performance of all three systems.
+
+\paragraph{anapoiesis} The middle loop in a hierarchy with three loops. It has the unique feature that it both acts and is acted upon by other loops.
+
+\section{Overview}
+\cite{practopoiesis} approaches intelligence from the perspective of cybernetics and control theory. The core unit of this theory is the feedback loop, where some system acts on an environment and uses feedback to adjust its actions.
+
+The author proposes thinking in terms of hierarchies of such loops, with each loop in the hierarchy acting to change the rules in the next loop. The author believes that the height of this hierarchy is very important, and that a hierarchy with height three is qualitatively different than one with height two. As examples, consider the following:
+
+A book has no feedback loop and so has height zero.
+
+A thermostat has a fixed rule for converting temperature to output. The thermostat outputs cold or hot air, and gets feedback in the form of the current temperature. It has a single feedback loop.
+
+Now consider an artificial neural network. There is a fixed rule for a adjusting the weights of the network, and the weights themselves are rules for converting inputs to outputs. Thus, there are two levels in the hierarchy. The weights are a certain input-to-output mapping, and the learning rules are an input-to-weights mapping, or a procedure for learning different input-to-output mappings in different environments.
+
+The way the author sees it, a system with one feedback loop has to be designed for a particular task (or environment). A system with two feedback loops can learn any particular task (adapt to any particular environment), but it cannot switch between them. Indeed, neural networks have the forgetting problem -- they can be trained to perform lots of tasks, but if you train them on a new one they forget the old one.
+
+Thus, the author believes that human intelligence must be based on at least three feedback loops. The middle loop becomes the most important. Under this model, the bottom loop is whatever mechanism in the brain records long-term memories. Its rules are fixed, but the memories are not. The middle loop is the mechanism that recalls long-term memories. Its rules are the memories. The top loop is the activity of the brain in responding to a particular situation. Its rules are the currently recalled memory. If the current situation does not change, the top loop handles it. If the situation starts to change, the middle loop detects the top loop's failure, and attempts to change the top loop (recall a long-term memory) to match the new situation. If this also fails, the bottom loop is engaged and records a new long-term memory by changing the middle loop.
+
+I like this as a theory of long-term memory, because it avoids the circularity of descriptions like \nquote{memories are recordings of past events}. However, the claim that three feedback loops is some kind of magic number is questionable. For one thing, the \nquote{fixed} rules of learning at the bottom layer are in fact changed over evolutionary timescales. In that sense, our genes are a form of super-long-term memory for the species as a whole.
+
+
+\section{Approach to topics}
+How the theory of practopoiesis relates to my chosen topics.
+
+\subsection{Meaning of intelligent behaviour}
+Nikoli{\'c} believes that the key to intelligence is \nquote{adaptability}, defined as the ability to alter behaviour to suit the environment. Because it is infeasible to have behavioural rules prepared for every possible environment, this requires some system that can think up its behavioural rules on the fly. Nikoli{\'c} is of course partial to the idea that this system has multiple levels of feedback loops.
+
+\subsection{Relationship between intelligence and logic/mathematics}
+Nikoli{\'c} does not discuss logic and mathematics specifically.
+
+\subsection{How the utility function interacts with \nquote{morality}, and how it is learnt}
+Nikoli{\'c} does not discuss the goals of an adaptive system.
+
+\subsection{The role of human emotions}
+Nikoli{\'c} does not discuss emotions.
+
+\subsection{The concept of forming beliefs by combining prior beliefs with new evidence}
+Nikoli{\'c} mentions Bayes' Theorem and believes that adding more feedback loops allows a system to learn not only inferences but also priors. This occurs on multiple levels. Our genes (selected by evolution) constitute priors on what sort of environments we may have to face, and they are combined with evidence (the environment) to produce a phenotype. This phenotype includes long-term memories, which are like priors on what we expect to see, and have to be combined with evidence (what we actually see) to choose a behaviour.
+
+\subsection{Seeking out more information}
+Nikoli{\'c} does not discuss the exploration/exploitation tradeoff.
+
+\subsection{Bottom-up and top-down information flow}
+Nikoli{\'c} emphasises the informations flows in his model. Note that his hierarchy is reversed relative to most common ideas about cognition. The lowest level of the hierarchy (genes) contains the most general information (e.g. rules for learning), and it uses this to build the next layer. Higher layers contain more specific information (e.g. what was learnt) which is an instance of the more general rule.
+
+When the system is acting, Nikoli{\'c} believes it is important that higher levels cannot alter the lower levels directly (e.g. brain cannot alter genes and current brain activity does not wipe all past memories), otherwise the more general information in the lower level would be lost while the higher level optimises it for a particular situation.
+
+Finally, Nikoli{\'c} discusses in detail the way that feedback flows back through the system, calling it \nquote{trickle-down information} but I must admit I didn't really understand that part. I am happy to swap out that part of the theory wholesale and replace it with Minsky's (and others') ideas along the lines of \nquote{highest level gets feedback from the environment, lower levels get feedback from higher levels}. I don't think that is too different from what Nikoli{\'c} was getting at.
+
+\subsection{The concept of \nquote{learning}}
+Nikoli{\'c} emphasises the need for a system to adapt by incorporation information from the environment into its feedback loop. Learning then takes place at multiple levels. The lowest loop \nquote{learns} by adjusting the next loop, and so on. The highest loop doesn't learn, it just acts.
+
+\subsection{Different types of learning}
+This section is not relevant here.
+
+\subsection{The process by which decisions are made}
+Nikoli{\'c} imagines decisions being made via rules encoded in the highest-level feedback loop. These rules are specific to a particular situation, and are swapped out with others when a lower-level loop detects that the situation has changed. The lower-level's decisions, however, are made in a similar fashion.
+
+\subsection{Looking at behaviour in a hierarchical fashion}
+As discussed in the previous section, Nikoli{\'c}'s model is very hierarchical, although he insists on very strict criteria for what to call a separate level of the hierarchy, such that the entire brain only has three or so levels.
+
+\subsection{Internal actions}
+In Nikoli{\'c}'s model, every feedback loop except the topmost is performing internal actions, in the sense that it is not acting on the external world, but on a higher-up loop, to make it better.
+
+\subsection{Model-based vs model-free learning}
+Nikoli{\'c} believes that control systems must contain a model of the world, based on something from cybernetics called the \nquote{good regulator theorem}. Lower levels in the hierarchy contain more general information and hence more general (and lower-resolution) models.
+
+\subsection{Theory of mind}
+Nikoli{\'c} does not discuss theory of mind.
+
+\subsection{Self awareness}
+Nikoli{\'c} does not discuss self awareness.
+
+\subsection{Consciousness}
+Nikoli{\'c} makes passing references to the philosophical literature and the mind-body problem, but he does not say anything interesting about it.
+
+\subsection{Sleep}
+Nikoli{\'c} does not discuss sleep.
+
+\subsection{Brain wave frequencies}
+Nikoli{\'c} does not discuss brain waves.
+
+\subsection{Parts of the brain}
+Nikoli{\'c} does not discuss specific anatomical structures. He makes the intriguing conjecture that long-term memories are stored in the mechanism of neuronal adaptation (not in synaptic strengths as is commonly believed).
+
+\subsection{Cortical organisation}
+Nikoli{\'c} emphasises that he does \emph{not} believe that some regions of the cortex are higher or lower in his proposed hierarchy than others. Rather, his hierarchy refers to different mechanisms, such as genes, neuronal adaptation, and changes in synapses.
+
+\subsection{Short term (working) memory}
+In Nikoli{\'c}'s model, short-term memory is the current state of the highest-level feedback loop -- current brain activity. It gets immediate feedback from the environment, and is modified by the middle level (on a slightly longer timescale).
+
+\subsection{Long term memory}
+Nikoli{\'c} believes that long term memories are stored in the state of the middle loop. This loop retrieves memories by changing the top loop. The bottom loop stores new memories by changing the middle loop when the middle loop fails to retrieve a memory appropriate to the situation.
+
+\subsection{Transfer learning}
+Nikoli{\'c} does not address transfer learning directly. He talks a lot about how lower levels in the hierarchy store more general knowledge that is combined with inputs to create a specific case of the knowledge in the higher level (appropriate to the current situation).
+
+\subsection{Human language and natural language processing}
+Nikoli{\'c} does not discuss language.
+
+\subsection{Human pain/pleasure and reward signals in reinforcement learning}
+Nikoli{\'c} does not discuss reward signals.
+
+\section{Marcus's topics}
+
+\subsection{Reasoning}
+Nikoli{\'c} does not discuss reasoning in detail, except to say that he believes it to be an example of knowledge at the top level retrieved from the middle level.
+
+\subsection{Creativity}
+Nikoli{\'c} believes that creativity results from the middle loop iteratively changing the top loop until something new results (which a single loop cannot produce).
+
+\subsection{Generalization / Classification}
+Nikoli{\'c} talks about how the higher level has more specific knowledge of the kind stored in the lower levels.
+
+\subsection{Problem solving}
+Nikoli{\'c} does not discuss problem solving in detail.
+
+\subsection{Planning}
+Nikoli{\'c} does not discuss planning.
+
+\subsection{Self-preservation}
+Nikoli{\'c} does not discuss self-preservation.
+
+\subsection{Deduction}
+Nikoli{\'c} believes that a single feedback loop is enough to do deduction. The loop has to contain a fixed rule, and it can derive the result (like a thermostat)
+
+\subsection{Induction}
+Nikoli{\'c} believes that two fe
+
+\subsection{Abduction}
+Abductive reasoning means inferring a cause $A$ for an event $B$. This is also not logically sound, but important for intelligent systems.
+
+\section{Quotes from the article}
+without plasticity mechanisms,
+it would be impossible to endow the network with the structure
+necessary to accomplish its tasks across different environments if each
+environment poses different demands. Plasticity mechanisms are the
+means of steering the network into the desirable state of operation. Once created, the network offers another mechanism of equal steering
+importance: neural activity
+
+
+The present approach emphasizes that what plasticity is for a
+network, the network is for behavior: In both cases there is an enabling
+force
+
+
+The term practopoiesis refers
+to “creation of actions”, emphasizing the fact that physiological
+mechanisms at any level of adaptive organization operate through
+actions—and requires mechanisms to be put in place capable of
+executing those actions
+
+While self-organization generally applies also
+to non-biological phenomena (such as galaxies or chemical reactions),
+practopoiesis applies exclusively to adaptive systems
+
+
+One of the key postulates of practopoiesis is the necessity of
+interactions with the environment. The idea is that each adaptive
+mechanism, at any level of (self-) organization, receives feedback
+from the environment
+
+
+Practopoiesis is an extension [of cybernetics] in a sense that it explains how systems
+obtain their cybernetic capabilities i.e., how they learn what and
+where to control
+
+
+
+To determine whether a system has the capability to learn to
+control, these properties must be observed:
+(1) Monitor-and-act machinery: An adaptive system must consist of
+components that are capable of detecting conditions for a
+necessity to act, and of acting. These components monitor their
+own surrounding world, make changes through actions, and
+then evaluate the effects e.g., determine whether further
+actions are needed. For example, gene expression mechanisms
+constitute one type of monitor-and-act units. Neurons constitute
+another type of monitor-and-act units.
+(2) Poietic hierarchy: The monitor-and-act units are organized into
+a hierarchy in which low-level components, by their actions,
+create, adjust, service and nourish high-level components.
+Once created, higher-level components can in principle operate
+on their own. That is, at least for some time, they do not
+require further engagements of the lower-level components.
+This is achieved by creating new physical structures that
+constitute higher-level monitor-and-act units. For example,
+gene expression mechanisms create neurons and determine
+their properties, but not the other way around.
+(3) Level-specific environmental feedback: Monitor-and-act components
+receive necessarily feedback from the environment to
+which the system is adapting. This means that units at
+different levels of organization receive different type of feedback.
+For example, neurons constituting a patellar reflex
+receive different type of feedback from the environment than
+the gene expression mechanisms that build that reflex mechanism
+on the first place.
+
+
+
+For as long as higher-level components
+satisfy the needs of an organism, there will be no need for
+changes at lower levels of system organization. But if higher-level
+components are unsuitable, they are being poietically adjusted. For
+full functioning, two types of feedback from the environment are
+required, one for each level (Fig. 1B). In case that a low level fails to
+receive feedback from the environment but instead receives feedback
+only from within the system, the system’s capability to adapt
+to the environment at that level of organization is lost. In that case
+no separate levels of practopoietic organization can be claimed.
+
+
+
+Cybernetic knowledge is necessarily subjected to good
+regulator theorem of Conant and Ashby (1970), stating: “any successful
+control mechanism must be a model of the system that it controls”.
+
+Building a system through
+interaction with an environment and adjusting to it cannot be
+distinguished from acquiring cybernetic knowledge about this environment.
+That way, newly created structures become a model (Conant
+and Ashby, 1970) of the system’s environment.
+
+
+ For example, variation
+in phenotype for the same genotype (Johanssen, 1911) is a form of
+practopoietic extraction of knowledge3
+. Formation of neural network
+architecture (e.g., synaptic connectivity) through interactions with the
+environment is also a form of extraction of cybernetic knowledge.
+
+
+The total amount of cybernetic knowledge deposited within a
+system is related to the total number of different states that the system
+can assume while interacting with the environment, and is referred to
+as the cybernetic variety of the system. 
+
+Ashby’s law of requisite variety (Ashby, 1956; Beer, 1974,
+1979), which states that for a successful control of a system, the
+system that controls has to have at least as many states as the system
+being controlled.
+
+
+The contribution that practopoietic theory brings on top of the
+existing cybernetic theory is the introduction of the adaptive
+hierarchy. 
+
+
+The knowledge
+that can be instilled at a new level of organization is always
+limited by what the system had known prior to the process of
+poiesis: higher-level knowledge is always a specific case of lowerlevel
+knowledge. ... In machine learning, this system
+property is known as inductive bias
+
+Knowledge at a higher-level system
+organization must always be a specific case of more general
+knowledge at a lower level of organization
+
+
+: The general
+knowledge of that system can be expressed as a relation between the
+input (current temperature) and the output (heating intensity). For
+example, output=(target-input)/3. Specific knowledge is then derived
+by the actions of this controller. For example, specifically, right now
+input may be 35, and target may be 20. The needed output is thus 5.
+
+
+In biology, an example of the generality-specificity relation is the
+general rule about when and which proteins should be synthesized
+versus the specific proteins that have been synthesized and resulted in a
+certain phenotype. The latter reflects the properties of a particular
+environment within which the system operated recently, whilst the
+former reflects the properties of the environment across a range of time
+and space covered by the evolution of the organism. Thus, a phenotype
+will always contain more specific knowledge than the genotype.
+
+The anatomical connectivity of a nervous system
+reflects more general cybernetic knowledge than that of neuronal
+activity: The anatomy contains knowledge on what to do in general,
+across a range of sensory inputs, whilst the current electrical state of
+the network contains the knowledge of what is going on right now.
+
+ Ultimately, every
+skill that we acquire and every declarative fact we memorize is a specific
+form of general knowledge provided by our genes 
+
+
+
+The introduction of the practopoietic hierarchy implies that the
+transition from high to low generality of knowledge is an active
+process. We refer to this process here as an adaptive traverse of
+knowledge, or simply a traverse. A traverse is a process, or a set of
+operations, by which changes are made through system’s interaction
+with the environment such that the system has acquired new
+operational capabilities, or has directly adjusted its environment to
+its needs. Whenever a system operates i.e. its monitor-and-act
+units are engaged, the system executes a traverse.
+
+Systems with one traverse interact with
+the environment directly and make no changes to themselves. An
+additional traverse is needed to make changes to itself in which
+case the interaction with the environment becomes indirect—
+through the functioning of the other traverses that the selfchanges
+have affected. For the system to be adaptive each of the
+traverses has to receive feedback from the environment—and each
+feedback has to provide a specific type of information, relevant for
+the monitor-and-act units of this particular traverse. Whenever
+there is more than one traverse, the lower one on the hierarchy
+always determines how the upper one operates. 
+
+
+Note that the total
+number of levels of organization that possess cybernetic knowledge
+is always larger by one than the number of traverses within
+the system (indicated by arrows in knowledge graphs). This is
+because the top level of organization produces output5
+, which
+affects the environment instead of poietically affecting the
+system6
+
+
+
+In general, a traverse is when more general cybernetic knowledge
+of monitor-and-act units is used to produce certain beneficial
+effects for the system in a form of implementing new, more
+specific cybernetic knowledge. The latter is then considered higher
+on the organizational hierarchy than the former.
+
+
+Traverse is also how a system generates cybernetic variety. A
+small number of general rules can be used to extract a large
+number of specific ones.
+
+
+. Importantly, addition of one more traverse provides the
+system with much more capability to generate variety—even when the
+system is leaner: One system may use huge resources to store all actions for all situations that could possibly be encountered. Another system
+that has an additional traverse may compress that knowledge to a few
+general rules and infer in each situation the relevant actions
+
+
+
+: Actions of low-level
+mechanism produce effects on higher-level mechanisms, which then
+produce effects on the environment (Fig. 1B). In fact, in practopoietic
+systems, there is no way around this involvement of the top. If the
+causality flowed in any other way, a shortcut would have been found
+to affect the environment directly, without the higher levels of
+organization. The system would maybe act faster, but would lose
+its adaptive capabilities, the degree of loss corresponding to the
+number of organization levels skipped due to the shortcut.
+
+
+upward causation should occur
+within the system, and this is a process of poiesis. In contrast,
+downward causation should take the path outside the system and
+through level-specific environmental feedback. This is the only way for
+the poietic process to receive feedback from the environment, and for
+the system as a whole to extract cybernetic knowledge and become a
+good regulator. For example, a lack of certain nutrients may cause the
+expression of certain genes, which may be in turn responsible for
+plastic changes in the nervous system. These changes can then affect
+behavior patterns in such a way that the organism successfully
+obtains the needed nutrients, which eventually ceases the expression
+of the said genes. This entire loop of internal upward poiesis and
+external downward feedback through multiple levels of organization
+is referred to as the practopoietic cycle (or loop) of causation
+
+genes in one skin cell and genes in another neural cell do
+not have means to interact directly. Nevertheless, they interact because
+each affects somehow the input that the other receives from the
+environment ...
+ By relying on such indirect
+interactions, the system’s knowledge can grow linearly with its physical
+size; new monitor-and-act units can be added without having the
+burden of implementing the hardware for interaction pathways, the
+combinatorics of which grows faster than linearly. The organism’s
+interaction with the environment does the “connecting” job.
+
+For example, a cortical neuron is phylogenetically and ontogenetically higher
+than a spinal neuron and yet, the inhibition/excitation mechanisms of the two
+operate equi-level, while their respective plasticity mechanisms lie at a practopoietically
+lower level, and they both also operate equi-level. Similarly, the
+“classical” hierarchy of processing stages in vision: retina4LGN4V14V24…
+4IT is not a poietic hierarchy.
+
+The
+top level of organization acts on the environment, and then the
+environment informs lower levels that the higher ones may not
+have performed their jobs successfully. That is, the signal for a need
+to act at lower levels is an event that has both of the following
+properties: (i) it has been established in the past that this signal
+indicates a need for action, and (ii) higher levels did not manage, for
+whatever reason, to eliminate that need (i.e., eliminate the signal). In that case, through level-specific environmental feedback, the
+system experiences a downward pressure for adjustment: Changes are
+needed at lower levels of system organization in order to change –
+adaptively – the properties of the higher levels
+
+As a result of such adaptive capabilities, the total variety of the
+system’s interactions with the environment is much higher when
+observed across different demands from the environment, than
+when the system is observed within relatively stable environmental
+conditions
+
+Downward pressure is exerted on neuronal plasticity mechanisms
+to adjust the anatomy of the system as a result of changes in the
+environment (new events). Every form of learning is a result of the
+pressure to fix discrepancies between the existing sensory-motor
+operations and those required by the surrounding world
+
+From transcendence of knowledge (i.e., from inductive bias)
+follows a need to ensure resilience of knowledge at lower levels of
+organization to events that occur at higher levels of organization. The
+short-lived specific pieces of cybernetic knowledge supersede each
+other with high pace. They should not spoil the general knowledge
+acquired through much longer periods of time and reflecting much
+more “wisdom”. For example, the current extreme temperature to
+which a thermostat may be exposed should not affect the general
+input–output functions of the thermostat; A temporary event of a
+low air temperature should not immediately cause the animal to
+change its genome into growing a thick fur. A search for a shelter
+may be a much more appropriate response.
+In other words, the general knowledge at lower levels of organization
+should be protected, or shielded, from the whims of the specific
+events at higher levels of organization The uni-directional flow of
+poiesis in adaptive systems serves exactly this purpose: This organization
+ensures that general knowledge makes decisions about specific
+knowledge, but not the other way around; The “big picture” must not
+be muddled by the current affairs. This separation of knowledge is the
+key to success of an adaptive system.
+
+, if the behavior of an
+animal could change animal’s genes – the adaptive capabilities of the
+system would quickly fall apart ... The organism would be adapted only to very specific
+most-recent circumstances, and would lose the knowledge needed to
+the deal with a variety of circumstances, which the ancestors have
+painstakingly acquired through a long process of natural selection.
+Cybernetic wisdom would be replaced by folly\
+Similarly, if knowledge shielding was suddenly lost within a
+nervous system, memories and skills acquired throughout lifetime
+could vanish in a wake of a single novel event: One may forget
+how to walk while one swims.
+
+Physiological mechanisms by which living cells shield genetic
+knowledge are epitomized in Crick’s (1958, 1970) central dogma of
+molecular biology: Information can be transferred from DNA to proteins
+but not the other way around. Currently, much less is known about the
+mechanisms that shield memories within the nervous system.
+
+The more organizational levels spanned by
+traverses, the better the coverage of the generality-specificity continuum
+of cybernetic knowledge
+
+The systems that posses the
+same number of traverses are set apart by the amount of
+cybernetic knowledge. Additional knowledge can increase richness
+of behavior too
+
+5 Note that the total count of cells alone is not sufficient to produce all the
+necessary variety. The cells need to be equipped also with the correct cybernetic
+knowledge. The content of that knowledge is crucial in determining the total
+intelligence of the system. This is because systems may differ in how good models
+of the surrounding world they are. This is why a human, although equipped with a
+smaller brain than e.g. a whale, can exhibit in many aspects more intelligent
+behavior than a whale.
+
+The process of extraction of cybernetic knowledge ensures that the
+organism continues to be a good model of its environment. Hence,
+systems with a larger number of traverses can be smaller in total size
+and yet, produce the same or higher amount of variety than systems
+with a smaller number of traverses. This has critical consequences for
+operations in environments unpredictable at a certain shorter timescale—those
+who’s recent past is not necessarily a good predictor of
+immediate future. The less predictable the surrounding world at
+short time scales is i.e., the more the long-term statistics needs to be
+considered, the higher the advantage of an additional traverse
+
+
+The central idea of practopoietic theory is that, depending on the
+number of traverses, there are limitations on how much a system can
+adapt even if the variety of the system is unlimited
+
+Any structural element of a system e.g., a bone in a body is a T0-
+system, and so is any passive form of information storage, such as a
+book or DNA. Any tool or instrument, such as a knife, has a maximum
+of T0-capabilities too. Also, active components e.g., a motor or a
+computation processor, have T0-capabilities if they are not closing a
+loop with the environment to which the system adapts.
+
+
+in its simplest form, a T1-
+system can be described as a control mechanism, or as a regulator. Also,
+a variety rich T1-system can be seen as an elaborate monitor-and-act
+machine—a device that responds to events in the environment.
+A T1-system can also be understood as a mechanism that
+extracts knowledge. More formally they can be said to implement
+deduction of cybernetic knowledge: The action for a specific case is
+deduced (at higher level of organization) from a general rule (at
+lower level of organization).
+
+s. Although such systems can
+implement in principle any mapping function, in real life this is not
+enough because the number of combinations of events that an animal
+or a person could possibly encounter in his/her life in all possible
+environments that it may live in and in all possible situations that it
+may encounter, is way too large to be stored in a T1 physical system19.
+Instead, more flexibility is needed to learn selectively only about those
+environments in which the organisms actually happen to live.
+
+von Neumann
+computer architecture is used almost exclusively as a high-variety but not a highadaptability
+system—keeping its operations mostly at the T1-level. 
+Whereas the discipline of mathematics requires much more
+than T1 for creative formulation of problems and insights on possible solutions, in
+the end, solutions and proofs are reduced down to a set of T1 operations. Whenever
+the human mind operates logically, its high-level adaptive capabilities are reduced
+to much less adaptive (but usually more reliable) T1-operations. 
+
+A T2-system can be
+understood as granting supervision to a T1-system in the form of
+machinery that monitors the effects that T1 produces on the
+environment and that has the cybernetic knowledge to adjust
+the T1 component whenever necessary. The need for adjustment
+may appear e.g., when properties of the environment change
+
+A T2-system operates across a total of three levels of organization,
+the lower traverse relying on the most general form of
+cybernetic knowledge (the rules of supervision) and extracting
+knowledge of medium generality (the supervised properties of the
+system) and then, the higher traverse relying on that knowledge to
+extract an even more specific form of knowledge (the actual
+interaction with the surrounding world).
+
+While the
+cybernetic knowledge at the bottom of the hierarchy is always
+fixed and the one on the top of the hierarchy changes perpetually
+with even the slightest change in the environment, the middle
+level in a T2-system provides a place to store temporary knowledge
+that may be valid for a while, but which may be changed later
+if circumstances require so. A T2-system is the first one that is able
+to learn on its own to control the environment. In other words,
+while a T1-system controls only the surrounding world, a T2-
+system controls also itself. Thus, a T2-system can be understood as
+being capable of inducing cybernetic knowledge.
+
+
+n T2-systems, lower-level traverses have the capability of inducing
+allostasis (Sterling and Eyer, 1988; Sterling, 2004; Karatsoreos and
+McEwen, 2011): maintaining constancy at one place in the system
+by making the necessary changes at another place in the system.
+For example, in a case of dehydration, extensive physiological
+changes are needed in order to maintain the most critical internal
+water concentrations in the working range. Urine output is
+reduced. Veins and the arteries are constricted to maintain blood
+pressure with less fluid. The tongue and the mouth dry up.
+Whereas a minimum of T1-adaptability is needed for Bernard’s
+(1974) milieu intérieur and homeostasis (Cannon, 1932), a minimum
+of T2-adaptive capacities is needed for a system to be able to
+perform allostasis 
+
+. A minimum of T2-structure is needed
+to allostatically change the anatomy (synaptic weights in the mildest
+form) in order to maintain behavioral functionality of the system as a
+whole. A recovery after an injury, such as a stroke, also could not
+occur without a T2-structure and thus, without feedback obtained
+through exercise. Failure to successfully function at the higher
+traverse i.e., at the sensory-motor functions of the neural network,
+induces downward pressure for adjustment by actions of the lower
+traverse.
+
+The higher traverse of a neural system involves de- and hyperpolarization
+of neural membranes, generation and delivery of action
+potentials, and synaptic transmission. Here, cybernetic knowledge
+created by the plasticity mechanisms and stored at the level of
+anatomical properties of a neuron is used to extract more specific
+knowledge in the form of the current activity of that neuron.
+
+T2-structure helps a system operating in a changing, environment
+unpredictable at fast time scales in which no preconceived
+plans can be executed without an occasional need for adjustments
+to new circumstances, and no rules of behavior can be applied for
+long time without the need for adapting them according to the
+altered properties of the world. There is a need for general
+knowledge on how to adjust in a given situation
+
+The limitation of a T2-system is that it can learn efficiently to
+deal with only one set of behaving rules at the time i.e., with one
+type of situation. If the system learns to behave in one situation, it
+has hard time behaving in another situation without extensive
+relearning thus, finding itself in a need to forget the old knowledge
+in order to acquire new knowledge. This transition from situation
+to situation is related to stability plasticity dilemma23 and is costly
+both in learning time and in the adaptability that the system can
+exhibit.
+
+there is a qualitative leap in the
+adaptability that comes from this additional traverse when variety
+is high at each level of organization. The system can juggle much
+knowledge internally from a general to a specific level and back:
+With a minimal hint from the environment on what is about to
+come, a previously acquired knowledge about the upcoming
+activities can be pulled out from the general level and poietically
+instilled at a more specific level.
+As a consequence, a T3-system is not only capable of learning
+how to control but it can also learn how to learn quickly. The
+mentioned slow adaptation process may turn into a process as
+quick as what it takes to recognize a pattern. This is made possible
+by the intermediate traverse out of the total of three traverses that
+the system possesses
+This is the traverse in a sandwich i.
+e., it is the one whose both ends meet other traverses: Its lowerend
+knowledge is not fixed but can be changed; Its higher endknowledge
+is not an output but is still a part of the system. The
+consequence is that this middle traverse can give the system
+unprecedented level of adaptability, which, with sufficient variety,
+leads to nothing short of the ability to think.
+
+
+The middle traverse can be understood as reconstructing
+knowledge at top-1 that has been extracted once but lost since.
+In T3-systems, the knowledge at top-1 can be treated as temporary,
+while more permanent version is stored at top-2, which has
+also a more general (abstract) form. This generalized knowledge
+is stored by the learning rules at top-3 (Fig. 4B). Then, when
+needed, top-1 knowledge can be reconstructed from top-2 by a
+relatively brief interaction with the environment. Ultimately, it is
+top-1 that controls behavior directly (top is the actual behavior).
+
+
+That way, a familiar situation i.e., a set of environmental properties,
+needs to be detected to initiate reconstruction, but the details
+associated with that situation need not be learned all over again. Many
+of the details are already pre-stored and can be easily “pulled out” from
+a general form to a more specific one suitable for a given situation or
+context. Thus, a T3-system can also be understood as implementing
+situation-dependent or context-dependent supervision.
+This reconstructive traverse from top-2 to top-1 organization
+level is referred to as anapoiesis, from Ancient Greek a?? (ana)
+meaning “over, again”. The term refers to the repeated creation of
+knowledge through reconstruction from a general depository to a
+more specific form.
+
+Anapoiesis is an additional intermediate generator of variety at
+top-1. It is triggered whenever the environment significantly
+changes and downward pressure for adjustment is exerted onto
+the monitor-and-act units at the level top-2. If no significant
+pressure has been exerted at top-3 and if the system eventually
+succeeds in removing the adjustment pressure by relying on top-2/
+top-1 only, then a relatively easy solution to the problem has been
+reached. The system has successfully reconstructed knowledge
+from its past experiences and used anapoietic reconstruction to
+guide its behavior in a given situation.
+
+
+In contrast, if the downward pressure for adjustment reaches
+all the way to the bottom and thus, the monitor-and-act units at
+the level top-3 are informed of a need to make changes, anapoiesis
+alone has likely not been sufficient to satisfy the needs of the
+system. A new, unfamiliar situation is encountered! In that case, a
+T3-system adapts by deploying its unique capability to make
+changes to the general knowledge that drives anapoiesis—creating
+new knowledge at the level top-2 for a new type of situation. Thus,
+the full dynamics of the practopoietic cycle of causation in a T3-
+system includes anapoiesis as the middle traverse (from organization
+level top-2 to top-1) but also the verification process, which
+necessarily engages the top traverse (from top-1 to top), and the
+adjustment of the general knowledge  (from top to top-2), which is engaged whenever anapoiesis fails. This describes the full global
+workspace (Baars, 2005) of a T3-system.
+
+
+
+Anapoiesis is responsible for different phenotypes given the same genotype.
+Phenotype does not come from a pre-determined plan in genes. Genes create
+structure through feedback processes and regulation. Thus, the amounts of various
+created structures depend largely on the properties of the environment. In identical
+environments, identical phenotype would be obtained for the same genotype, but
+when properties of the environment vary, as in the real life, also phenotypes
+necessarily vary. Perhaps the most sensitive aspect of our anatomy to environmental
+factors, the one that is made to be susceptible as much as possible, are the
+anatomical structures that store our long-term memories. Everything that we learn
+is in effect a phenotype of the learning rules stored in the genotype.
+Hence, also anapoiesis is the schooling-based transfer of knowledge from one
+(footnote continued)
+generation to the next. Parents can educate their offspring by conveying knowledge
+not transferable through genes. This may include learning how to open a nut, hunt,
+use language, or appreciate music. This knowledge, provided during upbringing, is
+necessarily stored at higher levels of system organization than genes. Our culture is
+essentially anapoietic—it has to be re-created in every new individual. It is a form of
+phenotype (or extended phenotype; Dawkins, 1999, 2004). Anapoiesis makes it
+possible to skip the tedious process of rediscovering knowledge from scratch.
+Instead, a poiesis of specific knowledge is propelled by combining the inborn
+general cybernetic knowledge with a stimulating environment provided by the
+environment
+
+
+A T3-system
+has adaptive capabilities that exceed those of allostasis. The
+bottom traverse can adjust a T3-system to its habitat such that it
+can perform allostasis more efficiently—i.e., fast reconstruction
+means less allostatic load (McEwen and Stellar, 1993). If the
+organism is exposed to extreme allostatic pressure e.g., cold, a
+T3-system is able to adjust such that allostatic pressure is reduced,
+by e.g. growing fur, and thus a smoother physiological operation is
+ensured: The knowledge at top-3 is used to reconstruct properties
+of the system at a higher level of organization. This adjustment
+reflects a more elaborate form of adaptation to the surrounding
+world than allostasis i.e., a higher level of organization, and can be
+referred to as peristasis, from Ancient Greek word pe?? (peri)
+meaning “around”. Peristasis refers to “staying stable by understanding
+(or grasping) the conditions for adaptation that apply to
+the current situation”. 
+
+
+T1- and T2-systems perform cybernetic operations that correspond,
+respectively, to logical deduction and induction. There is an
+advanced form of logical-deduction that can be performed with its
+full power only by a T3-system. Anapoiesis of a T3-system can be
+described as a use of past knowledge to guess which knowledge is
+correct for the given situation and then evaluating the degree to
+which the guess matches reality, and adjusting the discrepancies
+that may appear. The corresponding guess-based logical operation
+is known as abduction, introduced to account for the inferences
+made on the basis of the best hypothesis given the available
+knowledge
+
+
+In principle, a T2-system is sufficient to implement logical
+abduction provided that a large-enough knowledge-base exists at
+top-2 level from which the hypotheses can be drawn. The process
+of establishing and refining this knowledge-base requires one
+more traverse i.e., a T3-system.
+
+Bayes’
+theorem cannot provide a complete description of T3-systems and
+hence, of the mind because there is nothing in Bayes’ approach that would correspond to the lowest traverse of the three-
+learning probabilistic priors. Thus, Bayesian inferences enter
+practopoietic systems through the top two traverses and hence,
+thorough anapoiesis. The present theory offers a general approach
+through T3-systems, covering also the learning of the knowledge
+on the basis of which inferences are made.
+
+
+variety and traverses should be considered as
+somewhat orthogonal in contributing towards the total intelligence
+of the system: Variety is about knowing what to do;
+Traverses are about acquiring this knowledge. Both components
+are essential and neither alone can provide powerful intelligence.
+Thus, no matter how much variety one may add to a system e.g., in
+a form of neurons and connections, the system may still not be
+able to produce human-like mental capabilities if it does not have
+enough traverses
+
+
+ But a T3-system appears to have
+enough flexibility to deal with the richness of a real life. This
+system can change itself on two levels: it can learn abstract rules
+and reconstruct from them concrete ones in a particular situation.
+A T3-system takes also advantage of the fact that with more
+adaptability levels the system can be smaller in total size and
+yet, produce the same or higher amount of variety than systems
+with fewer such levels
+
+There is evidence that recall from human memory is reconstructive
+by its nature (Schacter et al., 1998; Squire, 1992; Burgess,
+1996), and that working memory capacity is directly determined
+by reconstructive capabilities by a process known as chunking
+(Miller, 1956; Cowan, 2001)
+28. Thus, both of these phenomena may
+fundamentally rely on anapoietic reconstruction from general to
+specific knowledge
+
+Because it stores all our concepts, the level top-2 can be
+referred to as ideatheca (Greek for “place where concepts are
+stored”). These concepts in ideatheca should be shielded from the
+current activity at top-1, and should be adjusted only by the
+operations of monitor-and-act units at top-3.
+
+[Idea that system 1 vs system 2 corresponds *somewhat* to engaging top-1 only or top-2 also, which is slower]
+
+
+Anapoietic reconstruction may be the
+key behind those intellectual capabilities. Natural to a T3-system is
+a reiteration of anapoiesis in case that the first round was not
+successful in removing the pressure for adjustment. In case of
+failure, the pressure remains and thus, the need to continue with
+anapoiesis remains too. With each subsequent anapoietic iteration
+chances to find a solution may improve due to the work done by
+the preceding anapoietic steps. Although they failed, they may
+have brought the system closer to the solution than it was before.
+An important part of that is the adjustment pressure that is, due to
+the failures of anapoiesis, exerted on the lower level i.e., long-term
+memory.
+This dynamics of failure and pressure may underlie the process
+of abduction. For example, in an ambiguous situation (Is this a
+predator or a prey? A friend or a foe?), a T3-system may first
+abduce a hypothesis, and by doing so, drive the actions of the
+sensory-motor system towards obtaining further sensory inputs to
+test that hypothesis (e.g., by directing gaze). The hypothesis may
+be then confirmed or rejected. If rejected, abduction of a new
+hypothesis may require concurrent changes at top-2 consistent
+with the knowledge that the first hypothesis was incorrect. The
+process may then continue. This iterative dynamics of resolving
+ambiguities, from top to top-2 (i.e., from behavior to ideatheca),
+can eventually produce appropriate cybernetic knowledge at level
+top-1 that is original and different from anything in the past to a
+sufficient degree to be qualified as an insight or a creative solution
+to a problem
+
+
+
+In general, a property of the intermediate anapoietic traverse,
+lying in the sandwich between sensory-motor loops and plasticity,
+is that it allows for reorganization of knowledge without immediately
+executing behavior. That is, anapoiesis may not act immediately
+towards the main goal—i.e., towards resolving the main
+downward pressure for adjustment. Instead anapoiesis may act
+first towards sub-goals—postponing the main behavioral actions
+until the conditions for actions are ready. These sub-goals may
+involve behaviorally covert operations, which, when becoming
+elaborate, may manifest themselves as cognition
+
+
+
+. Anapoiesis,
+has never a full internal “peace” of uninterrupted operation
+like e.g., a computer algorithm would have when factoring a large
+number (unlike a computer algorithm, anapoiesis is not boxed).
+Instead, anapoietic process is continually bombarded by downward
+pressure for adjustment as a result of an unceasing influx of
+sensory inputs. Anapoietic process has to integrate all the inputs
+through its equi-level interactions, and this results in a form of
+continuous peristasis—i.e., perpetually adjusted knowledge of
+what is currently out there in the surroundings, even if it is
+irrelevant for the current task.
+The great adaptive advantage is that
+this knowledge can be used immediately if the distractor becomes
+suddenly relevant for the task, or relevant in any other way. For
+example, while hunting, an animal may have to integrate irrelevant
+auditory inputs such as the sounds of a water stream. But this
+very integration enables detecting effectively changes in that
+sound, which may then be essential for survival as they may
+indicate e.g., the presence of a predator. 
+
+[On the Chinese Room]: The insurmountable limitation is in the total amount of cybernetic
+knowledge that would need to be stored. The total number of possible situations i.
+e., possible sentences to be answered intelligently, using Chinese characters is too
+large to be programmed by rules and if stored in a T1-system, the requirements for
+the amount of needed memory storage may exceed the size of the universe. Thus,
+human-like level of intelligence can be achieved only if the system stores knowledge
+in a sufficiently generalized form, can extract and adjust this generalized
+knowledge on its own, and has the capability of applying it to specific situations.
+This requires a T3-system
+
+
+. The
+activation of a concept from ideatheca into top-1 is in the same time
+an abductive inference made on “symbols” and a symbol grounding
+process (see footnote 2). Thus, to infer anapoietically is to simultaneously
+verify through feedback both the premises and the conclusion
+of the inference. This in turn means that a full functioning T3-system is
+needed, as rich ideatheca can be established only if monitor-and-act
+units exist at level top-3. The existing artificial intelligence systems
+that have T2-structure do not have any capability to enrich or improve
+their ideatheca. Thus, only the human programmer is the one who
+understands, while a T1-machine executes that code without any
+understanding.
+
+r. The
+system begins to understand and posses semantics when, during its
+operations, bits of knowledge are used continuously from ideatheca to
+set anapoietically the properties of the level top-1. It is the continuous
+guessing (abduction) of this process and the continuous corrections of
+those guesses that make the system effectively conscious.
+
+
+
+The mechanisms of anapoiesis should have the following properties:
+First, they should operate on a time scales slower than spiking
+activity but, in the same time, they should be faster than plasticity.
+The time-scale should correspond to the pace with which our
+mental operations occur: recognition, recall, decision, mental
+imagery, and others. Studies on response times indicate that the
+underlying physiological mechanism should not be faster than
+about 100 ms and probably not slower than a second or two.
+Second, the underlying mechanisms should be local i.e., they
+should not be implemented through distributed network operations.
+The networks already serve the top-most traverse by
+mediating sensory-motor loops. Thus, we should look for an
+implementation separated from the network mechanisms. Finally,
+the mechanisms of anapoiesis should effectively change the
+properties of these networks.
+One particular physiological mechanism seems to fit these requirements.
+This mechanism is known as neural adaptation
+
+
+the following prediction necessarily follows: The
+rules by which neurons adapt are not fixed but are being
+learned. As we acquire new knowledge i.e., enrich ideatheca,
+we learn when to adapt our neurons (and when not)—the
+properties of adaptation mechanisms depending on the history
+of interactions with similar stimuli. This in turn means that the
+properties of neural adaptation mechanisms can be altered by
+appropriate experimental manipulation.
+
+
+[What is thought? - table]
+Classical (T1/2) Anapoietic (T2/3)
+Operation Computation Adaptation
+Input and output Symbols Monitor-and-act units
+Relation to surroundings (Gibson; Brooks; Nöe; supra) Boxed Permeable
+Logical operation (Peirce, supra) Deduction Abduction
+Symbol treatment (Searle, supra) Syntax Semantics
+Repeatability Faithful Creative
+Emergence Supervening Non-supervening
+Physiological implementation Electrochemical neural activity Processes of neural adaptation
+
+adaptation can be contrasted to computation (in a
+narrow meaning of that concept). A computation: (i) turns sensory
+inputs into states that represent properties of the outside world
+(symbols); (ii) is most effective if the operations of inference are
+isolated from the outside world (boxed); (iii) does not bring new
+information about the outside world besides that already present
+in the input symbols (deduction); (iv) the meaning is assigned
+to states i.e., symbols are grounded (see footnote 2), by a process
+separate from the inference machinery that manipulates
+those symbols (syntactic); and (v) for the same inputs reliably
+produces the same outputs (faithful). In contrast, an adaptive
+thought combines computation iteratively and is guided by feedback
+to produce something more substantial and more alive:
+(i) Adaptation mechanisms take as input cybernetic knowledge
+at one level of organization (monitor-and-act units) and extract as
+output new cybernetic knowledge at another level of organization
+(other monitor-and-act units); (ii) This extraction of new knowledge
+can only be effective if the system is not closed but integrates
+continual feedback from the outside (permeable); (iii) In anapoietic
+systems new knowledge is extracted through an iterative
+sequence of guesses and tests (abduction); (iv) Operations necessary
+for symbol grounding are implemented by the same processes
+that produce abductive inference—i.e., the process of
+inference is indistinguishable from the process of extracting
+meaning (semantics); (v) The outputs of adaptive systems depend
+considerably on the feedback received from the environment,
+opening possibilities for producing something new (creative). As
+a result, the processes underlying the emergence of computation
+can only be described as supervening, whereas adaptation can be
+understood also as a self-organized process of non-supervening
+poietic relations. T
+
+
+yet
+another surprising prediction that can be derived from a tritraversal
+theory of mind: Our semantic knowledge, such as
+skills and declarative facts, is not primarily stored in synapses
+i.e., in the network architecture (although this architecture
+needs to be fine-adjusted too). Rather, this knowledge that sits
+available to the mind even if not being activated in a while
+(sometimes in years) is stored by some other means—those that
+determine when and how a cell will adapt its responses
+They should be shielded from the activity of the network
+such that the network cannot directly alter these structures.
+These structures should be altered only by specialized monitorand-act
+units that have very general knowledge about when
+such learning should be made. These most-general monitorand-act
+units should lay at top-3 level and hence, should be
+driven by gene-expression mechanisms.
+
+\bibliography{../references}
+\end{document}
