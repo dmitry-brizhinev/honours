@@ -1,0 +1,157 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\bibliographystyle{apalike}
+%\setcitestyle{authoryear,open={((},close={))}}
+
+\newcommand{\delims}[3]{\!\left #1 #2 \right #3}
+\newcommand{\parens}[1]{\delims{(}{#1}{)}}
+\newcommand{\braces}[1]{\delims{\lbrace}{#1}{\rbrace}}
+\newcommand{\brackets}[1]{\delims{[}{#1}{]}}
+\newcommand{\norm}[1]{\delims{\|}{#1}{\|}}
+\newcommand{\abs}[1]{\delims{|}{#1}{|}}
+\newcommand{\inner}[2]{\delims{\langle}{#1,#2}{\rangle}}
+\newcommand{\vectinner}[2]{\inner{\vect{#1}}{\vect{#2}}}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\newcommand{\nquote}[1]{``{#1}''}
+
+\begin{document}
+\title{\vspace{-10ex}Affordance Competition}
+\author{Dmitry Brizhinev}
+\maketitle
+
+\section{Introduction}
+The \nquote{affordance competition hypothesis} is described by \cite{cisek2007} and \cite{cisek2010} (the two papers are very similar in content). This writeup is based on that work.
+
+\section{Overview}
+Cisek's core theory is simple, and most of his work consists of the practical research to validate it. For my part, I am not as concerned with whether a theory matches neural data, only how plausible it is as a description of intelligence -- even a theory very different from the brain might still lead to AI.
+
+Cisek contrasts his theory with the default assumption in cognitive psychology -- that one can divide brain activity into the three stages of perception (reading inputs and constructing a model of the world), cognition (manipulating the model), and motor control (controlling muscles to execute a plan formed by the cognition stage). Cisek believes that the neural data are inconsistent with such a model, and proposes his own.
+
+Under Cisek's model, brain activity serves two broad roles in parallel -- \nquote{action specification} and \nquote{action selection}. Specification means parsing inputs in terms of the actions that are available. Thus, a visual scene is represented primarily as the actions we could take in that scene (and how to take them). Following \cite{gibson}, Cisek calls these actions \nquote{affordances}. Selection means to choose which of these actions to carry out. Once the action is chosen, the same neurons that initially encoded the action choices are responsible for carrying out the action. Cisek says that the two processes might be separate in a highly artificial laboratory setting, with specification preceding selection; but in normal life the two proceed in parallel, since actions have to be specified and chosen continuously.
+
+Similar to many other theories of neural function, Cisek imagines that action specifications compete via mutual inhibition. Other parts of the brain bias towards one of the available actions based on various factors. Eventually one wins, causing it to surge in strength and be carried out.
+
+Cisek also proposes two feedback loops in the form of external feedback from watching the effect of an action, and internal feedback in the form of reward predictions. He does not elaborate on these ideas.
+
+
+\section{Approach to topics}
+How the affordance competition hypothesis relates to my chosen topics.
+
+\subsection{Meaning of intelligent behaviour}
+Cisek thinks that a pure input, process, output model would be too slow for the real world. Thus, his idea of intelligence implicitly includes decision-making speed. While there is obviously no reason why such a model couldn't run on sufficiently fast hardware, it is plausible that a model like Cisek's would always beat the serial one, given the same hardware.
+
+\subsection{Relationship between intelligence and logic/mathematics}
+Cisek explicitly avoids discussing logic and mathematics. He believes that such mental activity might be more serial, but prefers to focus on explaining moment-to-moment activity.
+
+\subsection{How the utility function interacts with \nquote{morality}, and how it is learnt}
+Cisek does not discuss the goals in a brain.
+
+\subsection{The role of human emotions}
+Cisek does not discuss emotions.
+
+\subsection{The concept of forming beliefs by combining prior beliefs with new evidence}
+Cisek does not discuss this explicitly, but a bit of it is implicit in the work. The process of action selection involves combining evidence from multiple sources to update the initial action specifications and see which one wins.
+
+\subsection{Seeking out more information}
+Cisek does not discuss such an action in his main works, but a later paper [still reading] talks about it.
+
+\subsection{Bottom-up and top-down information flow}
+Cisek's model does not divide easily into top-down and bottom-up directions. I think this is intended, since the idea of processing from bottom to top is part of the \nquote{serial} paradigm that he dislikes. He does not discuss very much how exactly the processes of action specification and selection happen, and it is \emph{within} those processes that such top-down/bottom-up distinctions are most likely to appear.
+
+\subsection{The concept of \nquote{learning}}
+Cisek does not discuss learning.
+
+\subsection{Different types of learning}
+This section is not relevant here.
+
+\subsection{The process by which decisions are made}
+This is the core of Cisek's theory. As I wrote in the overview, Cisek's model is that decisions are always represented in the brain as a set of actions ready to be taken. These are constructed from sensory inputs and fully planned out. Then other brain regions weigh in with whatever relevant information they have, including predictions of the actions' outcome. In a later paper [still reading] Cisek describes how the model can be extended to support sequential actions and longer-term planning.
+
+\subsection{Looking at behaviour in a hierarchical fashion}
+Cisek's basic model isn't particularly hierarchical. I am still reading a later paper that might be more so.
+
+\subsection{Internal actions}
+Cisek's model does not address internal actions (i.e. ones that do not involve muscle movements but only e.g. thoughts). I am unsure what he would think about that -- he seems to make much of the direct link between planning and motor control -- so he might think that internal actions follow a different mechanism.
+
+\subsection{Model-based vs model-free learning}
+Cisek dislikes the purely model-based approach. In Cisek's theory, action specification is explicitly model-free. However, he takes no position on whether action selection is model-based or not.
+
+\subsection{Theory of mind}
+Cisek does not discuss theory of mind.
+
+\subsection{Self awareness}
+Cisek does not discuss self awareness.
+
+\subsection{Consciousness}
+Cisek does not discuss consciousness.
+
+\subsection{Sleep}
+Cisek does not discuss sleep.
+
+\subsection{Brain wave frequencies}
+Cisek does not discuss brain waves.
+
+\subsection{Parts of the brain}
+Cisek is vague on the proposed roles for the basal ganglia and various other subcortical structures. He is similarly vague on the cerebellum, suggesting that it is involved in predicting reward. He seems to be an expert on the motor parts of the cortex.
+
+\subsection{Cortical organisation}
+Cisek uses visual processing as an example (which makes sense, since it is the most well understood). It is well known that visual information seems to travel through the brain in two broad streams: the dorsal (upper) stream, and the ventral (lower) stream. The dorsal stream seems to care more about the positions and shapes of objects (and is sometimes called the \nquote{where} stream), while the ventral stream cares more about the identities of object (the \nquote{what} stream). I know hearing has a similar distinction, and am not sure about other senses.
+
+Cisek proposes that the dorsal (\nquote{where}) stream is responsible for action specification. It gets the fastest (most current) information available, and focuses on physical space (which is necessary for planning actions). The ventral (\nquote{what}) stream contributes to action selection. I really like this model and think it makes a lot of sense. Mainstream neuroscience as I was taught in my courses doesn't really know why we have two separate streams like this instead of one integrated one.
+
+\subsection{Short term (working) memory}
+Cisek believes that working memory is closely related to the representation of available actions maintained by the action specification regions. They have to keep the activation going for a bit while selection takes place, and are thus recording recent events.
+
+\subsection{Long term memory}
+Cisek does not discuss long term memory.
+
+\subsection{Transfer learning}
+Cisek does not discuss transfer learning.
+
+\subsection{Human language and natural language processing}
+Cisek does not discuss language.
+
+\subsection{Human pain/pleasure and reward signals in reinforcement learning}
+Cisek does not discuss reward signals in much detail.
+
+\section{Marcus's topics}
+
+\subsection{Reasoning}
+Cisek does not discuss reasoning.
+
+\subsection{Creativity}
+Cisek does not discuss creativity.
+
+\subsection{Generalization / Classification}
+Cisek does not discuss these.
+
+\subsection{Problem solving}
+Cisek does not discuss problem solving in detail.
+
+\subsection{Planning}
+In Cisek's model, actions are fully specified and planned out \emph{before} being chosen. The choice involves predicting the effects of the actions. He does not discuss how the specification or prediction happens.
+
+\subsection{Self-preservation}
+Cisek does not discuss self-preservation.
+
+\subsection{Deduction}
+Cisek does not discuss deduction.
+
+\subsection{Induction}
+Cisek does not discuss induction.
+
+\subsection{Abduction}
+Cisek does not discuss abduction.
+
+\bibliography{../references}
+\end{document}
