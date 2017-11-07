@@ -1,0 +1,163 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\bibliographystyle{apalike}
+%\setcitestyle{authoryear,open={((},close={))}}
+
+\newcommand{\delims}[3]{\!\left #1 #2 \right #3}
+\newcommand{\parens}[1]{\delims{(}{#1}{)}}
+\newcommand{\braces}[1]{\delims{\lbrace}{#1}{\rbrace}}
+\newcommand{\brackets}[1]{\delims{[}{#1}{]}}
+\newcommand{\norm}[1]{\delims{\|}{#1}{\|}}
+\newcommand{\abs}[1]{\delims{|}{#1}{|}}
+\newcommand{\inner}[2]{\delims{\langle}{#1,#2}{\rangle}}
+\newcommand{\vectinner}[2]{\inner{\vect{#1}}{\vect{#2}}}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\newcommand{\nquote}[1]{``{#1}''}
+
+\begin{document}
+\title{\vspace{-10ex}IBM Watson}
+\author{Dmitry Brizhinev}
+\maketitle
+
+\section{Introduction}
+Watson (also known as DeepQA) is a question-answering system created by IBM. Its claim to fame was defeating the reigning human champions at the game show Jeopardy! in 2011. Although that version of Watson was specifically tuned for Jeopardy!, the system is more general, and IBM is currently working to apply it to medical diagnosis. Watson is described by \cite{watsonbase}, with more detail in the journal issue \cite{watsonjournal}.
+
+\section{Overview}
+The interesting thing (to me) about Watson, is that it has superhuman performance on a natural language task, but very little of it employs machine learning. I have gotten used to expecting most recent breakthroughs in AI to include a significant machine learning component. Watson does have a bit of ML, but most of the system (and most of the work that went into creating it) does not employ any ML.
+
+Watson's question answering process is naturally described in several stages.
+
+The first stage is to analyse the question and determine the type of object that the question asks for. This is done using some lexical analysis algorithms (but not ML).
+
+The second stage is to decompose the question into sub-parts. An example is when the question asks for an object that satisfies two sets of criteria simultaneously. The system uses an algorithm to compute possible decompositions, and then answers the question for each possible decomposition. The result with the highest confidence at the end gets chosen. Once decomposed, the system can proceed with each sub-question as with a normal question.
+
+The third stage is to generate candidate answers. Watson searches a large base of both structured and unstructured data, using a wide variety of algorithms to find possible answers. The answers are then filtered to pick the hundred or so most plausible ones (for performance reasons).
+
+The fourth stage is to rate the quality of the answers. This is very similar to the previous stage, except now a variety of algorithms are used to evaluate the answers instead of find them. The difference between stages three and four is like the difference between searching Google for \nquote{president of the United States} and \nquote{JFK is the president of the United States}. The kinds of algorithms Watson uses include string-matching (how many words in a sentence match the query), searches through structured databases, checking the type of object, etc. etc. The result of this stage is a feature vector of \nquote{scores} for each answer -- one score per algorithm per candidate answer.
+
+The fifth stage is the only one that contains significant ML. The details are in \cite{watsonranking}. An ML system is trained to take the feature vectors and generate a final ranking and confidence for each answer. Watson then chooses the top-ranked answer and uses the confidence estimate to decide whether to risk \nquote{buzzing in}. I was surprised to learn that the ML is just logistic regression, though there are some subtleties: there is a separate model for each of several question types, to handle the fact that different algorithms might work better for different question types, so their scores need to be interpreted differently. There are also several stages of ML, with each stage ranking the current candidate answers and discarding the lowest-ranked ones, so that the next stage has fewer options to choose from (\nquote{successive refinement}). Thus, the early stages are focused on discriminating between reasonable and really bad answers, and the later stages are focused on learning finer discriminations between the true answer and several almost-as-good answers. Finally, the ranking system also includes a (non-ML-based) ensemble of algorithms to detect and merge equivalent answers and their feature vectors.
+
+The sixth stage is a wagering strategy \cite{watsonwagering} that takes the final answer and confidence and decides how to play Jeopardy! (whether to risk answering and how much to bet). This is basically game theory and not very interesting to me from an AI standpoint.
+
+\section{Approach to topics}
+How the Watson system relates to my chosen topics.
+
+\subsection{Meaning of intelligent behaviour}
+Watson's performance depends on both finding the correct answer \emph{end} accurately estimating its confidence. For other applications e.g. medicine \cite{watsonmedicine} it is also useful to explain the evidence for and against any particular answer. As it happens, Watson's abilities stem from having a range of simple and individually weak algorithms and an ML algorithm that learns to integrate their outputs.
+
+\subsection{Relationship between intelligence and logic/mathematics}
+Watson is more logic-based than other recent AI systems in the sense that it has a lot of hand-coded algorithms doing the heavy lifting of choosing and rating answers. However, Watson in its current form cannot answer mathematical puzzles, it can only answer questions of fact for which the answer might be found with a literature search.
+
+\subsection{How the utility function interacts with \nquote{morality}, and how it is learnt}
+Watson's performance is measured by the accuracy of its answers and the accuracy of its confidence estimates. The emphasis on accurate confidence is partly an artifact of the demands of Jeopardy! but I think it is interesting in its own right -- Watson needs to \nquote{know what it doesn't know}.
+
+\subsection{The role of human emotions}
+Watson does not have emotions. The closest analogue might be the way that it uses different ML models depending on the type of question. These will output different confidences, so, for example, Watson might seem more \nquote{shy} when the questions are from a category that it historically has trouble with, because it will assign low confidence to its answers and be less likely to buzz in.
+
+\subsection{The concept of forming beliefs by combining prior beliefs with new evidence}
+I didn't see any mention of Bayes' theorem playing a prominent role. I'm sure something like it is used in some of the algorithms in the ensemble.
+
+\subsection{Seeking out more information}
+Watson does not seem to have the ability to \nquote{go back and spend more computation time} if the evidence it has is insufficient. However, it has several hardcoded stages that do something like that. Firstly, after answers are generated there is a second stage of evidence gathering to score the answers. Secondly, during the final ranking stage, there are several cycles of ML and pruning so that the most likely answers can be compared using a more precise model trained for the job, instead of a crude model that specialises in discarding the worst answers.
+
+\subsection{Bottom-up and top-down information flow}
+Watson does not seem to employ top-down information to guide its work. I would summarise its operation as utilising a whole range of bottom-up algorithms and then learning an ML model to combine their answers.
+
+\subsection{The concept of \nquote{learning}}
+Watson has three main information stores. The first is the database of content that it searches for answers. Watson \nquote{learns} when human operators add things to the data store. It can also find links to relevant internet content and add it to the database. This is a form of declarative memory. The second is the ensemble of algorithms used for hypothesis generation and hypothesis scoring. Some of them are general language processing ones, but they can be augmented with any number of domain-specific algorithms. This is a form of procedural memory. The last is the parameters of the ML models that combine scores from the algorithms. This is the only bit that Watson learns on its own. It is also a form of procedural memory.
+
+\subsection{The process by which decisions are made}
+Watson's answer choices are based on an ML model that combines scores from many different scorers. In a sense, each scorer votes for its preferred answer, and the ML model learns which scorers to trust.
+
+For playing Jeopardy! Watson also needs a wagering strategy \cite{watsonwagering}. These are based on some game theory, Monte-Carlo simulations of the game, and some reinforcement learning. Simulations are based on a database of historical Jeopardy! games. The reinforcement learning component is a \nquote{multilayer perceptron} that learns to estimate the likelihood of a particular player winning the game given the current game state as input.
+
+\subsection{Looking at behaviour in a hierarchical fashion}
+Watson does not need to make complex plans or decisions and so it does not need hierarchical behaviour. The closest analogue might be the way it can decompose a question into sub-parts, solve them individually, and then combine the results.
+
+\subsection{Internal actions}
+Watson doesn't really have anything that I would classify as internal actions.
+
+\subsection{Model-based vs model-free learning}
+Watson's wagering strategies use statistical models of the game and of its opponents. However, it does not have a model of \nquote{the world} that it uses to answer questions. It just throws a bunch of algorithms at its database.
+
+\subsection{Theory of mind}
+Surprisingly, Watson has a kind of theory of mind in the sense that its wagering strategies are informed by a model of human wagering to determine the optimal wagering strategy.
+
+\subsection{Self awareness}
+Watson learns and is aware of the accuracy of its different scoring algorithms, and uses this information to predict how much to trust its own answers and how much to bet.
+
+\subsection{Consciousness}
+I think Watson is probably not conscious.
+
+\subsection{Sleep}
+Watson does not need to sleep.
+
+\subsection{Brain wave frequencies}
+Watson does not have brain waves.
+
+\subsection{Parts of the brain}
+Watson does not have a human-like brain.
+
+\subsection{Cortical organisation}
+Watson does not have a cortex.
+
+\subsection{Short term (working) memory}
+Watson does not have a mechanism analogous to human working memory (except insofar as RAM is a type of computer working memory).
+
+\subsection{Long term memory}
+Watson has data stores but it does not record anything in them. The closest thing to long-term memory is the parameters of its ML models.
+
+\subsection{Transfer learning}
+Transfer learning can refer to two things in the Watson system.
+
+First, in the final question ranking stage, the designers encountered the problem that certain question types were rare and thus there was not enough data to train a good model for this particular question type. What they do in this case is first pass the feature vectors through a general model, and then feed the output of the general model as an extra feature into the specific model. Since the general model has already done most of the work of extracting important information from the feature vector, the specific model's remaining job is now simple enough that a specific model can be trained on limited data.
+
+Second, there is the question of how the Watson system can be adapted to other domains besides Jeopardy! This is described in detail for medicine in \cite{watsonmedicine}. They say that adapting Watson to a new domain means changing the three types of knowledge I described in \emph{Learning}: Watson's databases, the ensemble of algorithms, and the ML model. They say that the biggest performance improvement comes from retraining the ML model.
+
+\subsection{Human language and natural language processing}
+Watson is all about natural language processing, although I didn't read too much about the specific algorithms it uses. I got the impression that no individual algorithm is responsible for more than a small fraction of its performance.
+
+\subsection{Human pain/pleasure and reward signals in reinforcement learning}
+Watson does not need pain/pleasure signals.
+
+\section{Marcus's topics}
+
+\subsection{Reasoning}
+Some of Watson's algorithms perform reasoning over structured knowledge, e.g. knowing then things happened, where things are, which objects are instances of which categories, etc.
+
+\subsection{Creativity}
+Watson's creativity comes from the use of a large range of algorithms to search for answers, making it highly likely that at least one will stumble on the correct one.
+
+\subsection{Generalization / Classification}
+I am not sure that this section applies to Watson.
+
+\subsection{Problem solving}
+Watson explicitly does not problem solve, it can only answer fact-based questions to which the answer can be found with a literature search.
+
+\subsection{Planning}
+Watson's wagering strategy includes a rudimentary form of planning.
+
+\subsection{Self-preservation}
+Watson does not have a self-preservation instinct, except insofar as its wagering strategy knows e.g. that it should always buzz in even with low confidence if not buzzing in will lead to a guaranteed loss.
+
+\subsection{Deduction}
+See \emph{Reasoning}.
+
+\subsection{Induction}
+Watson doesn't do anything resembling induction, except insofar as its ML components are based on the assumption that its performance on future questions in a category is likely to resemble its performance on past questions.
+
+\subsection{Abduction}
+\cite{watsonmedicine} refer to Watson as \nquote{a massive abduction machine} because it generates hypotheses to explain a question and evaluates the evidence that supports the hypotheses (the analogy works better in medicine, where the \nquote{question} is a list of symptoms and then \nquote{answer} is a diagnosis).
+
+\bibliography{../references}
+\end{document}

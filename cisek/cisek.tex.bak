@@ -39,10 +39,21 @@ Cisek contrasts his theory with the default assumption in cognitive psychology -
 
 Under Cisek's model, brain activity serves two broad roles in parallel -- \nquote{action specification} and \nquote{action selection}. Specification means parsing inputs in terms of the actions that are available. Thus, a visual scene is represented primarily as the actions we could take in that scene (and how to take them). Following \cite{gibson}, Cisek calls these actions \nquote{affordances}. Selection means to choose which of these actions to carry out. Once the action is chosen, the same neurons that initially encoded the action choices are responsible for carrying out the action. Cisek says that the two processes might be separate in a highly artificial laboratory setting, with specification preceding selection; but in normal life the two proceed in parallel, since actions have to be specified and chosen continuously.
 
-Similar to many other theories of neural function, Cisek imagines that action specifications compete via mutual inhibition. Other parts of the brain bias towards one of the available actions based on various factors. Eventually one wins, causing it to surge in strength and be carried out.
+Similar to many other theories of neural function, Cisek imagines that action specifications compete via mutual inhibition. Other parts of the brain bias towards one of the available actions based on various factors. Eventually one wins, causing it to surge in strength and be carried out. Cisek emphasises that action specifications are not discrete -- the representation is closer to a probability distribution e.g. over angles. If there are multiple discrete actions to take, the distribution will be multimodal.
 
 Cisek also proposes two feedback loops in the form of external feedback from watching the effect of an action, and internal feedback in the form of reward predictions. He does not elaborate on these ideas.
 
+One last thing mentioned in that paper which I want to record is the justification for a cross-inhibition decision process. Intuitively, such a process is an inefficient way of making a decision between two alternatives. You should be able to just take the maximum value. Waiting for one of two alternatives to win a cross-inhibition game is slower, and is particularly slow when the two choices are very similar. However, Cisek explains that this might be desirable in the presence of noise. Taking the max too early risks allowing noise to influence the decision. The closer two options are, the longer we must wait to average the noise out.
+
+\cite{cisek2012} extends the theory a little to add competition between goals. He calls this the \nquote{distributed consensus} theory, and the only difference seems to be that, in addition to representing the actions themselves, some other part of the brain represents salient goals that the action might help achieve, and the value of these goals participates in (but does not determine) the competition among action plans.
+
+\cite{cisek2016} use more of the \nquote{control systems} language, although I get the impression that Cisek supported this view all along. This paper introduces the \nquote{hierarchical affordance competition hypothesis}, which argues that one of the biasing influences in action selection is a prediction of what affordances (or future actions) it will make available. The authors imagine a process whereby higher brain regions compare goals and send lower regions a message about which goals they would like to achieve. Lower regions will compare actions, and will try to fulfil the higher regions' goal but might give up if it is too difficult and settle for a lesser reward. This enables planning because the \nquote{goals} can be subgoals like \nquote{turn X into a reachable state}, where X is some desirable end goal.
+
+I don't particularly like this extension to the theory because I'm not sure it actually explains anything. It seems like a very na\"{i}ve version of the search tree, but there is no discussion at all of the fundamental problem with such trees: their exponential blowup.
+
+This paper also discusses a control systems based theory that I have previously heard of, with the seminal work being \cite{powers}. I will have to read that at some point. This theory posits that brain regions form a hierarchy of feedback loops. Each loop specifies a goal for a lower regions, and tries to accomplish a goal for the upper region. Importantly, it doesn't tell the lower region \emph{how} to achieve the goal -- only what they should be optimising for.
+
+One interesting idea mentioned in the paper is that the more abstract parts of the hierarchy operate at longer timescales, and this may be why we think of them as the \nquote{executive} functions in the brain. Also, in this paper Cisek explicitly mentions the idea of reusing motor control circuitry to perform purely internal (\nquote{covert}) thinking.
 
 \section{Approach to topics}
 How the affordance competition hypothesis relates to my chosen topics.
@@ -54,7 +65,7 @@ Cisek thinks that a pure input, process, output model would be too slow for the 
 Cisek explicitly avoids discussing logic and mathematics. He believes that such mental activity might be more serial, but prefers to focus on explaining moment-to-moment activity.
 
 \subsection{How the utility function interacts with \nquote{morality}, and how it is learnt}
-Cisek does not discuss the goals in a brain.
+\cite{cisek2007} does not discuss the goals in a brain. \cite{cisek2012} adds the idea of a goal but doesn't really discuss it in detail.
 
 \subsection{The role of human emotions}
 Cisek does not discuss emotions.
@@ -63,10 +74,12 @@ Cisek does not discuss emotions.
 Cisek does not discuss this explicitly, but a bit of it is implicit in the work. The process of action selection involves combining evidence from multiple sources to update the initial action specifications and see which one wins.
 
 \subsection{Seeking out more information}
-Cisek does not discuss such an action in his main works, but a later paper [still reading] talks about it.
+Cisek does not discuss such an action directly, but would probably think of it as an extension of the \nquote{create more affordances} idea from the hierarchical version of the theory.
 
 \subsection{Bottom-up and top-down information flow}
 Cisek's model does not divide easily into top-down and bottom-up directions. I think this is intended, since the idea of processing from bottom to top is part of the \nquote{serial} paradigm that he dislikes. He does not discuss very much how exactly the processes of action specification and selection happen, and it is \emph{within} those processes that such top-down/bottom-up distinctions are most likely to appear.
+
+In the hierarchical version of the theory, there is more of top-down and bottom-up flow. Higher brain regions specify more abstract goals, and send t
 
 \subsection{The concept of \nquote{learning}}
 Cisek does not discuss learning.
@@ -75,7 +88,11 @@ Cisek does not discuss learning.
 This section is not relevant here.
 
 \subsection{The process by which decisions are made}
-This is the core of Cisek's theory. As I wrote in the overview, Cisek's model is that decisions are always represented in the brain as a set of actions ready to be taken. These are constructed from sensory inputs and fully planned out. Then other brain regions weigh in with whatever relevant information they have, including predictions of the actions' outcome. In a later paper [still reading] Cisek describes how the model can be extended to support sequential actions and longer-term planning.
+This is the core of Cisek's theory. As I wrote in the overview, Cisek's model is that decisions are always represented in the brain as a set of actions ready to be taken. These are constructed from sensory inputs and fully planned out. Then other brain regions weigh in with whatever relevant information they have, including predictions of the actions' outcome.
+
+Cisek argues that a cross-inhibition process, where alternatives compete and one eventually wins, is superior (although slower) than a simpler \nquote{just take the max} process, because it is robust to noise.
+
+In a later paper [still reading] Cisek describes how the model can be extended to support sequential actions and longer-term planning.
 
 \subsection{Looking at behaviour in a hierarchical fashion}
 Cisek's basic model isn't particularly hierarchical. I am still reading a later paper that might be more so.
