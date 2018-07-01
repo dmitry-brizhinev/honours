@@ -1,0 +1,164 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\bibliographystyle{apalike}
+%\setcitestyle{authoryear,open={((},close={))}}
+
+\newcommand{\delims}[3]{\!\left #1 #2 \right #3}
+\newcommand{\parens}[1]{\delims{(}{#1}{)}}
+\newcommand{\braces}[1]{\delims{\lbrace}{#1}{\rbrace}}
+\newcommand{\brackets}[1]{\delims{[}{#1}{]}}
+\newcommand{\norm}[1]{\delims{\|}{#1}{\|}}
+\newcommand{\abs}[1]{\delims{|}{#1}{|}}
+\newcommand{\inner}[2]{\delims{\langle}{#1,#2}{\rangle}}
+\newcommand{\vectinner}[2]{\inner{\vect{#1}}{\vect{#2}}}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\newcommand{\nquote}[1]{``{#1}''}
+
+\begin{document}
+\title{\vspace{-10ex}Carruthers}
+\author{Dmitry Brizhinev}
+\maketitle
+
+\section{Introduction}
+Peter Carruthers is a philosopher interested in the mind and consciousness. He lays out his \nquote{massively modular} theory of the mind in \cite{carruthers}.
+
+\section{Overview}
+ssss
+
+...
+
+Desire generating modules
+
+\section{Approach to topics}
+How Carruthers' massively modular model relates to my chosen topics.
+
+\subsection{Meaning of intelligent behaviour}
+Cisek thinks that a pure input, process, output model would be too slow for the real world. Thus, his idea of intelligence implicitly includes decision-making speed. While there is obviously no reason why such a model couldn't run on sufficiently fast hardware, it is plausible that a model like Cisek's would always beat the serial one, given the same hardware.
+
+\subsection{Relationship between intelligence and logic/mathematics}
+Cisek explicitly avoids discussing logic and mathematics. He believes that such mental activity might be more serial, but prefers to focus on explaining moment-to-moment activity.
+
+\subsection{How the utility function interacts with \nquote{morality}, and how it is learnt}
+\cite{cisek2007} does not discuss the goals in a brain. \cite{cisek2012} adds the idea of a goal but doesn't really discuss it in detail.
+
+\subsection{The role of human emotions}
+Cisek does not discuss emotions.
+
+\subsection{The concept of forming beliefs by combining prior beliefs with new evidence}
+Cisek does not discuss this explicitly, but a bit of it is implicit in the work. The process of action selection involves combining evidence from multiple sources to update the initial action specifications and see which one wins.
+
+\subsection{Seeking out more information}
+Cisek does not discuss such an action directly, but would probably think of it as an extension of the \nquote{create more affordances} idea from the hierarchical version of the theory.
+
+\subsection{Bottom-up and top-down information flow}
+Cisek's model does not divide easily into top-down and bottom-up directions. I think this is intended, since the idea of processing from bottom to top is part of the \nquote{serial} paradigm that he dislikes. He does not discuss very much how exactly the processes of action specification and selection happen, and it is \emph{within} those processes that such top-down/bottom-up distinctions are most likely to appear.
+
+In the hierarchical version of the theory, there is more of top-down and bottom-up flow. Higher brain regions specify more abstract goals, and send this information down. Lower brain regions attempt to achieve those goals and send a feedback signal up.
+
+\subsection{The concept of \nquote{learning}}
+Cisek does not discuss learning.
+
+\subsection{Different types of learning}
+This section is not relevant here.
+
+\subsection{The process by which decisions are made}
+This is the core of Cisek's theory. As I wrote in the overview, Cisek's model is that decisions are always represented in the brain as a set of actions ready to be taken. These are constructed from sensory inputs and fully planned out. Then other brain regions weigh in with whatever relevant information they have, including predictions of the actions' outcome.
+
+Cisek argues that a cross-inhibition process, where alternatives compete and one eventually wins, is superior (although slower) than a simpler \nquote{just take the max} process, because it is robust to noise.
+
+In the hierarchical version, Cisek imagines that longer-term planning can happen if higher brain regions encode subgoals for lower regions to achieve.
+
+\subsection{Looking at behaviour in a hierarchical fashion}
+Cisek's basic model isn't particularly hierarchical. The later one is (as above), though I feel like it doesn't actually mesh well with Cisek's idea.
+
+\subsection{Internal actions}
+Cisek's model does not address internal actions (i.e. ones that do not involve muscle movements but only e.g. thoughts). I am unsure what he would think about that -- he seems to make much of the direct link between planning and motor control -- so he might think that internal actions follow a different mechanism.
+
+In the later work, Cisek does mention the idea that internal (\nquote{covert}) actions can be driven by the same motor control processes. He credits this idea to Piaget.
+
+\subsection{Model-based vs model-free learning}
+Cisek dislikes the purely model-based approach. In Cisek's theory, action specification is explicitly model-free. However, he takes no position on whether action selection is model-based or not.
+
+\subsection{Theory of mind}
+Cisek does not discuss theory of mind.
+
+\subsection{Self awareness}
+Cisek does not discuss self awareness.
+
+\subsection{Consciousness}
+Cisek does not discuss consciousness.
+
+\subsection{Sleep}
+Cisek does not discuss sleep.
+
+\subsection{Brain wave frequencies}
+Cisek does not discuss brain waves.
+
+\subsection{Parts of the brain}
+Cisek is vague on the proposed roles for the basal ganglia and various other subcortical structures. He is similarly vague on the cerebellum, suggesting that it is involved in predicting reward. He seems to be an expert on the motor parts of the cortex.
+
+\subsection{Cortical organisation}
+Cisek uses visual processing as an example (which makes sense, since it is the most well understood). It is well known that visual information seems to travel through the brain in two broad streams: the dorsal (upper) stream, and the ventral (lower) stream. The dorsal stream seems to care more about the positions and shapes of objects (and is sometimes called the \nquote{where} stream), while the ventral stream cares more about the identities of object (the \nquote{what} stream). I know hearing has a similar distinction, and am not sure about other senses.
+
+Cisek proposes that the dorsal (\nquote{where}) stream is responsible for action specification. It gets the fastest (most current) information available, and focuses on physical space (which is necessary for planning actions). The ventral (\nquote{what}) stream contributes to action selection. I really like this model and think it makes a lot of sense. Mainstream neuroscience as I was taught in my courses doesn't really know why we have two separate streams like this instead of one integrated one.
+
+In the hierarchical version of the theory, Cisek proposes that more anterior (frontal) regions encode increasingly more abstract goals.
+
+\subsection{Short term (working) memory}
+Cisek believes that working memory is closely related to the representation of available actions maintained by the action specification regions. They have to keep the activation going for a bit while selection takes place, and are thus recording recent events.
+
+\subsection{Long term memory}
+Cisek does not discuss long term memory.
+
+\subsection{Transfer learning}
+Cisek does not discuss transfer learning.
+
+\subsection{Human language and natural language processing}
+Cisek does not discuss language.
+
+\subsection{Human pain/pleasure and reward signals in reinforcement learning}
+Cisek does not discuss reward signals in much detail.
+
+\section{Marcus's topics}
+
+\subsection{Reasoning}
+Cisek does not discuss reasoning.
+
+\subsection{Creativity}
+Cisek does not discuss creativity.
+
+\subsection{Generalization / Classification}
+Cisek does not discuss these.
+
+\subsection{Problem solving}
+Cisek does not discuss problem solving in detail.
+
+\subsection{Planning}
+In Cisek's model, actions are fully specified and planned out \emph{before} being chosen. The choice involves predicting the effects of the actions. He does not discuss how the specification or prediction happens.
+
+In the hierarchical version of the model, Cisek imagines that while lower brain regions represent possible actions, higher regions represent subgoals that those actions will achieve, and affordances (potential actions) that they will make available. It sounds to me like a na\"{i}ve version of a search tree.
+
+\subsection{Self-preservation}
+Cisek does not discuss self-preservation.
+
+\subsection{Deduction}
+Cisek does not discuss deduction.
+
+\subsection{Induction}
+Cisek does not discuss induction.
+
+\subsection{Abduction}
+Cisek does not discuss abduction.
+
+\bibliography{../references}
+\end{document}

@@ -1,0 +1,173 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\bibliographystyle{apalike}
+%\setcitestyle{authoryear,open={((},close={))}}
+
+\newcommand{\delims}[3]{\!\left #1 #2 \right #3}
+\newcommand{\parens}[1]{\delims{(}{#1}{)}}
+\newcommand{\braces}[1]{\delims{\lbrace}{#1}{\rbrace}}
+\newcommand{\brackets}[1]{\delims{[}{#1}{]}}
+\newcommand{\norm}[1]{\delims{\|}{#1}{\|}}
+\newcommand{\abs}[1]{\delims{|}{#1}{|}}
+\newcommand{\inner}[2]{\delims{\langle}{#1,#2}{\rangle}}
+\newcommand{\vectinner}[2]{\inner{\vect{#1}}{\vect{#2}}}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\newcommand{\nquote}[1]{``{#1}''}
+
+\begin{document}
+\title{\vspace{-10ex}Predictive Processing}
+\author{Dmitry Brizhinev}
+\maketitle
+
+\section{Introduction}
+The \nquote{predictive processing} model is described in detail in \cite{surfing}, which this writeup is based on. There is also \cite{friston2010}, but that paper is famously incomprehensible. \cite{surfing}'s style is also annoying -- he likes to use hyperbole, which makes it difficult to distinguish the genuinely new contributions and successful explanations from vague handwaving that doesn't explain anything -- but at least it is comprehensible.
+
+\section{Overview}
+The core idea is that the brain should always be trying to predict the sensory input it is going to get (and learning to do so better). This naturally leads to having a model of the world or something like it. Besides having experimental backing, this idea also makes sense to me on theoretical grounds -- in the standard reinforcement learning setup, the agent gets sensory input and rewards from the environment. The Q-learning algorithm only trains on the rewards, but this is throwing away heaps of information. Even in the absence of rewards, the agent can make good use of sensory data by trying to learn to predict it (a kind of unsupervised learning), so that when it finds a reward, it already understands the environment well enough to predict where to find the reward next time.
+
+Stacked on top of this basic idea are some others, with varying levels of plausibility.
+
+One key point is that the system doesn't just try to predict each input and move on to the next, it actually keeps trying multiple times, to find a set of hidden neuron activation (equivalently -- model parameters) that best describe the input. The amount of times it can try is limited by the need to interact with the environment in real-time, which means that the system can understand a stimulus better if it gets more time to look at and think about it. I am not sure yet how to implement this, but it seems interesting and important.
+
+Another key point is that the whole system is hierarchical. Lower level modules are meant to predict the detailed inputs, and send any prediction errors up to higher levels. Higher levels treat prediction errors from lower levels as \nquote{inputs to be explained}. They also send predictions downwards and sideways to help other modules in their prediction job. In particular, as far as I've been able to understand, modules send predictions of \nquote{activity} down, receive predictions of their \nquote{activity} from above, and send prediction errors up. So when I say that prediction errors are input, it's not the input that needs to be predicted (this point was confusing me before) -- it's the activity that generates that input. Again, the system's goal is to find a set of hidden neuron activations that predicts the input, so it's trying to minimise the amount of prediction errors being passed around, because each such error represents a failure of the model to understand what is happening.
+
+Next is the idea of precision. The basic version is that besides predicting sensory inputs, the system also predicts the precision/reliability/variance/something of those inputs. Effectively, when the model predicts that a certain input is low precision, it chooses to ignore that input even when the prediction is wrong (because if the input is imprecise, then there are wide error bars around the prediction, and it is unlikely to be falsified). The book is a bit vague on how exactly these precision predictions work, and how they are implemented/learnt. There is some handwaving to indicate that precision is the \nquote{inverse variance} which is certainly a quantity we can train a network to predict, but doesn't always correspond to the \nquote{reliability} of a signal in a way that lets us decide whether to ignore the signal or not. What they really want is \nquote{signal-to-noise ratio} but it's unclear how to compute that. He also imagines that the brain would try to pick actions that produce high-precision signals -- e.g. to move the eyes to look at the most informative part of the visual scene. He seems to think this idea (of choosing actions to sample the input and reduce model uncertainty) is very important. Then \cite{surfing} extends the concept of precision to a general \nquote{gain} mechanism -- that is, if low precision means we ignore the signal, the precision prediction system is basically just an attention system that decides which signals to emphasise and which to ignore. Given such a system, it can be reused for other things like paying attention to salient/action-relevant parts of the input, choosing actions, or controlling neural activity. Unfortunately, the author never really explains how these more advanced applications are implemented or trained. I feel like the general idea makes sense, but needs a lot more thought to figure out how it could actually be trained.
+
+Finally, we get to actions. \cite{surfing} and \cite{friston2010} argue that the process of choosing actions is fundamentally the same as the process of perception. I don't feel that they make a good job of really showing this, but I think the idea is on the right track. They imagine that the same \nquote{model of the world} that predicts perceptions can also \nquote{predict} actions, except that when a visual cortex module receives a prediction, it computes an error to send back up; but when a motor cortex module receives a prediction (of somatosensory input i.e. limb positions) it instead sends a command to muscles to make the prediction true, and it will only need to send an error if something stops the muscle from executing the commanded action. AlphaZero does something similar -- its network learns to predict the action that it will take after a tree search; which means the network ends up able to play very well on its own, even without a search. Similarly, the actor network in the actor-critic architecture for continuous Q-learning also learns to \nquote{predict} the action that will produce the most value. However, the predictive processing model lacks an element that both of these AI architectures have -- a way to \emph{train} the network to choose the right actions. Thus I think they don't do a good job of explaining this process. But, I still think it's on the right track, because it explains why the motor cortex controls actions. For example, in Coward's model, the basal ganglia chooses actions, so we would expect the basal ganglia to project down to muscles. Instead, it projects to motor cortex, and the motor cortex projects down to muscles. Coward handwaves this away by saying that it's the same in the end due to the pattern of inhibition and excitation, but then it's not clear what the extra synapses are for. Whereas in the predictive processing model, if action uses the same neural architecture as perception, then that explains why motor commands are done in cortex just like visual perception. Unfortunately, it's still unclear how the action selection is trained. Finally, the predictive processing model also argues that the precision/gain mechanism is used to select actions, where high precision means sending motor commands and low precision means ignoring the commands (because errors, or  \nquote{unexecuted commands}, don't need to be reduced). Thus, multiple motor modules can simultaneously predict different actions, and the precision/gain/attention mechanism can select one of them to execute that particular action. Once again, the model doesn't really explain how the mechanism is implemented/trained.
+
+For some reason, \cite{surfing} and \cite{friston2010} are determined to claim that their model does not require any reward signals. The obvious problem is that if the system just tries to reduce prediction errors, the best way to do this is to stay in a dark room and do nothing. I find their responses to this objection unsatisfying (that some predictions, like not being hungry, are hardcoded, so the only way to reduce errors is to not be hungry), especially when we can just introduce a reward signal and add it to the system's goals, and then everything works out fine. Besides, I think hardcoding \nquote{not hungry} predictions is basically isomorphic to introducing a reward signal, except the latter is a clearer way of thinking about it.
+
+The weaknesses of the predictive processing model in explaining action are clear in the computational models that people have tried to implement. There have been a few such experiments, but they all focus on a very particular kind of task -- teaching a robot to \emph{copy} the actions of a teacher. It so happens that the predictive processing architecture is very good at this -- if it has the neurons to predict what actions a teacher is going to take, simply sending those predictions to the muscles is enough to take those same actions. However, this task dodges the real problem of choosing actions to obtain reward in a world where you can't copy someone, which is the whole reason why Q-learning is not the same as ordinary supervised learning -- you don't get the correct answer to copy, only a reward signal.
+
+\section{Connections}
+There are some interesting connections to the other theories I've covered.
+
+\cite{surfing} mentions Cisek's hypothesis (affordance competition) explicitly, claiming that the predictive processing model reproduces that behaviour, but to be honest I am not convinced. It is true that the precision/gain mechanism can be used to gate possible affordances/actions until one is selected, but the predictive processing model doesn't explain how such a mechanism would be implemented or learned. Likewise, the idea of paying attention to salient regions of sensory input, and affordances, is important in \cite{surfing}, but again he never explains how to implement that.
+
+The model also has a natural connection to the control systems model. In the control systems model, a brain module receives a \nquote{goal} from above and takes actions below to keep the signals from below within the range specified by the goal. In the predictive processing model, a module receives a prediction from above and tries to send predictions downwards in such a way as to keep the errors from below within the range specified by the prediction.
+
+There is an interesting parallel to Minsky's ideas. Minsky thought the brain was made of modules that are dynamically organised into groups (\nquote{Ways To Think}) that work well together for a particular task. Similarly, \cite{surfing} imagines that the precision/gain mechanism can be used to dynamically activate some modules and suppress others to perform a particular task. However, as with other ideas in the book, it doesn't really think about how to implement/train such a mechanism.
+
+Finally, I see a link to Coward's work. Coward imagines that the cortex detects conditions and then the basal ganglia sends dopamine to select actions. In the predictive processing model, dopamine is the gain/precision channel, and is also used to select actions.
+
+\section{Approach to topics}
+How the predictive processing model relates to my chosen topics.
+
+\subsection{Meaning of intelligent behaviour}
+Clark thinks that intelligent behaviour means acting in ways that are optimal in an environment. In particular, he thinks that making use of environmental affordances in an important part of this.
+
+\subsection{Relationship between intelligence and logic/mathematics}
+Clark doesn't talk much about mathematics.
+
+\subsection{How the utility function interacts with \nquote{morality}, and how it is learnt}
+Clark doesn't talk about morality much (probably because he doesn't spend a lot of time on social interactions in general). He doesn't think there is a utility function, only a set of hardcoded \nquote{predictions} like a lack of hunger, that the organism is driven to satisfy (which is like a utility function by another name.
+
+\subsection{The role of human emotions}
+Clark thinks that emotions are the subjective feeling of particular kinds of predictions about the best actions to take in a given situation, based on both environmental and internal (physiological) cues. This idea owes some to the classic idea that emotions are the brain's interpretation of more fundamental physiological signals like arousal, coming *after* those signals rather than causing them.
+
+\subsection{The concept of forming beliefs by combining prior beliefs with new evidence}
+Bayesian updates are the core of the model, as Clark believes that the modules that actually do predictions do this through some kind of bayesian computation. He says that prediction from higher modules can act as priors that are combined with sensory evidence to generate a \nquote{best guess} at the true state of the world.
+
+\subsection{Seeking out more information}
+Clark thinks a key part of perception is directing muscles to find the highest-precision (signal-to-noise-ratio) stimulus. This ranges from simple things like directing eyes towards important information, to complex things like buying a newspaper to learn relevant information. I think the model stops short of explaining how the exploration/exploitation tradeoff is handled, which I think is a blind spot coming from the fact that Clark and Friston don't believe in exploitation (utility functions). In practice, if some (not-utility-functions) hardcoded predictions exist, the organism or architecture will still need to decide how much to prioritise satisfying those predictions vs improving others -- also a kind of exploration/exploitation tradeoff.
+
+\subsection{Bottom-up and top-down information flow}
+The predictive processing model argues that bottom-up information flow represents aspects of the sensory signal not yet accounted for by the internal model (i.e. not predicted, or \nquote{prediction error}), while top-down represents predictions from the current best guess of the true state of the world.
+
+\subsection{The concept of \nquote{learning}}
+In the model, learning is mostly directed at improving the generative model that predicts inputs. Every prediction error is a chance to make such improvements. There is also the precision-predictions which could be learnt in a similar way if there were some objective way to measure precision (signal-to-noise ratio, or, even more precisely, the importance of a particular signal to the organism).
+
+\subsection{Different types of learning}
+Clark doesn't really discuss different types of learning.
+
+\subsection{The process by which decisions are made}
+This is very conspicuously underexplained by Clark and Friston. Clark says that the generative model that makes predictions of inputs also has the job of \nquote{predicting} the actions that the organism needs to take. However, they don't seem to notice that while sensory data is enough to train a predictor, it is not enough to train an actor. They never really expand on how this system actually learns which decisions to make. Clark does mention that precision weightings can be used to select a particular action out of several candidates that are being imagined at once, similar to Cisek's model.
+
+\subsection{Looking at behaviour in a hierarchical fashion}
+The predictive processing is very hierarchical. On the sensory side, a higher-level module tries to predict the activity of lower-level modules, and thus deals in more abstract information about the sensory signal. On the motor side, higher-level modules issue commands as predictions of behaviour for the lower module, and thus the same sort of hierarchy holds.
+
+\subsection{Internal actions}
+Clark's model has a little bit of internal actions when he suggests that precision weighting can be used to suppress certain modules and activate others, to form a temporary circuit in the brain (similar to Minsky's model). Interestingly, he suggests using precision weighting, not the predictive action process that he uses for ordinary muscle movements. I wonder if the model should be extended in that direction?
+
+\subsection{Model-based vs model-free learning}
+The idea seems mostly model-based to me, although Clark emphasises that it doesn't always *have* to be. For example, if you are trying to catch a ball, predicting the sensory input doesn't necessarily require a model of the ball and it's physics -- you only need to account for a 2D projection of it on your retina, which might be much simpler (e.g. an image increasing in size at a constant rate). However, in general, the model seems to suggest that the brain will try to find a set of hidden neuron activations that predict the current input, which sounds a lot like tuning the parameters of a model. In particular, this proposal seems to make good use of time -- traditional model-based learning is implicitly slower because there is a step where you interpret the input and update your model; but in predictive processing, you are always choosing actions based not on the model you have perceived, but on the model that you are predicting; perception is merely used to \emph{correct} this model.
+
+\subsection{Theory of mind}
+Clark believes that theory of mind is a natural application of predictive processing to human behaviour -- once again the system tries to find a simple model that predicts the actions of others. Concepts like \nquote{beliefs}, \nquote{goals}, etc. come naturally from there.
+
+\subsection{Self awareness}
+Clark agrees that self awareness can emerge from the application of theory of mind predictions on oneself.
+
+\subsection{Consciousness}
+Clark thinks consciousness has something to do with interoception -- our ability to sense some of our internal state -- and the application of predictive processing to that input. He also thinks that the resulting feeling of \nquote{presence} is separable from a feeling of \nquote{agency} (being in control of our actions), and that the latter comes from having low prediction errors when giving motor commands (i.e. the muscles feel like they do what we tell them to do).
+
+\subsection{Sleep}
+Clark thinks that sleep is used to simplify the internal generative model. That is, while awake, the brain optimises for accurate predictions; but while asleep, there is nothing to predict, and the brain exercises the model, trying to make it simpler.
+
+\subsection{Brain wave frequencies}
+Friston speculatively suggests that gamma frequencies are used for bottom-up sensory info and beta frequencies are used for top-down predictions.
+
+\subsection{Parts of the brain}
+Clark is vague on specific parts of the brain and the role of the basal ganglia.
+
+\subsection{Cortical organisation}
+Clark suggests that the fast dorsal (\nquote{where}) visual pathway gives the first sketches of a scene, and then the slow ventral (\nquote{what}) pathway processes the input properly based on predictions generated based on the dorsal data. I don't particularly like this idea and think that Cisek's one is much better. Other than this, Clark doesn't talk much about cortical organisation.
+
+\subsection{Short term (working) memory}
+Clark doesn't discuss working memory much.
+
+\subsection{Long term memory}
+Clark thinks that memory for the past is a by-product of the more important \nquote{memory for the future} or the ability to imagine future scenarios using the generative model that makes predictions. He also thinks that the different kinds of memory are all aspects of the same system.
+
+\subsection{Transfer learning}
+Clark doesn't really discuss transfer learning.
+
+\subsection{Human language and natural language processing}
+Clark discusses language several times, though always a bit side-on. He suggests that we use language to structure our environment in such a way as to make hidden causes more explicit (for example, a classroom where we are taught chemistry, and our brain tries to predict what the chemistry teacher will say, makes it easier to learn about chemistry as the hidden cause behind various things than by just observing the things).
+
+He also talks about \nquote{supra-communicative} language, meaning using language for thinking. Here he suggests that we can use language to more carefully and precisely direct our brain activity, e.g. by cueing certain concepts.
+
+\subsection{Human pain/pleasure and reward signals in reinforcement learning}
+As mentioned previously, Clark and Friston are not fans of reward signals or utility functions. Clark does not discuss pain, except to say that pain is predictive, like everything else -- that is, that a painful percept is the brain's best guess that something is actually wrong, and thus sometimes pain can exist without any peripheral pain signals, and sometimes peripheral pain signals can be suppressed by central activity.
+
+\section{Marcus's topics}
+
+\subsection{Reasoning}
+Clark does not talk much about reasoning.
+
+\subsection{Creativity}
+Clark does not talk much about creativity.
+
+\subsection{Generalization / Classification}
+Clark does not talk much about these.
+
+\subsection{Problem solving}
+Clark does not talk much about problem solving.
+
+\subsection{Planning}
+Clark does not talk much about planning, except to say that a generative model is good for rehearsing offline plans, and to argue against the model where a mechanism to select an action is separate from a mechanism to predict the effects of an action.
+
+\subsection{Self-preservation}
+Clark does not talk much about self-preservation.
+
+\subsection{Deduction}
+Clark does not talk much about deduction.
+
+\subsection{Induction}
+Clark does not talk much about induction.
+
+\subsection{Abduction}
+The predictive processing model has abduction at the core -- it's trying to find the best explanation for the inputs. As I write this, I feel like I remember Clark calling the brain an \nquote{abduction machine} but it must have been somebody else because it's not in the book. In any case, it is an apt term.
+
+\bibliography{../references}
+\end{document}
