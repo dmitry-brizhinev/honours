@@ -30,135 +30,131 @@
 \maketitle
 
 \section{Introduction}
-Peter Carruthers is a philosopher interested in the mind and consciousness. He lays out his \nquote{massively modular} theory of the mind in \cite{carruthers}.
+Peter Carruthers is a philosopher interested in the mind and consciousness. He lays out his \nquote{massively modular} theory of the mind in \cite{carruthers}. Although it follows in the tradition of very symbolic theories (which I think is misguided), it has many nuggets of insight.
 
 \section{Overview}
-ssss
+Carruthers is clearly a philosopher rather than a neuroscientist or AI researcher. For example, he spends half a chapter arguing for his preferred definition of \nquote{module}, and justifying his choice of name for the \nquote{massively modular} theory. He also has a tendency to say things are \nquote{obvious} without justifying them. In other words, I felt he spent too long justifying irrelevant things like definitions, and too short justifying substantive assumptions. But if you look past all that, there is a lot of actual content, too.
 
-...
+He likes to draw diagrams with lines and boxes (like \nquote{perception}, \nquote{practical reasoning}, etc.). This is what I mean by the symbolic tradition. Those diagrams can mostly be ignored. I note that Carruthers takes as an obvious assumption that cognition proceeds in a \emph{perception-plan-act} fashion, which seems reasonable, but now that we have the predictive processing model we can see how that assumption can be misleading. Anyway, all the block diagrams can safely be ignored, as can his assumption that practical reasoning works on first-order-logic statements of various kinds. Despite his distaste for \nquote{connectionism}, connectionist ideas slot nicely into the gaps left behind if you ignore all his symbolic stuff.
 
-Desire generating modules
+The core idea I took away from this book is Carruthers' theory of system 2 thinking. It is not really \emph{novel}, but I felt that it tied together ideas that I had heard before, and explained them very cleanly. It is a theory that ties together language, human evolution, and uniquely human types of thought.
+
+For reference, \nquote{system 1} thinking refers to cognition that is automatic and unconscious (e.g. our ability to identify objects, or make intuitive judgements), which Carruthers identifies with the normal operation of all parts of the brain. \nquote{System 2} refers to effortful thinking of the kind we are conscious of and which we use to e.g. solve math problems. Carruthers' theory is this: system 2 thinking is accomplished by using the language production parts of the brain to encode something about the current brain state into a sentence, project it to the auditory cortex as an imagined piece of inner speech, then use the language comprehension parts to decode it and send the result to the rest of the brain, just like it would when listening to someone else's speech. The result is a new brain state that can again be encoded into language. Carruthers argues that this process is based on a more ancient (pre-human) ability to plan by imagining possible actions, globally broadcasting them, and then thinking about the consequences.
+
+The theory deserves some unpacking. First, language is almost but not quite necessary for this to work -- one could instead encode state into a visual image, and use visual decoding, to get the same effect. Second, language is definitely useful, because essentially any thought can be expressed in language (owing to the flexibility of human grammar). This means that, using language as a kind of intermediate state, the brain can express thoughts that it otherwise might not have a representation for. Third, by going through the state-language-state loop, the brain can make information available to parts of the brain that would not otherwise see it. If we assume that brain regions have particular patterns of connectivity (as they do), then if one region knows something, others might not realise. However, the way language has evolved, language production can use a wide variety of information all over the brain to construct sentences; and likewise, a wide variety of brain regions are involved in processing any incoming language. Thus, going through this loop is a kind of \nquote{global broadcasting} step (and language is not always necessary because there may be other ways to do global broadcasting). Fourth, this theory does a really good job of separating system 1 from system 2, explaining why such a distinction exists, and the relevant differences -- namely, that system 2 is slow, effortful, serial, trainable, and feels like a conscious action, while system 1 is automatic and unconscious. Finally, I like this theory because it ties together three key human capabilities, and makes it easy to see how they might evolve together. These are: language, theory of mind, and system 2 thinking. Language has to come first, but then theory of mind becomes crucial, both to decide what to say to people, and to decide whether they are lying. And with these two in place, all the elements are there for system 2 thinking. The theory is thus a plausible story of how \emph{human} intelligence arose as the ultimate result of human language (in contrast to the various difficult tasks, like object recognition and simple planning, that we can do unconsciously -- these are also a kind of intelligence, but not one that is unique to humans).
+
+I think Coward had some elements of this in his theory, but it never clicked for me like Carruthers.
+
+A second, comparatively minor, novel element in \cite{carruthers} is his theory of desire generation. He imagines that human (and animal) motivations depend on desire modules that detect certain conditions and generate a desire for a particular thing (e.g. food when we are either hungry or observe some tasty food). This seems like a strange architecture (compared to the AI idea of maximising a utility function), but actually fits well with other things I know about how human motivations work (and which Carruthers doesn't even mention). The brain does seem to have circuitry that creates desires (sometimes called \nquote{incentive salience}) -- these are the circuits that malfunction in cases of addiction. Addiction is weird from the utility-maximising point of view, because in that kind of architecture, we can see how an agent might overestimate the utility of an action, but not how it would really want to take an action that is \emph{knows} won't get it much utility. However, if the agent's architecture has so-called desire-generating modules, then it is clear how making one of the modules too strong might result in the agent really wanting the thing that it knows won't provide any benefit.
+
+Carruthers also argues that desire generating modules can learn, which results in people attaching intrinsic motivation to the cultural norms of their community (sounds right to me!), and also allows system 2 thinking to derive new goals/motivations/morals etc. That is, in such an architecture, the agent has some power to change its own motivations directly, rather than merely finding new instrumental goals that lead to overall utility gain.
 
 \section{Approach to topics}
 How Carruthers' massively modular model relates to my chosen topics.
 
 \subsection{Meaning of intelligent behaviour}
-Cisek thinks that a pure input, process, output model would be too slow for the real world. Thus, his idea of intelligence implicitly includes decision-making speed. While there is obviously no reason why such a model couldn't run on sufficiently fast hardware, it is plausible that a model like Cisek's would always beat the serial one, given the same hardware.
+Despite his love for definitions, I don't remember Carruthers even defining intelligence anywhere. He focuses more on explaining human capabilities than on intelligence in general.
 
 \subsection{Relationship between intelligence and logic/mathematics}
-Cisek explicitly avoids discussing logic and mathematics. He believes that such mental activity might be more serial, but prefers to focus on explaining moment-to-moment activity.
+Carruthers (following psychology) subdivides thinking into system 1 and system 2, where logic and mathematics are system 2 activities that humans can learn; but definitely not the be-all and end-all of intelligence.
 
 \subsection{How the utility function interacts with \nquote{morality}, and how it is learnt}
-\cite{cisek2007} does not discuss the goals in a brain. \cite{cisek2012} adds the idea of a goal but doesn't really discuss it in detail.
+Carruthers thinks the brain has desire-generating modules, which are partially innate, but many or all of which can also learn. A key possibility is that some of them are primed to absorb \nquote{norms}, and will then generate the intrinsic motivation to follow norms \emph{and} to punish offenders. He also argues that system 2 thinking (and even some system 1) can derive logical consequences of norms and thereby produce new intrinsic motivations (similar to deriving new truths from the logical consequences of a true statement). He doesn't say this, but I think this idea provides a neat explanation for why people have such a strong tendency to reify moral statements (treat them as statements of fact about the world rather than about their own motivations) -- if the brain can process them in the same way that it processes statements of fact, they will feel the same way too.
 
 \subsection{The role of human emotions}
-Cisek does not discuss emotions.
+Carruthers thinks emotions are made by modules that detect conditions under which an emotion is appropriate. He doesn't discuss emotions much (other than satisfaction and disappointment, which are the result of satisfied/frustrated desires).
 
 \subsection{The concept of forming beliefs by combining prior beliefs with new evidence}
-Cisek does not discuss this explicitly, but a bit of it is implicit in the work. The process of action selection involves combining evidence from multiple sources to update the initial action specifications and see which one wins.
+Carruthers imagines that the brain contains a dedicated reasoning module which does something like logical inference, based on a knowledge base of beliefs and perceptual evidence. He always uses first order logic statements as examples, though I am not sure if he literally believes that the brain encodes a database of first order logic statements that it believes. He explicitly notes that full bayesian updating is not computationally feasible, but the brain might implement some approximation to it.
 
 \subsection{Seeking out more information}
-Cisek does not discuss such an action directly, but would probably think of it as an extension of the \nquote{create more affordances} idea from the hierarchical version of the theory.
+Carruthers does not discuss exploration/exploitation in detail, except to note that humans seem to have at least partially an intrinsic desire for knowledge (rather than a purely instrumental one), and that this might be the result of one of those desire-generating modules that has evolved for the purpose.
 
 \subsection{Bottom-up and top-down information flow}
-Cisek's model does not divide easily into top-down and bottom-up directions. I think this is intended, since the idea of processing from bottom to top is part of the \nquote{serial} paradigm that he dislikes. He does not discuss very much how exactly the processes of action specification and selection happen, and it is \emph{within} those processes that such top-down/bottom-up distinctions are most likely to appear.
-
-In the hierarchical version of the theory, there is more of top-down and bottom-up flow. Higher brain regions specify more abstract goals, and send this information down. Lower brain regions attempt to achieve those goals and send a feedback signal up.
+Carruthers doesn't talk much about bottom-up and top-down distinctions because he likes to draw block diagrams with arrows going every which way.
 
 \subsection{The concept of \nquote{learning}}
-Cisek does not discuss learning.
+Carruthers thinks that each module is responsible for learning its own kinds of information (and also that sometimes whole new modules might be built via learning, though he does not elaborate on that). He believes that it is \nquote{obvious} that no single general learning algorithm could exist, and that every module must implement its own.
 
 \subsection{Different types of learning}
-This section is not relevant here.
+Carruthers thinks there are as many types of learning as there are modules.
 
 \subsection{The process by which decisions are made}
-This is the core of Cisek's theory. As I wrote in the overview, Cisek's model is that decisions are always represented in the brain as a set of actions ready to be taken. These are constructed from sensory inputs and fully planned out. Then other brain regions weigh in with whatever relevant information they have, including predictions of the actions' outcome.
-
-Cisek argues that a cross-inhibition process, where alternatives compete and one eventually wins, is superior (although slower) than a simpler \nquote{just take the max} process, because it is robust to noise.
-
-In the hierarchical version, Cisek imagines that longer-term planning can happen if higher brain regions encode subgoals for lower regions to achieve.
+Carruthers thinks that simple decisions can be the result of competition among several modules for control of behaviour. A key part of his theory is that, in primates, decisions can sometimes be made with more effortful thought by imagining an action and predicting its consequences (by broadcasting the imagined image to the whole brain, allowing the brain to do its thing). In humans, the process can go in cycles where each imagined image or utterance leads to another.
 
 \subsection{Looking at behaviour in a hierarchical fashion}
-Cisek's basic model isn't particularly hierarchical. The later one is (as above), though I feel like it doesn't actually mesh well with Cisek's idea.
+Carruthers acknowledges that action plans can be hierarchical (with the details filled in as they are needed) but he does not elaborate.
 
 \subsection{Internal actions}
-Cisek's model does not address internal actions (i.e. ones that do not involve muscle movements but only e.g. thoughts). I am unsure what he would think about that -- he seems to make much of the direct link between planning and motor control -- so he might think that internal actions follow a different mechanism.
-
-In the later work, Cisek does mention the idea that internal (\nquote{covert}) actions can be driven by the same motor control processes. He credits this idea to Piaget.
+Carruthers emphasises that thinking is a type of acting, and his model makes clear exactly how that works: to think something (system 2!!) is an action very similar to saying that thing. The result is to create a situation where the whole brain \emph{hears} the thought almost as if someone else had said it.
 
 \subsection{Model-based vs model-free learning}
-Cisek dislikes the purely model-based approach. In Cisek's theory, action specification is explicitly model-free. However, he takes no position on whether action selection is model-based or not.
+Carruthers doesn't really discuss this, but his theory is kind of model-based since he imagines a database of beliefs about the world and a logical reasoning module that predicts the effects of actions.
 
 \subsection{Theory of mind}
-Cisek does not discuss theory of mind.
+Carruthers thinks that theory of mind (which he prefers to call mind-reading) is a module that evolves in tandem with language, and which can innately make inferences like assuming that a person who has seen an event knows that event happened.
 
 \subsection{Self awareness}
-Cisek does not discuss self awareness.
+Carruthers identifies self-awareness with turning the theory of mind module onto oneself. He thinks that the module does not get any special access to internal brain states (because it evolved for other brains that it did not have access too) and so most of our self awareness is guesses and reconstructions based on our visible actions.
 
 \subsection{Consciousness}
-Cisek does not discuss consciousness.
+Carruthers has a whole theory of consciousness which he does not discuss in this book.
 
 \subsection{Sleep}
-Cisek does not discuss sleep.
+Carruthers does not discuss sleep.
 
 \subsection{Brain wave frequencies}
-Cisek does not discuss brain waves.
+Carruthers does not discuss brain waves.
 
 \subsection{Parts of the brain}
-Cisek is vague on the proposed roles for the basal ganglia and various other subcortical structures. He is similarly vague on the cerebellum, suggesting that it is involved in predicting reward. He seems to be an expert on the motor parts of the cortex.
+Carruthers does not discuss the anatomy of the brain much.
 
 \subsection{Cortical organisation}
-Cisek uses visual processing as an example (which makes sense, since it is the most well understood). It is well known that visual information seems to travel through the brain in two broad streams: the dorsal (upper) stream, and the ventral (lower) stream. The dorsal stream seems to care more about the positions and shapes of objects (and is sometimes called the \nquote{where} stream), while the ventral stream cares more about the identities of object (the \nquote{what} stream). I know hearing has a similar distinction, and am not sure about other senses.
-
-Cisek proposes that the dorsal (\nquote{where}) stream is responsible for action specification. It gets the fastest (most current) information available, and focuses on physical space (which is necessary for planning actions). The ventral (\nquote{what}) stream contributes to action selection. I really like this model and think it makes a lot of sense. Mainstream neuroscience as I was taught in my courses doesn't really know why we have two separate streams like this instead of one integrated one.
-
-In the hierarchical version of the theory, Cisek proposes that more anterior (frontal) regions encode increasingly more abstract goals.
+Carruthers does not discuss cortical organisation much.
 
 \subsection{Short term (working) memory}
-Cisek believes that working memory is closely related to the representation of available actions maintained by the action specification regions. They have to keep the activation going for a bit while selection takes place, and are thus recording recent events.
+Carruthers thinks that working memory is local to each module, and is a kind of scratch space. Long term memory is permanent changes recorded in a module. Any different \emph{kinds} of memory noticed by psychologists reflect the different properties of the modules that store/use that memory.
 
 \subsection{Long term memory}
-Cisek does not discuss long term memory.
+As above.
 
 \subsection{Transfer learning}
-Cisek does not discuss transfer learning.
+Carruthers notes that many animals have difficulty with \emph{some} kinds of cross-domain learning, like that rats can't be trained to jump for food, only to escape danger. Carruthers believes that global broadcasting in humans and primates lets us overcome that limitation. He doesn't really discuss transfer learning, except to suggest that we can imagine actions while mixing in random elements that are weakly related (his only nod to connectionism).
 
 \subsection{Human language and natural language processing}
-Cisek does not discuss language.
+Carruthers thinks language is super important. Half the book is about the system 2 thinking theory where language takes centre stage. He doesn't discuss how language processing itself might work (he just lumps it in a box named \nquote{language comprehension module}). However, he does think that the language production module can do some simple logical inferences like turning descriptive two statements about the same thing into a single sentence with two adjectives -- and that this capability lets us use language to overcome the domain specificity of other modules.
 
 \subsection{Human pain/pleasure and reward signals in reinforcement learning}
-Cisek does not discuss reward signals in much detail.
+Carruthers doesn't really talk about pain, only about his desire-generating modules.
 
 \section{Marcus's topics}
 
 \subsection{Reasoning}
-Cisek does not discuss reasoning.
+Carruthers thinks that system 2 reasoning is a learnt skill -- we have the ability to use language to engage in cycles of reasoning, but can be trained to do so in particular, fruitful, ways.
 
 \subsection{Creativity}
-Cisek does not discuss creativity.
+Carruthers thinks that rudimentary creativity is present in animals that can improvise action sequences. He thinks that creativity in general can be reduced to some complicated versions of inventing random things and then picking the good ones. He thinks that primates in particular can come up with creative action sequences by imagining the outcomes, and then randomly varying some elements. He thinks that human creativity is an extension of this ability, and that childhood pretend play is how we train that ability.
 
 \subsection{Generalization / Classification}
-Cisek does not discuss these.
+Carruthers does not discuss these.
 
 \subsection{Problem solving}
-Cisek does not discuss problem solving in detail.
+Carruthers thinks problem solving is a learnt system 2 skill.
 
 \subsection{Planning}
-In Cisek's model, actions are fully specified and planned out \emph{before} being chosen. The choice involves predicting the effects of the actions. He does not discuss how the specification or prediction happens.
-
-In the hierarchical version of the model, Cisek imagines that while lower brain regions represent possible actions, higher regions represent subgoals that those actions will achieve, and affordances (potential actions) that they will make available. It sounds to me like a na\"{i}ve version of a search tree.
+Carruthers thinks that while some animals can make some simple plans, complex planning can be done by imagining performing an action and letting the rest of the brain predict the consequences. Even more complex planning is a learnt system 2 skill. The simple planning Carruthers thinks is implemented in a dedicated \nquote{practical reasoning} module, which builds action plans for achieving goals.
 
 \subsection{Self-preservation}
-Cisek does not discuss self-preservation.
+Carruthers does not discuss self-preservation.
 
 \subsection{Deduction}
-Cisek does not discuss deduction.
+Carruthers thinks the brain has a dedicated logical reasoning module that can take beliefs and generate new ones that are their logical consequences. He thinks that more complex logical deduction is a learnt system 2 skill.
 
 \subsection{Induction}
-Cisek does not discuss induction.
+Carruthers does not discuss induction much, he thinks that abduction is much more important.
 
 \subsection{Abduction}
-Cisek does not discuss abduction.
+Carruthers thinks that abduction is one of the key uses for our system 2 thinking. In particular, he thinks that it may have been evolutionarily selected for as a tool for hunting-by-tracking, which requires complex inferences about an animal's travel from scant clues. Carruthers thinks that the first two steps -- generation of hypotheses and inferring their consequences -- are taken care of by system 2 the same way that creativity is -- generate a sort-of-not-quite random hypothesis, simulate it, predict the conse
 
 \bibliography{../references}
 \end{document}
