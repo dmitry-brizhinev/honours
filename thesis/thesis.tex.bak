@@ -98,90 +98,64 @@ The approach of generating all the pixels in parallel and replacing missing ones
 \subsection{Generative models}
 
 \hl{- Review of generation methods: autoregressive (pixelCNN), GAN, VAE
-
   - Explain how they approach the problem of multiple outputs for one input
-  
   - Diagram for two related pixels
-  
   - View of generation as defining a "natural image" manifold
-  
   - Exact and approximate log likelihood
-  
 - Review of PixelCNN and applications/extensions
-
-  - PixelCNN++, WaveNet, Video, Translation, Quantiles}
+  - PixelCNN++, WaveNet, Video, Translation, Quantiles
 
 \subsection{Autoregressive models}
 
 \subsection{Noncausal autoregression}
 
-\hl{- Review of noncausal autoregression:
-
+- Review of noncausal autoregression:
   - economics and the old autoregressive models
-  
   - (un)importance of causality, for stock market data (most causal), audio/text/video (less causal), images (least causal).
-  
-  - bidirectional RNN}
+  - bidirectional RNN
 
 \subsection{Neural fields}
 
-\hl{- Review of neural fields in neuroscience and in AI}
+- Review of neural fields in neuroscience and in AI
 
 \subsection{Recurrent Convolutional networks}
 
-\hl{- Review of recurrent convolutional networks}
+- Review of recurrent convolutional networks
 
 \subsection{Denoising, deblurring, and upsampling}
 
-\hl{- Review of denoising/deblurring/upsampling}
+- Review of denoising/deblurring/upsampling
 
 \subsection{Dropout and uncertainty}
 
-\hl{- ????? Review of dropout uncertainty ????}
+- ????? Review of dropout uncertainty ????
 
 \section{Methods}
 
-\hl{- Architecture details, hyperparameters}
+- Architecture details, hyperparameters
 
 \section{Results}
 
-\hl{- Results
-
+- Results
   - Hopefully even if I don't beat PixelCNN, I will demonstrate that it's not too much worse, but runs in constant time and can do a bunch of things pixelcnn can't
-  
-  - Include training curves}
+  - Include training curves
   
 \section{Future Work}
-
-\hl{- Possible improvements and future work
-
+- Possible improvements and future work
   - PixelCNN++: dropout, logistic mixture output, bottleneck
-  
   - Recurrence within layers (and better kind of neural field)
-  
   - Batch normalisation
-  
   - ??????? Dropout / batch norm uncertainty ???????
-  
   - Deterministic model relying entirely on latent noise info, or training whole model end-to-end (I think this is a bad idea and will cause more bluriness)
-  
   - Other datasets: imagenet/cifar, audio (speech/music), text, video
-  
   - Elaborating based on sketches
-  
   - Editing in the image manifold
-  
   - Sparsity regularisation for the output layer getting stronger as we go deeper
-  
   - Reducing temperature as we go deeper
-  
   - Removing random noise in inputs with an extra mask telling us which inputs to ignore
-  
   - Other regularisations - weight decay/L2 ?
-  
   - gradient clipping
-  
-  - Better losses - wesserstein distance}
+  - Better losses - wesserstein distance
 
 \bibliography{../references}
 \end{document}
