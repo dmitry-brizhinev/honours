@@ -36,17 +36,45 @@ I introduce a modification to the generative model PixelCNN, which allows genera
 
 \section{Introduction}
 
-\cite{??}
+The generation of synthetic image (and other) data, is an important step on the way to complete machine understanding of images (and others) \cite{??}. In the deep learning field, there are currently three broad approaches to the generation of images: variational autoencoders (VAEs) \cite{??}, generative adversarial networks (GANs) \cite{??} and autoregressive models like PixelCNN \cite{??}.
 
-\subsection{PixelCNN}
+\subsection{The Natural Image Manifold}
 
-\hl{- Review of generation methods: autoregressive (pixelCNN), GAN, VAE
+All three approaches attempt to solve the problem of how a neural network can both \emph{represent} the set of \nquote{natural} images, and to \emph{sample} from it. It is common to think of natural images as defining a manifold (continuous subset) in the space of all possible images. Importantly, this manifold is not convex -- the average of two natural images is often not a natural image itself. A network trained to generate natural images implicitly defines the shape of a manifold, which we hope is as close as possible to the \nquote{true} natural image manifold. Thinking in terms of the natural image manifold is fruitful -- for example, \cite{??} apply this idea to image editing, using a GAN to constrain edits to remain within the manifold -- that is, unlike ordinary per-pixel edits which quickly make the image look doctored and unrealistic, their system tries to approximate what the user wants while ensuring that the image remains natural at all times.
 
-  - Explain how they approach the problem of multiple outputs for one input
-  
-  - Diagram for two related pixels
-  
-  - View of generation as defining a "natural image" manifold
+\hl{diagram}
+
+\subsection{The Problem of Sampling}
+
+Consider the simplest possible approach to generating images. We train a deterministic, feedforward network with a fixed input to produce the desired images as output (say, with L2 loss). The problem here is clear: the network can only ever produce one output, and so the optimal strategy (to minimise L2 loss) is to output the mean of all the images in the training set. This network fails to learn much about natural images.
+
+\hl{diagrams throughout this section, my idea of a diagram for two related pixels}
+
+Now suppose the deterministic network can receive a random seed as input. For each training example, we pair one of our images with a random input seed. But now the network still has no choice but to output the mean: the seeds provide it with no information about the images it needs to generate. If we instead associate each image with a unique seed, and make sure the same seed appears each time the same image is seen, the network now has a chance, but we deprive it of the ability to learn any structure in the image space -- it has to memorise the mapping from seeds to images, and will not generalise.
+
+Finally, suppose we let the network be probabilistic. Instead of outputting images, the network outputs probability distributions over each pixel (with cross-entropy loss). We still face a problem here: the network no longer has to output the mean, but the best it can do is to learn the distribution of each pixel independently. The network cannot learn even as simple a relationship as that two particular neighbouring pixels are always the same colour. If each pixel can be white or black with 50\% probability, the best it can do is predict a 50\% probability of each colour for each pixel. Simply making the network probabilistic still fails to capture dependencies \emph{among} pixels.
+
+\hl{Explain more the problem of generating when there are multiple plausible outputs for one input; and explain for each of the three below how they deal with this}
+
+The three main approaches to generation all solve this problem in different ways.
+
+\subsection{Variational Autoencoder}
+
+The variational autoencoder \cite{??} is structured as follows: \hl{diagram}. An \nquote{encoder} network turns images into low-dimensional seeds (called \nquote{latent vectors}). A \nquote{decoder} network learns to turn the seeds back into images. Both networks are trained simultaneously end-to-end. The latent vector must be low-dimensional to prevent the network from simply recording the image itself into the vector. This is an ordinary autoencoder, and a variational autoencoder adds the constraint that the latent vectors must overall have some known distribution.
+
+How does this structure solve the problem above? Now, instead of choosing random seeds, we let the network associate seeds (latent vectors) to images. This allows the network to assign similar latent vectors to similar images, and thus take advantage of the structure of the image space. With this architecture, we can expect that latent vectors outside the training set will still produce natural images. The constraint that the latent vectors have a known distribution allows us to sample from the natural image manifold, as we wanted to.
+
+VAEs still suffer from producing blurry samples. The reason can be illustrated with a diagram. \hl{diagram}. Suppose a particular latent vector corresponds to two plausible natural images. The network's best (loss-minimising) option is to output the mean of these two images. There is no force ensuring that every individual sample be a natural image, only that loss is minimised overall -- as long as the mapping of latent vectors to natural images is not perfect, blurring results.
+
+\subsection{Generative Adversarial Networks}
+
+GANs have produced the most spectacular generation results, causing a surge of interest in the idea. A GAN consists of two networks: a \nquote{generator} that takes random seeds (latent vectors) as input and produces natural images as output, and a \nquote{discriminator} that takes natural images \emph{or} generator samples as input and tries to tell which is which. Crucially, the generator is never trained on \emph{particular} images. It is free to learn whatever mapping it wants from latent vectors to images, as long as the outputs fool the discriminator. In essence, instead of training the generator on particular pairs of images, we train a differentiable metric -- the discriminator -- that compares each of the generator's samples to the entire training set. \hl{expand on this and how true KL divergence or similar is expensive but could solve e.g. VAE blurriness}. The networks are trained end-to-end. To sample images, we simply sample a latent vector from the same distribution we used at training time.
+
+How does this structure solve the problem? Now the generator has to generate images with global consistency, otherwise the discriminator can beat it. We don't suffer from bluriness because we never ask the generator to generate a \emph{particular} image. Thus, the network never has to compromise and take the mean of the images we want. The flip side is the well-known difficulty with GANs: \emph{mode collapse}. The basic setup described above provides no incentive for the generator to include the whole image manifold in its range of outputs. It is merely judged on whether the particular images it \emph{does} produce look natural. It is not penalised for deciding to \emph{never} produce a certain image. This problem has spawned a lot of research into encouraging \nquote{diversity} in GAN samples, e.g. with additional terms in the loss function.
+
+\subsection{Autoregressive Models}
+
+\hl{- Review of generation methods: autoregressive (pixelCNN)
   
   - Exact and approximate log likelihood
   
@@ -65,6 +93,8 @@ In theory, we could fill in the early pixels by performing Bayesian inference --
 What is the alternative? What would it mean if pixels did not have a fixed order? In that case, a generated pixel could depend on the values of \nquote{future} pixels that have not been generated yet i.e. the model is no longer \nquote{causal}. This seems like a contradiction, but what if we fed some other value as a placeholder for missing pixels? In the simplest possible case, suppose we feed noise. Then, after the first forward pass, each pixel is generated using only noise as input. But we can do another pass, and now each pixel receives the first generated values as input. On the second pass, we hope that pixels will now be generated to conform to the choices made in the first pass. This procedure can be iterated a few (constant) number of times, and we can hope that after a few passes the generated image will converge to something reasonable. This procedure is not theoretically \hl{analysis} guaranteed to converge in constant time, or at all, but in this work I show empirically that it does.
 
 The approach of generating all the pixels in parallel and replacing missing ones with noise has another surprising benefit. It also addresses the third issue (the need to explicitly mark missing pixels). The resulting model simply takes one image and outputs another. The input image can be noise, if we want to generate something from scratch. But it doesn't have to be. We can also feed a noisy, blurry, or downsampled version of an image, and try to generate a clean one.
+
+\hl{talk about causality in autoregression}
 
 
 \hl{- Motivation for my model as a modification of PixelCNN:
@@ -98,10 +128,6 @@ The approach of generating all the pixels in parallel and replacing missing ones
 \subsection{Generative models}
 
 \hl{- Review of generation methods: autoregressive (pixelCNN), GAN, VAE
-
-  - Explain how they approach the problem of multiple outputs for one input
-  
-  - Diagram for two related pixels
   
   - View of generation as defining a "natural image" manifold
   
