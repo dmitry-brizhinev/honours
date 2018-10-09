@@ -31,8 +31,10 @@
 \author{Dmitry Brizhinev}
 \maketitle
 
-\section{Abstract}
+\section*{Abstract}
 I introduce a modification to the generative model PixelCNN, which allows generation to complete in constant time, rather than requiring a separate forward pass for each pixel of the output. The key idea is to not enforce a strict causal order like in PixelCNN, effectively allowing generated pixels to depend on both the past and the future. I show empirically that, despite violating causality, the resulting model functions \hl{comparably} to PixelCNN. This improvement markedly improves the running time of PixelCNN in its core task -- generation -- and can also perform tasks that PixelCNN cannot, such as denoising, deblurring, and upsampling.
+
+\tableofcontents
 
 \section{Introduction}
 
@@ -40,7 +42,7 @@ The generation of synthetic image (and other) data, is an important step on the 
 
 \subsection{The Natural Image Manifold}
 
-All three approaches attempt to solve the problem of how a neural network can both \emph{represent} the set of \nquote{natural} images, and to \emph{sample} from it. It is common to think of natural images as defining a manifold (continuous subset) in the space of all possible images. Importantly, this manifold is not convex -- the average of two natural images is often not a natural image itself. A network trained to generate natural images implicitly defines the shape of a manifold, which we hope is as close as possible to the \nquote{true} natural image manifold. Thinking in terms of the natural image manifold is fruitful -- for example, \cite{??} apply this idea to image editing, using a GAN to constrain edits to remain within the manifold -- that is, unlike ordinary per-pixel edits which quickly make the image look doctored and unrealistic, their system tries to approximate what the user wants while ensuring that the image remains natural at all times.
+All three approaches attempt to solve the problem of how a neural network can both \emph{represent} the set of \nquote{natural} images, and to \emph{sample} from it. It is common to think of natural images as defining a manifold (continuous subset) in the space of all possible images \cite{??}. Importantly, this manifold is not convex -- the average of two natural images is often not a natural image itself. A network trained to generate natural images implicitly defines the shape of a manifold \cite{??}, which we hope is as close as possible to the \nquote{true} natural image manifold. Thinking in terms of the natural image manifold is fruitful -- for example, \cite{??} apply this idea to image editing, using a GAN to constrain edits to remain within the manifold -- that is, unlike ordinary per-pixel edits which quickly make the image look doctored and unrealistic, their system tries to approximate what the user wants while ensuring that the image remains natural at all times.
 
 \hl{diagram}
 
@@ -60,76 +62,93 @@ The three main approaches to generation all solve this problem in different ways
 
 \subsection{Variational Autoencoder}
 
-The variational autoencoder \cite{??} is structured as follows: \hl{diagram}. An \nquote{encoder} network turns images into low-dimensional seeds (called \nquote{latent vectors}). A \nquote{decoder} network learns to turn the seeds back into images. Both networks are trained simultaneously end-to-end. The latent vector must be low-dimensional to prevent the network from simply recording the image itself into the vector. This is an ordinary autoencoder, and a variational autoencoder adds the constraint that the latent vectors must overall have some known distribution.
+The variational autoencoder \cite{??} is structured as follows: \hl{diagram}. An \nquote{encoder} network turns images into low-dimensional seeds (called \nquote{latent vectors}). A \nquote{decoder} network learns to turn the seeds back into images. Both networks are trained simultaneously end-to-end. The latent vector must be low-dimensional to prevent the network from simply recording the image itself into the vector \cite{??}. This is an ordinary autoencoder \cite{??}, and a variational autoencoder \cite{??} adds the constraint that the latent vectors must overall have some known distribution.
 
-How does this structure solve the problem above? Now, instead of choosing random seeds, we let the network associate seeds (latent vectors) to images. This allows the network to assign similar latent vectors to similar images, and thus take advantage of the structure of the image space. With this architecture, we can expect that latent vectors outside the training set will still produce natural images. The constraint that the latent vectors have a known distribution allows us to sample from the natural image manifold, as we wanted to.
+How does this structure solve the problem above? Now, instead of choosing random seeds, we let the network associate seeds (latent vectors) to images. This allows the network to assign similar latent vectors to similar images \cite{??}, and thus take advantage of the structure of the image space. With this architecture, we can expect that latent vectors outside the training set will still produce natural images \cite{??}. The constraint that the latent vectors have a known distribution allows us to sample from the natural image manifold \cite{??}, as we wanted to.
 
-VAEs still suffer from producing blurry samples. The reason can be illustrated with a diagram. \hl{diagram}. Suppose a particular latent vector corresponds to two plausible natural images. The network's best (loss-minimising) option is to output the mean of these two images. There is no force ensuring that every individual sample be a natural image, only that loss is minimised overall -- as long as the mapping of latent vectors to natural images is not perfect, blurring results.
+VAEs still suffer from producing blurry samples \cite{??}. The reason can be illustrated with a diagram. \hl{diagram}. Suppose a particular latent vector corresponds to two plausible natural images. The network's best (loss-minimising) option is to output the mean of these two images. There is no force ensuring that every individual sample be a natural image, only that loss is minimised overall -- as long as the mapping of latent vectors to natural images is not perfect, blurring results.
 
 \subsection{Generative Adversarial Networks}
 
-GANs have produced the most spectacular generation results, causing a surge of interest in the idea. A GAN consists of two networks: a \nquote{generator} that takes random seeds (latent vectors) as input and produces natural images as output, and a \nquote{discriminator} that takes natural images \emph{or} generator samples as input and tries to tell which is which. Crucially, the generator is never trained on \emph{particular} images. It is free to learn whatever mapping it wants from latent vectors to images, as long as the outputs fool the discriminator. In essence, instead of training the generator on particular pairs of images, we train a differentiable metric -- the discriminator -- that compares each of the generator's samples to the entire training set. \hl{expand on this and how true KL divergence or similar is expensive but could solve e.g. VAE blurriness}. The networks are trained end-to-end. To sample images, we simply sample a latent vector from the same distribution we used at training time.
+GANs have produced the most spectacular generation results, causing a surge of interest in the idea \cite{??}\cite{??}\cite{??}. A GAN consists of two networks: a \nquote{generator} that takes random seeds (latent vectors) as input and produces natural images as output, and a \nquote{discriminator} that takes natural images \emph{or} generator samples as input and tries to tell which is which. Crucially, the generator is never trained on \emph{particular} images. It is free to learn whatever mapping it wants from latent vectors to images, as long as the outputs fool the discriminator. In essence, instead of training the generator on particular pairs of images, we train a differentiable metric -- the discriminator -- that compares each of the generator's samples to the entire training set \cite{??}. \hl{expand on this and how true KL divergence or similar is expensive but could solve e.g. VAE blurriness}. The networks are trained end-to-end. To sample images, we simply sample a latent vector from the same distribution we used at training time.
 
-How does this structure solve the problem? Now the generator has to generate images with global consistency, otherwise the discriminator can beat it. We don't suffer from bluriness because we never ask the generator to generate a \emph{particular} image. Thus, the network never has to compromise and take the mean of the images we want. The flip side is the well-known difficulty with GANs: \emph{mode collapse}. The basic setup described above provides no incentive for the generator to include the whole image manifold in its range of outputs. It is merely judged on whether the particular images it \emph{does} produce look natural. It is not penalised for deciding to \emph{never} produce a certain image. This problem has spawned a lot of research into encouraging \nquote{diversity} in GAN samples, e.g. with additional terms in the loss function.
+How does this structure solve the problem? Now the generator has to generate images with global consistency, otherwise the discriminator can beat it. We don't suffer from blurriness because we never ask the generator to generate a \emph{particular} image \cite{??}. Thus, the network never has to compromise and take the mean of the images we want. The flip side is the well-known difficulty with GANs: \emph{mode collapse} \cite{??}. The basic setup described above provides no incentive for the generator to include the whole image manifold in its range of outputs. It is merely judged on whether the particular images it \emph{does} produce look natural. It is not penalised for deciding to \emph{never} produce a certain image. This problem has spawned a lot of research into encouraging \nquote{diversity} in GAN samples, e.g. with additional terms in the loss function \cite{??}\cite{??}\cite{??}.
 
 \subsection{Autoregressive Models}
 
-\hl{- Review of generation methods: autoregressive (pixelCNN)
-  
-  - Exact and approximate log likelihood
-  
-- Review of PixelCNN and applications/extensions
+The autoregressive model originates from trying to solve the problems of VAEs and GANs: blurriness and mode collapse. The headline autoregressive model is PixelCNN \cite{??}, and variations on the same \cite{??} \cite{??} \cite{??}. An autoregressive model generates an image one pixel at a time, with each operation taking previously generated pixels as input. This requires choosing and enforcing a strict ordering on pixels, such that no pixel can ever receive information from pixels \nquote{in the future}. At each step, the network outputs a probability distribution over the next pixel. We sample from this distribution, and the actually selected pixel value becomes part of the input for the next step. Generating and image with $N$ distinct values (including multiple channels) thus takes $N$ forward passes, which must be performed serially. However, training can be parallelised, since at training time all of the true pixel values are already available. Many variations are possible on this basic idea, like using recurrent neural networks to transmit information from distant pixels \cite{??}, but the standard model is a many-layered convolutional network where the convolutions are carefully \emph{masked} \cite{??} or \emph{shifted} \cite{??} to ensure the ordering is never violated.
 
-  - PixelCNN++, WaveNet, Video, Translation, Quantiles}
+Generating pixels one at a time lets PixelCNN solve the problem of blurry samples. If there are two possibilities for a group of pixels (say: all white or all black) the first pixel in that group to be generated will output an appropriate probability distribution. Once we sample it and feed it as input, all the other pixels are generated \emph{conditional} on the already-generated pixel, and so can safely output 100\% probability of white or black, as appropriate. The network thus never needs to output a blurry image that averages between multiple possibilities, and it can capture dependencies among pixels. It also avoids the problem of mode collapse because (unlike the basic GAN) the network is penalised for failing to generate an image in the training set. Finally, because the model outputs a probability distribution at each step, it is possible to exactly calculate the model's \emph{log likelihood} \cite{??} -- the exact probability that the model will generate any particular image, typically calculated over the test set. For other models like VAEs and GANs, log likelihood can only be estimated with an expensive sampling procedure \cite{??}, and as a result other, more questionable metrics are used to evaluate their performance \cite{??}.
 
 \section{Motivation}
 
-The PixelCNN model has three major flaws that I attempt to address. First, generation takes time linear in the number of pixels, since each pixel must be generated to be fed as input to the next pixel. Second, it has an aesthetically displeasing asymmetry. By default, PixelCNN generates pixels from top-left to bottom-right. As a result, PixelCNN can convincingly fill-in the bottom half of an image given the top half (the examples usually displayed in papers) but not vice-versa. Third, the model cannot \emph{correct} pixels that are only slightly wrong, and cannot infer which pixels in an image are wrong -- it can \nquote{fill-in} missing parts of an image only if the location of the missing region is known.
+The PixelCNN model has three major flaws that I attempt to address. First, generation takes time linear in the number of pixels, since each pixel must be generated to be fed as input to the next pixel. Second, it has an aesthetically displeasing asymmetry. By default, PixelCNN generates pixels from top-left to bottom-right. As a result, PixelCNN can convincingly fill-in the bottom half of an image given the top half (the examples usually displayed in papers \cite{??}\cite{??}\cite{??}) but not vice-versa. Third, the model cannot \emph{correct} pixels that are only slightly wrong, and cannot infer which pixels in an image are wrong -- it can \nquote{fill-in} missing parts of an image only if the location of the missing region is known.
 
-The first and second flaws (slow generation, asymmetry) are closely related. They both stem from defining an order on the pixels, and requiring each pixel to depend (only) on the preceding pixels. This is a nice idea, since it allows for an \emph{exact} factorisation of the conditional probability of an image \hl{equation}. But it comes with the aforementioned costs. Although the bottom-left pixel can depend on the values on all the others, the top-left pixel can only ever be generated independently, even if the rest of the image is available. And, of course, pixels have to be generated one at a time.
+The first and second flaws (slow generation, asymmetry) are closely related. They both stem from defining an order on the pixels, and requiring each pixel to depend (only) on the preceding pixels. This is a nice idea, since it allows for an \emph{exact} factorisation of the conditional probability of an image \hl{equation} \cite{??}. But it comes with the aforementioned costs. Although the bottom-left pixel can depend on the values on all the others, the top-left pixel can only ever be generated independently, even if the rest of the image is available. And, of course, pixels have to be generated one at a time.
 
-In theory, we could fill in the early pixels by performing Bayesian inference -- given the later pixels in the image, what are the most likely early pixels that could have produced them? However, such inference is computationally intractable. In fact, we use PixelCNN precisely to approximate the ideal Bayesian computation of the conditional likelihoods of all the pixels in the image. Unfortunately, the model is not easily invertible.
+In theory, we could fill in the early pixels by performing Bayesian inference \cite{??} -- given the later pixels in the image, what are the most likely early pixels that could have produced them? However, such inference is computationally intractable \cite{??}. In fact, we use PixelCNN precisely to approximate the ideal Bayesian computation of the conditional likelihoods of all the pixels in the image. Unfortunately, the model is not easily invertible.
 
-What is the alternative? What would it mean if pixels did not have a fixed order? In that case, a generated pixel could depend on the values of \nquote{future} pixels that have not been generated yet i.e. the model is no longer \nquote{causal}. This seems like a contradiction, but what if we fed some other value as a placeholder for missing pixels? In the simplest possible case, suppose we feed noise. Then, after the first forward pass, each pixel is generated using only noise as input. But we can do another pass, and now each pixel receives the first generated values as input. On the second pass, we hope that pixels will now be generated to conform to the choices made in the first pass. This procedure can be iterated a few (constant) number of times, and we can hope that after a few passes the generated image will converge to something reasonable. This procedure is not theoretically \hl{analysis} guaranteed to converge in constant time, or at all, but in this work I show empirically that it does.
+The need to maintain a strict ordering of the pixels and prevent information from travelling in the wrong dimensions also makes the model complicated \cite{??}. It is difficult to adapt for a version with any kind of pooling operation, and an image with multiple channels (e.g. red, green, blue) requires all the filters in every layer to be arbitrarily segmented according to which channel information they can access \cite{??}. This complexity makes the model harder to implement \cite{??}, makes it easier to introduce bugs, and makes it harder to experiment with variations on the basic architecture.
+
+What is the alternative? What would it mean if pixels did not have a fixed order? In that case, a generated pixel could depend on the values of \nquote{future} pixels that have not been generated yet i.e. the model is no longer \nquote{causal}. This seems like a contradiction, but what if we fed some other value as a placeholder for missing pixels? In the simplest possible case, suppose we feed noise. Then, after the first forward pass, each pixel is generated using only noise as input. \hl{explain motivation for using noise as input rather than zeros}. But we can do another pass, and now each pixel receives the first generated values as input. On the second pass, we hope that pixels will now be generated to conform to the choices made in the first pass. This procedure can be iterated a few (constant) number of times, and we can hope that after a few passes the generated image will converge to something reasonable. \hl{explain why I think it might be constant time.} This procedure is not theoretically \hl{analysis} guaranteed to converge in constant time, or at all, but in this work I show empirically that it does work.
 
 The approach of generating all the pixels in parallel and replacing missing ones with noise has another surprising benefit. It also addresses the third issue (the need to explicitly mark missing pixels). The resulting model simply takes one image and outputs another. The input image can be noise, if we want to generate something from scratch. But it doesn't have to be. We can also feed a noisy, blurry, or downsampled version of an image, and try to generate a clean one.
 
-\hl{talk about causality in autoregression}
+\subsection{Causality}
 
+Because my model violates causality by allowing pixels to be influenced by others that have not been generated, I dub it \nquote{noncausal} PixelCNN. The name draws an analogy to classic noncausal autoregressive models \cite{??} \cite{??}. The idea does not apply only to images. In an image, the unnaturalness of defining an order on the pixels is clear. However, the same noncausal approach also applies to text, music, video, and speech. At first glance, strict causality makes more sense for these media, which have a time dimension. Surely it makes sense to have future time steps in an audio stream depend on past ones, and not vice versa? But the fact that we have a time dimension misleads us. When composing speech in real life, we do not always proceed strictly linearly \cite{??}. We may know the conclusion of a paragraph before we have written the middle. Similarly, a composer does not have to write a piece of music in linear order, nor must a director film the scenes of a movie so. The \nquote{past} parts of these media can depend on the \nquote{future} parts. \hl{bidirectional RNN} \cite{??}. It makes sense to violate causality when generating these also, and I hypothesise that the results may have more sophisticated structure, by allowing the model to adjust the beginning to suit the end.
 
-\hl{- Motivation for my model as a modification of PixelCNN:
+Violating causality even makes sense in the classic application of autoregressive models: the stock market \cite{??}. Here the causality assumption seems genuinely warranted -- certainly, the actual future values of the stock market cannot \emph{actually} influence past ones (unlike speech, where the whole thing may be composed before it is uttered, and so the end of a sentence really can influence the start). However, noncausal models can still be useful. There are at least two reasons for this. First, there are many hidden variables affecting the stock market that are not fed into a model that only takes stock prices as input. These hidden variables affect the future also, and thus taking future values as input can effectively give the model more insight into these variables \cite{??}. Because past stock prices do not capture all available information about the world, future prices can give extra information even though current prices do not literally depend on them. Second, stock prices depend a great deal on traders' \emph{predictions} of future prices \cite{??}. Although these predictions don't literally depend on the actual future prices, allowing a model to see the true future prices makes it easier for the model to approximate the predictions that traders make \cite{??}.
 
-  - view of my model as several parallel iterations of PixelCNN
-  
-  - Approximate version of the ideal where we train on one pixel at a time
-  
-  - can do other operations including denoising that PixelCNN can't do because it needs to know which pixels are accurate.
-  
-  - Training is harder because we don't want to only learn identity}
+My model can be viewed as a version of PixelCNN that violates causality. My preferred variation is one that discards the complexity of PixelCNN and replaces it with a simple, symmetric, convolutional network. However, it is possible to achieve something similar with the PixelCNN architecture. When generating an image, we can simply run all of PixelCNN in parallel, replacing unavailable pixels with noise. \hl{I have tested this approach also}.
+
+\subsection{Training}
+
+The most difficult part of the noncausal model is training it. I think finding an optimal training approach remains important future work. The training procedure for PixelCNN no longer applies. PixelCNN is trained using example images. The model is trained to output the correct value for each pixel (or, more precisely, to minimise the cross-entropy between the predicted and actual distribution of pixel values). Because each pixel only gets previous pixels as input, this results in a model that captures the conditional probability distribution of each pixel given the previous ones. This trick will not work for the noncausal variant. Noncausal PixelCNN cannot prevent a pixel from depending on itself. Thus, if we attempt to use the same training procedure, the model can simply learn the identity, and will be useless for generation or denoising.
+
+Even if we could prevent a pixel from depending on itself, this would not be sufficient. Consider an image where two particular pixels are always the same. The model can learn to read the value of both pixels from the other one, without learning the actual distribution of those values conditional on the rest of the image. PixelCNN solves this problem by enforcing an order on the pixels. Whichever of the two pixels comes second will always be copied from the first, but the first has to be predicted without knowledge of itself or of the second. \hl{diagram}
+
+My preliminary approach to solving this is to force the network to denoise images. I feed the network noisy (and otherwise corrupted) versions of images, and train it to output the originals. There is room for training to reproduce an image from itself, since we want the network to act as the identity on uncorrupted natural images. However, I hypothesise that the uncorrupted parts of the images in the denoising task are enough for that. I also trained the network to produce images from pure noise, in a first-order approximation to the PixelCNN approach of learning to generate images from scratch.
+
+At test time, noncausal PixelCNN performs multiple forward passes on an image. The number of passes is a hyperparameter. This raises the question of how many forward passes to do during training. I do not attempt to propagate gradients back through the sampling step. \hl{discussion of how doing so would damage the network even if the discontinuity was not a problem.} Thus, we can treat each forward pass as an independent iteration, with some input (either raw data, or the output of a previous pass) and some desired ground-truth output. We have to take care with how exactly we train -- suppose we start with pure noise. After one iteration, the network should output a probability distribution over plausible digits. The network should be invariant to the details of the initial noise, so here we can train the network to approximate the overall distribution over digits by pairing random noise with random instances of the training set. However, if we perform a sampling operation and then another forward pass, the network now gets something nonrandom as input. And the optimal output given that input is \emph{not} a uniform distribution of possible digits. Thus, it is not appropriate to train the network on more than one iteration given pure noise as input. \hl{diagram?} Given a corrupted image (noisy or blurry) on the other hand, it makes sense to train on multiple iterations, since the true image is the actual denoised, deblurred or completed version of the input. It makes sense to train the network to not only produce the true image after one iteration, but also to produce the true image given its output after one iteration. I chose to train on two iterations, thus hoping to capture both the \nquote{improve the noisy image} and the \nquote{keep improving on the network's own output} behaviours. Despite training on only two iterations, the network can be run for more iterations at test time.
   
 \section{Alternative Views}
 
-\hl{- Other ways to look at my model:
+Noncausal PixelCNN is conceptually a simplification of PixelCNN that removes the ordering over pixels. However, the model can be understood from other perspectives.
 
-  - Denoising autoencoder without a bottleneck
-  
-  - Combination of VAE and PixelCNN due to the noise inputs
-  
-  - Projection operator into natural image space + theoretical discussion of convergence
-  
-  - Measuring loss ONLY on noise pixels is a bad idea because we want identity on true natural images
-  
-  - Weird kind of recurrent CNN
-  
-  - Model of neural field with complex excitatory/inhibitory connections}
+\subsection{Denoising Autoencoder}
+
+Due to my chosen training method, noncausal PixelCNN acts as a kind of denoising autoencoder \cite{??} -- it takes noisy images as input and is trained to produce the true images as output. My model does not have a bottleneck, which explains why a pure (not denoising) version would not work and would simply learn the identity \cite{??}. Also unlike an autoencoder, the model's output is a probability distribution from which we can sample. Finally, the model is intended to be applied to an input iteratively, improving the result each time. \hl{I'm sure someone has iterated an autoencoder before.}
+
+\subsection{Combination of VAE and PixelCNN}
+
+When generating images, PixelCNN has a single source of randomness: the sampling procedure applied to the output to get the final value for each pixel. A variational autoencoder \cite{??} has a different source of randomness: the latent vector. Noncausal PixelCNN actually has both: generating an image requires first inputting noise, and then performing multiple iterations, with a sampling step each time. The input noise is akin to the latent vector in a VAE. I think having two sources of randomness is an undesirable property, and so I train the network to ignore the details of noise. However, maybe it is possible to find a variation where both sampling and input noise are meaningful in some way.
+
+\subsection{Projection}
+
+Noncausal PixelCNN can be thought of as a projection operator into the natural image manifold. A true projection operator \cite{??} is a transformation that is \emph{idempotent}: that is, applying it more than once makes no further changes. Thus, a projection defines some manifold over which it has no effect, while all inputs outside the manifold are mapped to somewhere in the manifold. \hl{diagram}. Noncausal PixelCNN is not an ideal projection in that sense, because applying it multiple times continues to improve the result. However, it performs a similar operation of taking inputs that are not natural images, and bringing them closer to the nearest natural image. Ideally, noncausal PixelCNN should act as the identity on images that are already valid. Images that are corrupted may have multiple plausible true versions \cite{??}. In this case, noncausal PixelCNN chooses one of the versions at random. But since this operation requires considering dependencies among pixels, it takes the model multiple iterations to choose a point on the manifold.
+
+Thinking about noncausal PixelCNN as a projection also reveals why the model might be suitable for performing multiple different decorruption tasks. Deblurring, denoising, upsampling, and completing missing parts of an image are all examples of taking something that is not a natural image, and finding the \nquote{nearest} natural image (though not with the obvious L2 norm as a metric, but rather some more subtle \nquote{perceptual} distance \cite{??}). A network that has learnt this operation should be able to do all of these tasks, and more. If the projection is done in an appropriate space, using perceptual distance, then it might even be able to do some more complex tasks, like elaborating on a rough sketch \cite{??}. Noncausal PixelCNN as defined here is not ready for that, but I see it as interesting future work.
+
+\subsection{Recurrent CNN}
+
+Since noncausal PixelCNN receives its own outputs as input, it can be thought of as a recurrent neural network \cite{??}. Recurrent convolutional neural networks have been used before \cite{??}\cite{??}, but the recurrence is usually within each layer rather than connecting the output back to the input. Furthermore, unlike a typical RNN, there is a discontinuous sampling step and we do not propagate gradients back through multiple time steps.
+
+\subsection{Neural Field}
+
+Neurons in multiple areas of the human brain are known to be organised in a particular fashion. First, the meaning or output space of that brain region is somehow mapped to the physical neuron space \cite{??} (for example, different locations in the brain region can represent different parts of the visual field \cite{??}, or different frequencies of sound \cite{??}, or different parts of the body \cite{??}, or different targets for a reaching action \cite{??}, or different types of action \cite{??}). Second, the strong activation of neurons in one part of the region represents a decision \cite{??} (for example, to reach in a particular direction \cite{??} or pronounce a particular syllable \cite{??}). Third, when a decision needs to be made, the region starts out with diffuse activations all over, and then converges to a single sharp peak after some time \cite{??}. This process is faster when the decision is easy, and slower when it is hard \cite{??} (because the options are very similar \cite{??}). The convergence process is influenced both by connections within the region (e.g. neurons for very different actions will inhibit each other, expressing the constraint that two different actions cannot be simultaneously chosen \cite{??}) and by connections into the region from other brain regions that have some information to contribute \cite{??}. \hl{I believe this applies to perception as well as action, where a stable percept is formed after some time, but need to check}
+
+Work in computational neuroscience typically models the simple case where the task that a region needs to do is to choose the highest of two incoming noisy signals \cite{??} \cite{??} \cite{??}. This reproduces the basic observation that difficult decisions take longer -- it takes more time to be sure which of two noisy signals is larger if they are close together \cite{??}. However, the real brain regions can probably perform more complex computations.
+
+In particular, I notice a parallel to noncausal PixelCNN -- we start with some noisy input, and slowly converge to a cleaner version. More noise makes the decision take longer, as does an input with multiple plausible ground truths. We can think of the \nquote{image} that is both input and output to the network as a group of neurons that slowly converge to a particular configuration, with the other layers of the network representing a complex web of inhibitory and excitatory connections between them. Alternatively, other layers could represent other brain regions, which suggests a modification to the architecture: adding recurrent connections of some kind within each layer, so that each layer of the network can converge to some representation over time. And the layers could be connected in some other way than a purely linear network, like by adding a web of skip connections \cite{??}.
 
 \section{Literature Review}
 
-\subsection{Generative models}
+\subsection{Generative Models}
 
 \hl{- Review of generation methods: autoregressive (pixelCNN), GAN, VAE
   
-  - View of generation as defining a "natural image" manifold
+  - View of generation as defining a "natural image" manifold (e.g. the image editing paper)
   
   - Exact and approximate log likelihood
   
@@ -137,9 +156,7 @@ The approach of generating all the pixels in parallel and replacing missing ones
 
   - PixelCNN++, WaveNet, Video, Translation, Quantiles}
 
-\subsection{Autoregressive models}
-
-\subsection{Noncausal autoregression}
+\subsection{Noncausal Autoregression}
 
 \hl{- Review of noncausal autoregression:
 
@@ -149,25 +166,51 @@ The approach of generating all the pixels in parallel and replacing missing ones
   
   - bidirectional RNN}
 
-\subsection{Neural fields}
+\subsection{Neural Fields}
 
 \hl{- Review of neural fields in neuroscience and in AI}
 
-\subsection{Recurrent Convolutional networks}
+\subsection{Recurrent Convolutional Networks}
 
 \hl{- Review of recurrent convolutional networks}
 
-\subsection{Denoising, deblurring, and upsampling}
+\subsection{Denoising, Deblurring, and Upsampling}
 
 \hl{- Review of denoising/deblurring/upsampling}
 
-\subsection{Dropout and uncertainty}
+\subsection{Dropout and Uncertainty}
 
 \hl{- ????? Review of dropout uncertainty ????}
 
 \section{Methods}
 
-\hl{- Architecture details, hyperparameters}
+I performed experiments with the MNIST database of handwritten digits \cite{??}. Specifically, I used a binarised MNIST \cite{??}, where each pixel is only black or white, with no grays, like the original PixelCNN paper \cite{??}. I trained three models: the ordinary PixelCNN, my noncausal PixelCNN, and a version of PixelCNN that has the normal architecture but is trained with the same procedure as the noncausal version (which I will call denoising PixelCNN). I tried to use the same hyperparameters for all three, though the architectures are slightly different and not directly comparable. Once trained, I evaluated the networks in two ways: by visual inspection of generated images and by measuring log likelihood \cite{??} on the test set. For ordinary PixelCNN I evaluated the log likelihood directly. For noncausal PixelCNN, I used the sampling procedure described by \cite{??}. \hl{I should also run the sampling procedure on ordinary PixelCNN as a comparison, and I need to think about how to evaluate the denoising version}.
+
+Source code for all the experiments is available at \url{https://github.com/dmitry-brizhinev/honours-code}
+
+\subsection{PixelCNN}
+
+I used a basic version of PixelCNN, similar to the second paper \cite{??}. There was a vertical and a horizontal stack (to avoid a blind spot). The vertical stack used shifting to preserve the causal structure. I used $4\times 5$ \hl{5 by 4?} convolutions because in combination with the horizontal stack this made the total number of parameters roughly equivalent to the noncausal variant. The horizontal stack also used shifting, with $1\times 5$ convolutions in every layer except the first, where the convolution was $1\times 4$ so as to exclude the identity connection \hl{5 by 1?}. Each layer included a residual connection and a skip connection to the end. \hl{diagram}. \hl{explain exactly which papers I consulted to get this architecture -- it's a combination of one that had a better diagram and another that had a simpler architecture}. \hl{Also mention how I only have one channel, which simplifies things?} The final layers were a fully-connected one and a softmax output (with two output neurons per pixel, for white and black).
+
+I used 15 convolutional layers, each the same dimension as the image (convolutions were zero-padded at the edges) with 16 feature filters per layer. I think of the filter size as being $5\times 5$, though as described above this is split between the horizontal and vertical stacks. The final fully connected layers used 64 features per layer. When sampling, I used a temperature of $1/1.05$. I trained for 200000 iterations, with 32 instances in each minibatch. I used RMSProp with a fixed learning rate of $1\mathrm{e}{-4}$. \hl{explain the sources of all of these}.
+
+The training procedure is to perform a forward pass with a training example as input, and then to optimise the cross-entropy between the softmax outputs and the ground truth (the same training example).
+
+\subsection{Noncausal PixelCNN}
+
+The structure of noncausal PixelCNN is much simpler, being simply a stack of (residual \cite{??}) convolutional layers, with no shifting or masking required. I used the same gates as PixelCNN, and included residual and skip connections. I attempted to match the hyperparameters of PixelCNN. \hl{diagram}.
+
+I used 15 convolutional layers, each the same dimension as the image (convolutions were zero-padded at the edges) with 16 feature filters per layer and a filter size of $5\times 5$. The final fully connected layers used 64 features per layer. When sampling, I used a temperature of $1/1.05$. I trained for 200000 iterations, with 32 instances in each minibatch. I used RMSProp with a fixed learning rate of $1\mathrm{e}{-4}$.
+
+The training procedure for noncausal PixelCNN is different. There are two types of training examples: decorruption and generation. In generation examples, the input is pure noise and the desired result is to minimise cross-entropy between the softmax outputs and a particular training example. In decorruption examples, the input is a corrupted training example and the goal is to minimise cross-entropy between the softmax outputs and the uncorrupted example. Each decorruption example produces two forward passes: one using the corrupted input, and another using the output of the first as an input for a second iteration. I averaged the errors for these two, and treated them as a single training example. \hl{diagram?} \hl{in hindsight, I shouldn't average the errors, I should treat them as two batches, because I can't easily do the same for the denoising variant: if I have time and funding I might run this training procedure again} I alternated between minibatches of 32 decorruption examples and 32 generation examples. Each MNIST image produced 5 decorruption examples: one where the top half was replaced with noise, one where the bottom half was replaced with noise, one where a random 50\% of the pixels were replaced with noise, one where a gaussian blur was applied with $\sigma=1.0$, and one where the image was downsampled by a factor of $2\times$(using bicubic interpolation) and then upsampled again (using bilinear interpolation). \hl{if I run this again I will rethink the blurring and scaling: first, the blurred and scaled ones look very similar; second, the result is not binary and I should binarise it like the rest of the data; third, I think the task is too easy, maybe I need to increase the strength of the blur} For the three noise-based decorruption types, and for the input noise for the generation examples, noise pixels were drawn from roughly the same distribution as the pixels in binarised MNIST: each noise pixel was black with probability 0.87 and white otherwise.
+
+\subsection{Denoising PixelCNN}
+
+\hl{I haven't run this experiment yet so the details might change}
+
+The architecture for the denoising variant was the same as ordinary PixelCNN above. All the hyperparameters were also the same.
+
+The training procedure, however, was the same as for noncausal PixelCNN, with one alteration. Instead of averaging the errors for the two forward passes of the decorruption iterations, I treated them as separate batches. I thus alternated between two batches in a row of decorruption (first and second pass) and two batches in a row of generation.
 
 \section{Results}
 
@@ -179,35 +222,67 @@ The approach of generating all the pixels in parallel and replacing missing ones
   
 \section{Future Work}
 
-\hl{- Possible improvements and future work
+There are many possible improvements to noncausal PixelCNN and future research directions to explore.
 
-  - PixelCNN++: dropout, logistic mixture output, bottleneck
-  
-  - Recurrence within layers (and better kind of neural field)
-  
-  - Batch normalisation
-  
-  - ??????? Dropout / batch norm uncertainty ???????
-  
-  - Deterministic model relying entirely on latent noise info, or training whole model end-to-end (I think this is a bad idea and will cause more bluriness)
-  
-  - Other datasets: imagenet/cifar, audio (speech/music), text, video
-  
-  - Elaborating based on sketches
-  
-  - Editing in the image manifold
-  
-  - Sparsity regularisation for the output layer getting stronger as we go deeper
-  
-  - Reducing temperature as we go deeper
-  
-  - Removing random noise in inputs with an extra mask telling us which inputs to ignore
-  
-  - Other regularisations - weight decay/L2 ?
-  
-  - gradient clipping
-  
-  - Better losses - wesserstein distance}
+\subsection{Existing Architectural Improvements}
+
+The version of PixelCNN I used as a baseline is a fairly basic one, without some improvements that have been added since. PixelCNN++ \cite{??} adds dropout regularisation and replaces softmax outputs with a logistic mixture that reduces the number of independent output neurons and makes it easier for the network to learn the idea that some colours are closer than others. They also add a bottleneck, which makes the architecture more like an autoencoder. The original PixelCNN team have experimented with class-conditional generation, different gates and dilated convolutions \cite{??}. All of these improvements could apply to noncausal PixelCNN also.
+
+\subsection{Hyperparameter Search}
+
+I have reused PixelCNN hyperparameters for the noncausal variant, but it is plausible that the optimal hyperparameters for the noncausal variant are different. A hyperparameter search is beyond my means, but might produce further improvements. Besides the hyperparameters I have explicitly mentioned in the Methods section, there are other variations that could be applied, like batch normalisation \cite{??}, L2 regularisation, and gradient clipping \cite{??}.
+
+\subsection{Other Datasets}
+
+Just like PixelCNN has been applied to other datasets, noncausal PixelCNN can be applied to them too. It would be good to see results on Imagenet and CIFAR, and on speech, music, text, and video. In particular, I hypothesise that noncausal PixelCNN can improve on the structural properties of generated sequences (like speech) because it can adapt the beginning of a sequence to suit the end, rather than always having to compose the sequence in temporal order.
+
+Experiments with different sizes of Imagenet (like the $32\times 32$ variant used for PixelCNN \cite{??}) would be needed to test how the number of iterations depends on the input size. I hypothesise that the number can remain constant, but in this work I only demonstrate that it is markedly less than $N$. It is possible that more iterations are needed to achieve convergence for larger inputs -- the scaling might be $O(\sqrt{N})$ or even $O(N)$ (but with a much smaller constant than ordinary PixelCNN).
+
+\subsection{Improving on the Training Procedure}
+
+The training procedure I have used for noncausal PixelCNN is ad-hoc. Besides experimenting with different kinds of input corruption and testing hyperparameters, there is room for improvement in the general procedure itself. I am not sure what an improved procedure would look like, but I am not fully satisfied with just denoising. I think it would be good to express the desired learning objective via some combination of architecture and loss function, rather than through data augmentation as I have.
+
+\subsection{Theoretical Analysis}
+
+In this work I have not put much thought into a detailed theoretical analysis of noncausal PixelCNN. On the contrary, my goal was to show empirically that we do not \emph{need} to maintain an exact factorisation of the probability distribution as PixelCNN provides, and that we can get away with a simpler architecture that makes little sense given available theory.
+
+However, I expect that it is possible to put the noncausal variant on a more rigorous theoretical footing, like classical noncausal autoregressive models. Such an analysis might also suggest improvements to the architecture that have not occurred to me while doing largely empirical work. \hl{note that even the rough theoretical ideas like thinking about the network as a projection, thinking about neural fields, thinking about the blurring problem, have all informed the architecture I have designed}. 
+
+\subsection{Experimental Architectural Improvements}
+
+There are many possible improvements to the noncausal PixelCNN architecture that are worth trying or thinking more about.
+
+\subsubsection{Recurrence}
+
+As suggested by the discussion comparing the architecture to neural fields, it may be worth considering recurrent connections within each layer. Rather than traditional recurrent connections, maybe these should be sampled from probability distributions, the same way the output of the current model passes through a sampling step before being fed as input. The result would be more similar to actual neural fields, and would operate slightly differently -- rather than an operation repeatedly applied to an image, we would have to see the network more as a set of abstract representations of the image that influence each other and converge to something over time.
+
+There may be other ways to improve the architecture with ideas from neural fields that I haven't thought of yet.
+
+\subsubsection{Rethinking the Use of Input Noise}
+
+In the current model, the input noise acts as a VAE-like latent vector that affects the output independently of the sampling procedure. Ideally, I feel that there should only be one canonical source of randomness in the generation procedure. It would be good to rethink the architecture and find a way to eliminate one of the two sources of randomness. I do not think the sampling procedure can be eliminated without reintroducing the problem of bluriness, but I am not certain.
+
+I am likewise not sure how noise can be eliminated. One possibility is to add an extra channel that flags whether a pixel is a known part of the image or not -- but this reintroduces PixelCNN's weakness of needing to know which pixels are valid. Alternatively, perhaps the network can be trained to use zeros as input for missing pixels, instead of noise. My hypothesis is that this will work poorly because the network will interpret zeros as a region of the image known to be black, but perhaps I am wrong.
+
+\subsubsection{Reducing Temperature}
+
+Since we expect the output to get closer and closer to a natural image with more iterations, it might make sense to reduce the sampling temperature with each iteration -- that is, early iterations allow more randomness, while later ones force the network to settle on the most probable option.
+
+Another way to accomplish this might be with some form of sparsity regularisation. The network as currently structured is a residual network. Applying sparsity regularisation to the output is thus equivalent to limiting the number of pixels that are allowed to change. \hl{I think this might not be quite true for my architecture as it stands, since the output is a probability distribution that is not expressed as a residual -- maybe the architecture needs extra thought to make this possible}. It makes sense to add such regularisation, getting stronger with each iteration, to express the fact that we expect more and more pixels to have taken their final value.
+
+\subsubsection{Better Losses}
+
+\hl{wesserstein distance is something I still need to read about}
+
+\subsubsection{Working in the Image Manifold}
+
+Some more ideas are suggested by the view of noncausal PixelCNN as a projection into the natural image manifold. \cite{??} use a GAN to constrain edits to an image to lie on the manifold, by using gradient descent to find a latent vector that corresponds to the image closest to the edit. Noncausal PixelCNN could do something similar: simply apply a few iterations after an edit to \nquote{return} the result to the manifold.
+
+Viewing the operation as a quick \nquote{bring this back to the natural image manifold} suggests further ideas. For example, one can start with a rough sketch and then apply multiple iterations of noncausal PixelCNN to obtain a natural image based on the sketch. One could even interleave sketching with projection, making extra edits to move the projection in the desired direction. This procedure might work better if the network is somehow trained to understand the space of images under an appropriate metric -- we want a rough sketch to project into the object being sketched, not some other image with black pixels in the same location (as one would get if finding the nearest neighbour under the L2 norm). I am not sure how to accomplish this, but it is an intriguing possibility for future work.
+
+A general \nquote{natural imagification} operator would be a marvellous achievement. It could simultaneously be used for denoising, deblurring, upsampling, sketching, and editing. And it would represent a new kind of understanding of natural images. Noncausal PixelCNN is a first step in that direction.
+
+\hl{Do I need a conclusion section here?}
 
 \bibliography{../references}
 \end{document}
