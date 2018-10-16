@@ -1,43 +1,199 @@
-\documentclass[10pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{mathtools}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{enumerate}
-\usepackage{hyperref}
-\usepackage{graphicx}
-\usepackage{subcaption}
-\usepackage{color,soul}
-\sethlcolor{cyan}
-\usepackage{natbib}
-\bibliographystyle{plainnat}
-%\setcitestyle{authoryear,open={((},close={))}}
 
-\newcommand{\delims}[3]{\!\left #1 #2 \right #3}
-\newcommand{\parens}[1]{\delims{(}{#1}{)}}
-\newcommand{\braces}[1]{\delims{\lbrace}{#1}{\rbrace}}
-\newcommand{\brackets}[1]{\delims{[}{#1}{]}}
-\newcommand{\norm}[1]{\delims{\|}{#1}{\|}}
-\newcommand{\abs}[1]{\delims{|}{#1}{|}}
-\newcommand{\inner}[2]{\delims{\langle}{#1,#2}{\rangle}}
-\newcommand{\vectinner}[2]{\inner{\vect{#1}}{\vect{#2}}}
+\documentclass[11pt, a4paper]{book}
+\usepackage{svn-multi}
+\svnid{$Id$}
+%\usepackage{prelim2e}
+%\renewcommand{\PrelimWords}{Draft Copy \svnkw{Id}}
+%%\newcommand*{\mysvnrev}{\svnrev}
+\usepackage[hyperindex=true,
+			bookmarks=true,
+            pdftitle={}, pdfauthor={Dmitry Brizhinev},
+            colorlinks=false,
+            pdfborder={0 0 0},
+            pagebackref=false,
+            citecolor=blue,
+            plainpages=false,
+            pdfpagelabels,
+            pagebackref=true,
+            hyperfootnotes=false]{hyperref}
+\usepackage[all]{hypcap}
+\usepackage[palatino]{anuthesis}
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{thesis}
+\usepackage[square]{natbib}
+\usepackage[normalem]{ulem}
+\usepackage[table]{xcolor}
+\usepackage{makeidx}
+%\usepackage[centerlast]{caption2}
+\usepackage{float}
+\urlstyle{sf}
+\renewcommand{\sfdefault}{uop}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{beramono}
+
+\renewcommand{\bibname}{References}
+
+\usepackage{multirow}
+
+\usepackage{subcaption}
+
+\sethlcolor{cyan}
 
 \newcommand{\vect}[1]{\mathbf{#1}}
-
 \newcommand{\nquote}[1]{``{#1}''}
 
-\begin{document}
-\title{\vspace{-10ex}Noncausal PixelCNN}
-\author{Dmitry Brizhinev}
-\maketitle
 
-\section*{Abstract}
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{
+  \ifcase #1 %
+    %
+  \or
+    (cited on page #2)%
+  \else
+    (cited on pages #2)%
+  \fi
+}
+
+\usepackage{booktabs}
+\usepackage{relsize}
+\usepackage{xspace}
+\DeclareGraphicsRule{*}{pdf}{*}{}
+
+\usepackage{setspace}
+\usepackage{ifthen}
+
+\long\def\sfootnote[#1]#2{\begingroup%
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+           
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Preamble
+\title{Noncausal PixelCNN}
+\author{Dmitry Brizhinev}
+\date{\today}
+
+\renewcommand{\thepage}{\roman{page}}
+
+\makeindex
+\begin{document}
+%\doparttoc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Title page
+\pagestyle{empty}
+\thispagestyle{empty}
+%% anuthesis.sty Copyright (C) 1996, 1997 Steve Blackburn
+%% Department of Computer Science, Australian National University
+%%
+
+\begin{titlepage}
+  \enlargethispage{2cm}
+  \begin{center}
+    \makeatletter
+    \Huge\textbf{\@title} \\[.4cm]
+    \Huge\textbf{\thesisqualifier} \\[2.5cm]
+    \huge\textbf{\@author} \\[9cm]
+    \makeatother
+%%   \LARGE A thesis submitted for the degree of \\
+%%    Master of Philosophy at \\
+%%    The Australian National University \\[2cm]
+    \LARGE A thesis submitted for the degree of \\
+    Bachelor of Advanced Computing (Research and Development) (Honours) \\
+    The Australian National University \\[2cm]
+    \thismonth
+  \end{center}
+\end{titlepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here begin the preliminaries
+\vspace*{14cm}
+\begin{center}
+  \makeatletter
+  \copyright\ \@author{} 2018
+  \makeatother
+\end{center}
+\noindent
+\begin{center}
+  \footnotesize{~} %\aboutthesis
+\end{center}
+\noindent
+
+\newpage
+
+\vspace*{7cm}
+\begin{center}
+  Except where otherwise indicated, this thesis is my own original
+  work.
+\end{center}
+
+\vspace*{4cm}
+
+\hspace{8cm}\makeatletter\@author\makeatother\par
+\hspace{8cm}\today
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Acknowledgements
+\cleardoublepage
+\pagestyle{empty}
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgments}
+\hl{Who do you want to thank?}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Abstract
+\cleardoublepage
+\pagestyle{headings}
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\vspace{-1em}
 I introduce a modification to the generative model PixelCNN, which allows generation to complete in constant time, rather than requiring a separate forward pass for each pixel of the output. The key idea is to not enforce a strict causal order like in PixelCNN, effectively allowing generated pixels to depend on both the past and the future. I show empirically that, despite violating causality, the resulting model functions \hl{comparably} to PixelCNN. This improvement markedly improves the running time of PixelCNN in its core task -- generation -- and can also perform tasks that PixelCNN cannot, such as denoising and filling-in the top half of an image.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Table of contents
+\cleardoublepage
+\pagestyle{headings}
+\markboth{Contents}{Contents}
 \tableofcontents
+\listoffigures
+\listoftables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here begins the main text
+\mainmatter
+
+%% Introduction
+\chapter{Introduction}
+\label{cha:intro}
+
+
+\section{Thesis Statement}
+\label{sec:thesisstatement}
+\hl{I believe A is better than B.}
 
 \section{Introduction}
+\label{sec:problemstatement}
+\hl{Put your introduction here. You could use \textbackslash fix\{ABCDEFG.\} to
+leave your comments, see the box at the left side.}
+
+\section{Thesis Outline}
+\label{sec:outline}
+\hl{How many chapters you have?} You may have Chapter~\ref{cha:background},
+Chapter~\ref{cha:methods}, Chapter~\ref{cha:methodology},
+Chapter~\ref{cha:result}, and Chapter~\ref{cha:conclusion}.
+
+
+
+
+%% Chapters
+\chapter{Background}
+\label{cha:background}
+\hl{At the begging of each chapter, please introduce the motivation and high-level
+picture of the chapter. You also have to introduce sections in the
+chapter.}
+
+\section{Generating Images}
 
 The generation of synthetic image (and other) data, is an important step on the way to complete machine understanding of images (and other media). In the deep learning field, there are currently three broad popular approaches to the generation of images: variational autoencoders (VAEs) \citep{vae}, generative adversarial networks (GANs) \citep{gan} and autoregressive models like PixelCNN \citep{pixelcnn2}.
 
@@ -52,7 +208,7 @@ All three approaches attempt to solve the problem of how a neural network can bo
     \begin{subfigure}{0.7\columnwidth}
         \centering
         \caption{Pixel space}
-        \includegraphics[width=\linewidth]{../../Diagrams/manifold_pixel.png} 
+        \includegraphics[width=\linewidth]{../../Diagrams/manifold_pixel.png}
         \label{manifold:pixel}
     \end{subfigure}
     %\hfill
@@ -64,7 +220,7 @@ All three approaches attempt to solve the problem of how a neural network can bo
         \includegraphics[width=\linewidth]{../../Diagrams/manifold_perceptual.png} 
         \label{manifold:perceptual}
     \end{subfigure}
-  \caption{A simplified schematic of the natural image manifold. (\subref{manifold:pixel}) The manifold in pixel space (i.e. each dimension is the value of a pixel). In reality this would be a $3N$ dimensional space for images with $N$ pixels of 3 channels each. Crucially, the manifold is not convex -- the average of a cat and dog image in pixel space is not a natural image. (\subref{manifold:perceptual}) The same manifold in a different space, something where the dimensions are perceptually meaningful. In this case, if the dimensions are appropriate, the average of a cat and a dog image might be an image of something that looks both cat- and dog-like. We generally hope that the dimensions of the latent vector of a VAE or a GAN will form such a perceptual space.}
+  \caption[Simplified schematic of the natural image manifold]{A simplified schematic of the natural image manifold. (\subref{manifold:pixel}) The manifold in pixel space (i.e. each dimension is the value of a pixel). In reality this would be a $3N$ dimensional space for images with $N$ pixels of 3 channels each. Crucially, the manifold is not convex -- the average of a cat and dog image in pixel space is not a natural image. (\subref{manifold:perceptual}) The same manifold in a different space, something where the dimensions are perceptually meaningful. In this case, if the dimensions are appropriate, the average of a cat and a dog image might be an image of something that looks both cat- and dog-like. We generally hope that the dimensions of the latent vector of a VAE or a GAN will form such a perceptual space.}
   \label{manifold}
 \end{figure}
 
@@ -73,7 +229,6 @@ All three approaches attempt to solve the problem of how a neural network can bo
 
 \begin{figure}
   \centering
-  \vspace{-3cm}
   
       \begin{subfigure}{0.7\columnwidth}
         \centering
@@ -97,7 +252,7 @@ All three approaches attempt to solve the problem of how a neural network can bo
         \includegraphics[width=\linewidth]{../../Diagrams/lights_plain.png} 
         \label{trafficlights:manifold}
     \end{subfigure}
-  \caption{I will use this example for the rest of this section. (\subref{trafficlights:example}) Imagine that our dataset is these traffic lights. When we generate traffic lights, they must either have a green light or a red light. They should not have neither, both, or an average of the two. (\subref{trafficlights:axes}) With only two dimensions of variation -- the brightness of the green and red lights -- we can represent the complete space of possible data points. (\subref{trafficlights:manifold}) The valid regions are the top-left (only green) and bottom-right (only red), so the \nquote{traffic light manifold} is those two areas.}
+  \caption[Traffic light example]{I will use this example for the rest of this section. (\subref{trafficlights:example}) Imagine that our dataset is these traffic lights. When we generate traffic lights, they must either have a green light or a red light. They should not have neither, both, or an average of the two. (\subref{trafficlights:axes}) With only two dimensions of variation -- the brightness of the green and red lights -- we can represent the complete space of possible data points. (\subref{trafficlights:manifold}) The valid regions are the top-left (only green) and bottom-right (only red), so the \nquote{traffic light manifold} is those two areas.}
   \label{trafficlights}
 \end{figure}
 
@@ -106,7 +261,7 @@ Consider the simplest possible approach to generating images. We train a determi
 \begin{figure}
   \centering
   \includegraphics[width=0.7\columnwidth]{../../Diagrams/lights_mean.png}
-  \caption{The output of a deterministic neural network. It can only choose one point. If the network tries to optimise L2 loss, the best place is the average of the valid points. This is not a good generator. In practice, the result is blurry images.}
+  \caption[Output of a deterministic neural network]{The output of a deterministic neural network. It can only choose one point. If the network tries to optimise L2 loss, the best place is the average of the valid points. This is not a good generator. In practice, the result is blurry images.}
   \label{lightsmean}
 \end{figure}
 
@@ -115,7 +270,7 @@ Now suppose the deterministic network can receive a random seed as input. For ea
 \begin{figure}
   \centering
   \includegraphics[width=0.7\columnwidth]{../../Diagrams/lights_randompoints.png}
-  \caption{The output of a deterministic network that gets random values as input, where each value is paired to a fixed output. It could learn to output the correct data by memorising it, but it can't learn any of the structure, since the mapping from input to output is random. If we feed the network a new input value it has not seen before, there is no reason to expect a sane output.}
+  \caption[Output of a deterministic network with random values as input]{The output of a deterministic network that gets random values as input, where each value is paired to a fixed output. It could learn to output the correct data by memorising it, but it can't learn any of the structure, since the mapping from input to output is random. If we feed the network a new input value it has not seen before, there is no reason to expect a sane output.}
   \label{randompoints}
 \end{figure}
 
@@ -124,7 +279,7 @@ Finally, suppose we let the network be probabilistic. Instead of outputting imag
 \begin{figure}
   \centering
   \includegraphics[width=0.7\columnwidth]{../../Diagrams/lights_independent.png}
-  \caption{The output of a network that can produce probability distributions over pixels. Because it has no way to capture dependencies among pixels, the best it can do is to capture the marginal distribution of each pixel. It can specify that the green light can be on or off, and the red light can be on or off, but it cannot specify that \emph{exactly one} of the two must be on.}
+  \caption[Output of a network that can produce probability distributions]{The output of a network that can produce probability distributions over pixels. Because it has no way to capture dependencies among pixels, the best it can do is to capture the marginal distribution of each pixel. It can specify that the green light can be on or off, and the red light can be on or off, but it cannot specify that \emph{exactly one} of the two must be on.}
   \label{independent}
 \end{figure}
 
@@ -141,7 +296,7 @@ VAEs still suffer from producing blurry samples \citep{vaeunderstanding}. The re
 \begin{figure}
   \centering
   \includegraphics[width=0.7\columnwidth]{../../Diagrams/lights_vaemean.png}
-  \caption{The output of a VAE that does not have enough space in the latent vector to encode all the images. If multiple possible data points (say, green and red lights) map to the same latent vector, the network can do no better than to \nquote{reconstruct} this latent vector into the average of the data points that map to it.}
+  \caption[Output of a VAE]{The output of a VAE that does not have enough space in the latent vector to encode all the images. If multiple possible data points (say, green and red lights) map to the same latent vector, the network can do no better than to \nquote{reconstruct} this latent vector into the average of the data points that map to it.}
   \label{vaemean}
 \end{figure}
 
@@ -154,7 +309,7 @@ How does this structure solve the problem of sampling from a joint distribution?
 \begin{figure}
   \centering
   \includegraphics[width=0.7\columnwidth]{../../Diagrams/lights_modecollapse.png}
-  \caption{The output of a mode-collapsed GAN. The generator is judged merely on whether its outputs are realistic. It has no incentive to make sure that it can generate all possible outputs, so it can cheat by focusing on just a subset of the output space (but modelling that region very well).}
+  \caption[Output of a mode-collapsed GAN]{The output of a mode-collapsed GAN. The generator is judged merely on whether its outputs are realistic. It has no incentive to make sure that it can generate all possible outputs, so it can cheat by focusing on just a subset of the output space (but modelling that region very well).}
   \label{modecollapse}
 \end{figure}
 
@@ -167,7 +322,7 @@ Generating pixels one at a time lets PixelCNN solve the problem of sampling from
 \begin{figure}
   \centering
   \includegraphics[width=0.7\columnwidth]{../../Diagrams/lights_ideal.png}
-  \caption{The output of a PixelCNN. It generates the green dimension first, and outputs a $50/50$ chance of the green light being on or off. It then looks at our choice before generating the red dimension. If we choose \emph{on}, it generates a 100\% probability of the red light being off, and vice-versa. It thus captures the full joint distribution, including dependencies among pixels.}
+  \caption[Output of a PixelCNN]{The output of a PixelCNN. It generates the green dimension first, and outputs a $50/50$ chance of the green light being on or off. It then looks at our choice before generating the red dimension. If we choose \emph{on}, it generates a 100\% probability of the red light being off, and vice-versa. It thus captures the full joint distribution, including dependencies among pixels.}
   \label{lightsideal}
 \end{figure}
 
@@ -202,7 +357,7 @@ Even if we could prevent a pixel from depending on itself, this would not be suf
 My preliminary approach to solving this is to force the network to denoise images. I feed the network noisy (and otherwise corrupted) versions of images, and train it to output the originals. There is room for training to reproduce an image from itself, since we want the network to act as the identity on uncorrupted natural images. However, I hypothesise that the uncorrupted parts of the images in the denoising task are enough for that. \hl{I also trained the network to produce images from pure noise, in a first-order approximation to the PixelCNN approach of learning to generate images from scratch.}
 
 At test time, noncausal PixelCNN performs multiple forward passes on an image. The number of passes is a hyperparameter. This raises the question of how many forward passes to do during training. I do not attempt to propagate gradients back through the sampling step. \hl{discussion of how doing so would damage the network even if the discontinuity was not a problem.} Thus, we can treat each forward pass as an independent iteration, with some input (either raw data, or the output of a previous pass) and some desired ground-truth output. We have to take care with how exactly we train -- \hl{suppose we start with pure noise}. After one iteration, the network should output a probability distribution over plausible digits. The network should be invariant to the details of the initial noise, so here we can train the network to approximate the overall distribution over digits by pairing random noise with random instances of the training set. However, if we perform a sampling operation and then another forward pass, the network now gets something nonrandom as input. And the optimal output given that input is \emph{not} a uniform distribution of possible digits. Thus, it is not appropriate to train the network on more than one iteration given pure noise as input. \hl{diagram?} Given a corrupted image (noisy or occluded) on the other hand, it makes sense to train on multiple iterations, since the true image is the actual denoised or completed version of the input. It makes sense to train the network to not only produce the true image after one iteration, but also to produce the true image given its output after one iteration. I chose to train on two iterations, thus hoping to capture both the \nquote{improve the noisy image} and the \nquote{keep improving on the network's own output} behaviours. Despite training on only two iterations, the network can be run for more iterations at test time.
-  
+
 \section{Alternative Views}
 
 Noncausal PixelCNN is conceptually a simplification of PixelCNN that removes the ordering over pixels. However, the model can be understood from other perspectives.
@@ -240,6 +395,24 @@ Neurons in multiple areas of the human brain are known to be organised in a part
 Work in computational neuroscience typically models the simple case where the task that a region needs to do is to choose the highest of two incoming noisy signals \citep{decisions1,decisions2}. This reproduces the basic observation that difficult decisions take longer -- it takes more time to be sure which of two noisy signals is larger if they are close together. However, the real brain regions can probably perform more complex computations.
 
 In particular, I notice a parallel to noncausal PixelCNN -- we start with some noisy input, and slowly converge to a cleaner version. More noise makes the decision take longer, as does an input with multiple plausible ground truths. We can think of the \nquote{image} that is both input and output to the network as a group of neurons that slowly converge to a particular configuration, with the other layers of the network representing a complex web of inhibitory and excitatory connections between them. Alternatively, other layers could represent other brain regions, which suggests a modification to the architecture: adding recurrent connections of some kind within each layer, so that each layer of the network can converge to some representation over time. And the layers could be connected in some other way than a purely linear network, like by adding a web of skip connections \citep{denselyconnected}.
+
+
+\section{Summary}
+\hl{Summary what you discussed in this chapter, and mention the story in next
+chapter. Readers should roughly understand what your thesis takes about by only reading
+words at the beginning and the end (Summary) of each chapter.}
+
+
+\chapter{Literature Review}
+
+\section{Related work}
+\label{sec:relatedwork}
+\hl{You may reference other papers. For example: 
+Generational garbage collection is perhaps the
+single most important advance in garbage collection since the first collectors
+were developed in the early 1960s. (doi: "doi" should just be the doi part, not
+the full URL, and it will be made to link to dx.doi.org and resolve.
+shortname: gives an optional short name for a conference like PLDI '08.)}
 
 \section{Literature Review}
 
@@ -287,6 +460,16 @@ Finally, a model that has the potential to be noncausal autoregressive is the bi
 \hl{- Review of recurrent convolutional networks}
 \citet{videopixel}
 
+
+\chapter{Methods}
+\label{cha:methods}
+Same as the last chapter, introduce the motivation and the high-level picture to
+readers, and introduce the sections in this chapter.
+
+
+\section{Smart Design}
+\label{sec:des-hotpath}
+
 \section{Methods}
 
 I performed experiments with the MNIST database of handwritten digits \citep{mnist}. Specifically, I used a binarised MNIST \citep{binarisedmnist}, where each pixel is only black or white, with no grays, like the original PixelCNN paper \citep{pixelcnn1}. I trained three models: the ordinary PixelCNN, my noncausal PixelCNN, and a version of PixelCNN that has the normal architecture but is trained with the same procedure as the noncausal version (which I will call denoising PixelCNN). I tried to use the same hyperparameters for all three, though the architectures are slightly different and not directly comparable. Once trained, I evaluated the networks in two ways: by visual inspection of generated images and with the MMD metric \citep{mmd,ganmetrics}.
@@ -299,7 +482,6 @@ I used a basic version of PixelCNN, similar to the second paper \citep{pixelcnn2
 
 \begin{figure}
   \centering
-  \vspace{-3cm}
     \begin{subfigure}{0.45\columnwidth}
     	\addtocounter{subfigure}{2}
         \centering
@@ -330,7 +512,7 @@ I used a basic version of PixelCNN, similar to the second paper \citep{pixelcnn2
         \includegraphics[width=\linewidth]{../../Diagrams/pixelcnn_middle_layer.png} 
         \label{pixelcnn:middle}
     \end{subfigure}
-  \caption{The architecture I used for PixelCNN. Data flows from bottom to top. Numbers next to the lines represent the number of channels per pixel (the number of pixels stays constant). Dark blue boxes represent shifts. Light green boxes represent convolutions with bias terms, and the two light blue boxes (on the residual connections in the first and last layer) represent convolutions without bias terms. Yellow circles represent elementwise nonlinearities. Red circles represent binary elementwise operations. Blue diamonds represent dividing the channels into two streams.}
+  \caption[Architecture of PixelCNN]{The architecture I used for PixelCNN. Data flows from bottom to top. Numbers next to the lines represent the number of channels per pixel (the number of pixels stays constant). Dark blue boxes represent shifts. Light green boxes represent convolutions with bias terms, and the two light blue boxes (on the residual connections in the first and last layer) represent convolutions without bias terms. Yellow circles represent elementwise nonlinearities. Red circles represent binary elementwise operations. Blue diamonds represent dividing the channels into two streams.}
   \label{pixelcnn}
 \end{figure}
 
@@ -356,7 +538,7 @@ I used a basic version of PixelCNN, similar to the second paper \citep{pixelcnn2
         \includegraphics[width=\linewidth]{../../Diagrams/convolution_15.png} 
         \label{convolutions:15}
     \end{subfigure}
-  \caption{An illustration of the shifted convolutions used for PixelCNN. (\subref{convolutions:normal}) In a normal convolution, the middle pixel in the next layer receives the result of convolving the $5\times 5$ region with a filter. (\subref{convolutions:45}) In this shifted convolution, the bottom pixel receives the result. This ensures that no pixel in any layer ever receives any information about pixels below it. (\subref{convolutions:15}) The right pixel receives the result. This ensures that no pixel in any layer ever receives any information about pixels to the right of it.}
+  \caption[Shifted convolutions]{An illustration of the shifted convolutions used for PixelCNN. (\protect\subref{convolutions:normal}) In a normal convolution, the middle pixel in the next layer receives the result of convolving the $5\times 5$ region with a filter. (\subref{convolutions:45}) In this shifted convolution, the bottom pixel receives the result. This ensures that no pixel in any layer ever receives any information about pixels below it. (\subref{convolutions:15}) The right pixel receives the result. This ensures that no pixel in any layer ever receives any information about pixels to the right of it.}
   \label{convolutions}
 \end{figure}
 
@@ -370,7 +552,6 @@ The structure of noncausal PixelCNN is much simpler, being simply a stack of (re
 
 \begin{figure}
   \centering
-  \vspace{-3cm}
     \begin{subfigure}{0.35\columnwidth}
     	\addtocounter{subfigure}{2}
         \centering
@@ -401,7 +582,7 @@ The structure of noncausal PixelCNN is much simpler, being simply a stack of (re
         \includegraphics[width=\linewidth]{../../Diagrams/noncausal_middle_layer.png} 
         \label{noncausal:middle}
     \end{subfigure}
-  \caption{The architecture I used for my noncausal PixelCNN. Data flows from bottom to top. Numbers next to the lines represent the number of channels per pixel (the number of pixels stays constant). Light green boxes represent convolutions with bias terms, and the two light blue boxes (on the residual connections in the first and last layer) represent convolutions without bias terms. Yellow circles represent elementwise nonlinearities. Red circles represent binary elementwise operations. Blue diamonds represent dividing the channels into two streams.}
+  \caption[Architecture of noncausal PixelCNN]{The architecture I used for my noncausal PixelCNN. Data flows from bottom to top. Numbers next to the lines represent the number of channels per pixel (the number of pixels stays constant). Light green boxes represent convolutions with bias terms, and the two light blue boxes (on the residual connections in the first and last layer) represent convolutions without bias terms. Yellow circles represent elementwise nonlinearities. Red circles represent binary elementwise operations. Blue diamonds represent dividing the channels into two streams.}
   \label{noncausal}
 \end{figure}
 
@@ -417,6 +598,76 @@ The architecture for the denoising variant was the same as ordinary PixelCNN abo
 
 \hl{The training procedure, however, was the same as for noncausal PixelCNN, with one alteration. Instead of averaging the errors for the two forward passes of the decorruption iterations, I treated them as separate batches. I thus alternated between two batches in a row of decorruption (first and second pass) and two batches in a row of generation.}
 
+\section{Summary}
+Same as the last chapter, summary what you discussed in this chapter and
+be the bridge to next chapter.
+
+
+\chapter{Experimental Methodology}
+\label{cha:methodology}
+
+\section{Software platform}
+\label{sec:softplat}
+
+
+
+\section{Hardware platform}
+\label{sec:hardplat}
+
+Table~\ref{tab:machines} shows how to include tables and Figure~\ref{fig:helloworld} shows how to include codes.
+\begin{table*}
+  \centering
+  {
+%\scriptsize
+\sffamily
+
+\begin{tabular}{r@{\hspace{1.5ex}}r@{\hspace{1.5ex}}r@{\hspace{1.5ex}}r}%@{}r@{\hspace{1.5ex}}r@{\hspace{1.5ex}}r@{\hspace{1.5ex}}r@{} }
+%\toprule
+\\[-2ex]
+{\textbf{Architecture}} & \multicolumn{1}{r@{\hspace{1.5ex}}}{\textbf{Pentium 4}} &  \multicolumn{1}{r@{\hspace{1.5ex}}}{\textbf{Atom D510}} & \multicolumn{1}{r}{\textbf{sandy}} \\
+\midrule 
+{\textbf{Model}} & 
+P4D 820 & Atom D510 & Core i7-2600 \\
+{\textbf{Technology}} & 
+90nm & 45nm & 32nm \\
+{\textbf{Clock}} & 
+2.8GHz & 1.66GHz & 3.4GHz \\
+{\textbf{Cores $\times$ SMT}} &
+2 $\times$ 2 & 2 $\times$ 2 & 4 $\times$ 2 \\
+{\textbf{L2 Cache}} &
+1MB $\times$ 2 & 512KB $\times$ 2 & 256KB $\times$ 4 \\ 
+{\textbf{L3 Cache}} & 
+none & none &  8MB\\
+{\textbf{Memory}} & 
+1GB DDR2-400 &  2GB DDR2-800  &  4GB DDR3-1066 \\
+
+\bottomrule
+\end{tabular}
+}
+  \caption{Processors used in our evaluation.}
+  \label{tab:machines}
+\end{table*}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End: 
+
+
+\chapter{Results}
+\label{cha:result}
+
+
+
+
+\section{Direct Cost}\
+\label{sec:direct_cost}
+
+Here is the example to show how to include a figure. Figure~\ref{fig:cost}
+includes two subfigures (Figure~\ref{fig:zerocost}, and Figure~\ref{fig:zerobus});
+
 \section{Results}
 
 \hl{- Results
@@ -424,7 +675,20 @@ The architecture for the denoising variant was the same as ordinary PixelCNN abo
   - Hopefully even if I don't beat PixelCNN, I will demonstrate that it's not too much worse, but runs in constant time and can do a bunch of things pixelcnn can't
   
   - Include training curves}
-  
+
+
+\section{Summary}
+
+
+\chapter{Conclusion}
+\label{cha:conc}
+Summary your thesis and discuss what you are going to do in the future in Section~\ref{sec:future}.
+
+
+\section{Future Work}
+\label{sec:future}
+Good luck.
+
 \section{Future Work}
 
 There are many possible improvements to noncausal PixelCNN and future research directions to explore.
@@ -491,5 +755,18 @@ A general \nquote{natural imagification} operator would be a marvellous achievem
 
 \hl{Do I need a conclusion section here?}
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Here begins the end matter
+
+\backmatter
+
+\bibliographystyle{anuthesis}
 \bibliography{thesis}
+
+\printindex
+
 \end{document}
