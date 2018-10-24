@@ -764,7 +764,7 @@ Finally, Figure~\ref{noncausalsamples} shows the generation process for noncausa
   \label{decorruption}
 \end{figure}
 
-Figure~\ref{decorruption} shows noncausal PixelCNN attempting some tasks that plain PixelCNN cannot do. It seems to perform fairly well. Note that even when its final output is different from the ground truth, it is a reasonable completion given the limited information in the corrupted input.
+Figure~\ref{decorruption} shows noncausal PixelCNN attempting some tasks that plain PixelCNN cannot do. It appears to perform fairly well. Note that even when its final output is different from the ground truth, it is a reasonable completion given the limited information in the corrupted input.
 
 Figure~\ref{diversity} shows the diversity of samples generated from occluded or noisy inputs. Noncausal PixelCNN is usually able to generate reasonable results, and explores multiple plausible completions. Unlike when starting with pure noise, noncausal PixelCNN has no trouble completing images of digits that do not fill the whole square. This suggests that the model has not ignored those parts of the digit manifold -- it merely has trouble reaching them starting from pure noise. \citet{denoisinggenerative} reported a similar defect (their model did not reach some modes when starting far from the image manifold), and their \nquote{walkback} training procedure should alleviate the problem.
 
